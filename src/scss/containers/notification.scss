@@ -1,0 +1,12 @@
+.notification{
+    display: flex;
+    flex-direction: column;
+    gap: rem(10);
+
+    &__agreement{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: rem(20);
+    }
+}

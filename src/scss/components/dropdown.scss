@@ -1,0 +1,16 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 0;
+  overflow: hidden;
+  transition: 0.3s ease-in-out;
+
+  &.open {
+    min-height: rem(350);
+    height: max-content;
+    overflow: hidden;
+
+    
+  }
+}
