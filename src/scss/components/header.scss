@@ -3,10 +3,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: 120%;
-  background: linear-gradient(125.25deg, #618fd0 8.27%, #0d3b7c 84.58%);
+  background: -webkit-linear-gradient(#618fd0, #0d3b7c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
   &.big {
     font-size: rem(28);
   }
