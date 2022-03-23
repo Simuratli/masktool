@@ -52,7 +52,7 @@ function Notification() {
                 notificationState.approveAgreement && <Dropdown open={openNotifications}>
                     {
                         notificationData.map((data) => {
-                            return <NotificationBox onClick={() => { console.log("approveAgreement") }} key={data.text} text={data.text} button={false} />
+                            return <NotificationBox onClick={() => { console.log("approveAgreement") }} key={data.id} text={data.text} button={false} />
                         })
                     }
                 </Dropdown>
@@ -63,7 +63,7 @@ function Notification() {
             {!notificationState.approveAgreement && <div className='notification__agreement'>
                 <Checkbox
                     onChange={agreeWithNotification}
-                    text={"I have read and agree"}
+                    text={"I have read all the warnings"}
                 />
                 <Button
                     disabled={!notificationState.agree}
