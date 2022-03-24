@@ -1,7 +1,7 @@
 export const notificationData  = [
     {
         id:0,
-        text:"Use UDS Mask Tool only in the dev environment"
+        text:"Use UDS Mask Tool only in the dev environment."
     },
     {
         id:1,
@@ -27,4 +27,5 @@ export const notificationData  = [
         id:6,
         text:"It's better to create custom views in advance and apply the masking or deleting only to them."
     },
+    
 ]

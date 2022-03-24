@@ -7,7 +7,7 @@ function Footer() {
     return (
         <footer className='footer'>
             <Header headerType="big" text="Need help?" />
-            <p className="footer__text">We are always happy to help you and offer the best discount.</p>
+            <p className="footer__text">Feel free to contact us by Skype or Email</p>
             <div className="footer__icons">
                 <a href="mailto: abc@example.com" className="mail">
                     <Mail/> <span>portal@uds.systems</span>
