@@ -1,4 +1,4 @@
 import { setNotificationAllowance, setAproveNotificationAgreement } from './notification.actions'
+import { setStep } from './stepper.action'
 
-
-export { setNotificationAllowance, setAproveNotificationAgreement } 
+export { setNotificationAllowance, setAproveNotificationAgreement, setStep } 

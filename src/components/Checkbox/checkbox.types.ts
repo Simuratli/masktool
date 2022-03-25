@@ -1,4 +1,5 @@
 export interface CheckboxPropTypes {
     text: String,
-    onChange: any
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    checked?: boolean
 }

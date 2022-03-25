@@ -40,6 +40,7 @@
         }
 
         &--disable{
+            cursor: no-drop;
             .progress__item__text{
                 color: var(--disable-text-color); 
             }

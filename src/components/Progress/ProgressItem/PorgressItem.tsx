@@ -1,14 +1,22 @@
 import { Dvider } from './'
 import { ProgresItemPropTypes } from '../progress.types'
+import { useDispatch } from 'react-redux'
+import { setStep } from '../../../redux/actions'
 
 function PorgressItem({ icon, text, id, disabled }: ProgresItemPropTypes) {
+    const dispatch = useDispatch()
+
+    const travelBetweenSteps = () => {
+        !disabled?.includes(id) && dispatch(setStep(id))
+    }
+
     return (
         <>
-            <div className={`progress__item ${disabled && 'progress__item--disable'}`}>
+            <div onClick={travelBetweenSteps} className={`progress__item ${disabled?.includes(id) && 'progress__item--disable'}`}>
                 <span className='progress__item__text'>{text}</span>
                 {icon}
             </div>
-            {id !== 4 && <Dvider />}
+            {id !== "done" && <Dvider />}
         </>
     )
 }
