@@ -1,5 +1,5 @@
-import React, { useState, useCallback, } from 'react'
-import { NotificationBox, Button, Checkbox, Dropdown } from '../../components'
+import React, { useCallback, } from 'react'
+import { NotificationBox, Button, Checkbox } from '../../components'
 import { notificationData } from './notification.data'
 import { setNotificationAllowance, setAproveNotificationAgreement, setStep } from '../../redux/actions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,7 +9,7 @@ import { ReducerType } from '../../redux/reducers/reducer.types'
 function Notification() {
 
     const dispatch = useDispatch()
-    const notificationState = useSelector((state: ReducerType) => state.notificationReducer)
+    const notificationState = useSelector((state: ReducerType) => state.notificationReducer.agree)
 
 
     const agreeWithNotification = useCallback(
@@ -33,11 +33,11 @@ function Notification() {
             <div className='notification__agreement'>
                 <Checkbox
                     onChange={agreeWithNotification}
-                    checked={notificationState.agree}
+                    checked={notificationState}
                     text={"I have read all the warnings"}
                 />
                 <Button
-                    disabled={!notificationState.agree}
+                    disabled={!notificationState}
                     onClick={() => {
                         dispatch(setAproveNotificationAgreement(true));
                         dispatch(setStep('tutorial'))

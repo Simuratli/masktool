@@ -1,4 +1,5 @@
 import { Dvider } from './'
+import React from 'react'
 import { ProgresItemPropTypes } from '../progress.types'
 import { useDispatch } from 'react-redux'
 import { setStep } from '../../../redux/actions'
@@ -21,4 +22,4 @@ function PorgressItem({ icon, text, id, disabled }: ProgresItemPropTypes) {
     )
 }
 
-export default PorgressItem
+export default React.memo(PorgressItem)

@@ -10,4 +10,4 @@ function Dvider() {
     )
 }
 
-export default Dvider
+export default React.memo(Dvider)

@@ -1,9 +1,10 @@
 import { ProgressItem } from './ProgressItem'
 import { progressData } from './progressdata'
 import { useSelector } from 'react-redux'
-import { useEffect,useState } from 'react'
+import React,{ useEffect,useState } from 'react'
+
 function Progress() {
-  const stepState = useSelector((state: any) => state.stepReducer)
+  const stepState = useSelector((state: any) => state.stepReducer.step)
   const [disable, setdisable] = useState<String[]>()
   
   useEffect(() => {
@@ -17,7 +18,7 @@ function Progress() {
     setdisable(disabledBar)
 
   }, [stepState])
-
+ 
 
 
   return (
@@ -37,4 +38,4 @@ function Progress() {
   )
 }
 
-export default Progress
+export default React.memo(Progress)

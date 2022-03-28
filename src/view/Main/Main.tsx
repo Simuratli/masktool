@@ -6,11 +6,11 @@ import { useSelector } from 'react-redux'
 
 function Main() {
 
-  const stepState = useSelector((state: any) => state.stepReducer)
+  const stepState = useSelector((state: any) => state.stepReducer.step)
   const [component, setComponent] = useState<React.ReactNode>(<Notification />)
 
   useEffect(() => {
-    switch (stepState.step) {
+    switch (stepState) {
       case "main":
         setComponent(<Notification />)
         break;
