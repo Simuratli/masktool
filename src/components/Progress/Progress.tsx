@@ -8,7 +8,7 @@ function Progress() {
   const [disable, setdisable] = useState<String[]>()
   
   useEffect(() => {
-    let index = progressData.findIndex(x => x.id === stepState.step)
+    let index = progressData.findIndex(x => x.id === stepState)
     let newProgressArray = progressData.slice(index + 1, progressData.length)
     
     let disabledBar = newProgressArray.map((item) => {
