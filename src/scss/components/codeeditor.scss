@@ -1,0 +1,15 @@
+.editor {
+  width: rem(522);
+  min-height: rem(262);
+  background: var(--white);
+  border: 1px solid var(--progres-text-active);
+  box-sizing: border-box;
+  outline: none;
+  border-radius: rem(6);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--progres-text-active);
+  margin: rem(20) 0;
+}

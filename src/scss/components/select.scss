@@ -1,5 +1,6 @@
 .select{
     width: rem(234);
+    position: relative;
     &__main{
         background: var(--white);
         border: 1px solid var(--progres-text-active);
@@ -8,7 +9,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: rem(5) rem(14) rem(5) rem(12);
+        padding: rem(5) rem(12) rem(5) rem(12);
 
         &__icon{
             position: relative;
@@ -17,6 +18,34 @@
 
             .rotate{
                 transform: rotate(180deg);
+            }
+        }
+
+        &__text{
+            display: flex;
+            flex-wrap: wrap;
+            gap: rem(5);
+        }
+
+        &__badge{
+            background: var(--disable-text-color);
+            border-radius: rem(6);
+            padding: rem(2) rem(7);
+            margin-right: rem(4);
+            display: grid;
+            place-content: center;
+            display: inline-block;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 19px;
+            color: #696D8C;
+
+            svg{
+                cursor: pointer;
+                position: relative;
+                top: rem(1.4);
+                margin-left: rem(8);
             }
         }
     }
@@ -29,6 +58,8 @@
         max-height: 0;
         transition: max-height 0.2s ease-in-out;
         overflow: hidden;
+        position: absolute;
+        width: 100%;
 
         &__item{
             padding: rem(8) rem(10) rem(8) rem(10);
@@ -36,7 +67,25 @@
             background: var(--select-background-color);
             &:hover{
                 background-color: var(--disable-text-color);
+                span{
+                    color: var(--tutorial-text-color);
+                }
             }
+
+            div{
+                position: relative;
+                left: rem(30);
+            }
+
+            span{
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(14);
+                line-height: 120%;
+                color: var(--progres-text-active);
+            }
+
+
         }
 
         &.open{

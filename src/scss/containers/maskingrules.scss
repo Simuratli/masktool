@@ -12,12 +12,20 @@
 
     &__left{
         padding: rem(30);
-        min-width: rem(353);
+        width: rem(353);
         min-height: rem(481);
         left: 0px;
         top: 0px;
-        background: var(--disable-text-color);
+        // background: var(--disable-text-color);
         border-radius: rem(8);
+        
+        p{
+            font-weight: 400;
+            font-size: rem(14);
+            line-height: 140%;
+            color: #1E2432;
+            font-family: var(--font-sogoe);
+        }
     }
 
     &__right{

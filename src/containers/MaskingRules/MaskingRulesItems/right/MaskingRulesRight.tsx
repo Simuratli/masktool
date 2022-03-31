@@ -1,10 +1,11 @@
 import React from 'react'
-import { Select } from '../../../../components'
+import { Select, CodeEditor } from '../../../../components'
 
 function MaskingRulesRight() {
   return (
     <div className='masking__rules__right'>
       <Select />
+      <CodeEditor/>
     </div>
   )
 }
