@@ -1,7 +1,7 @@
 import { CHANGE_STEP } from '../../constants/stepper'
-import { StepReducerTypes } from './stepper.types'
+import { StepReducerTypes,StepStateTypes } from './stepper.types'
 
-const initialState: any = {
+const initialState: StepStateTypes = {
     step: "main",
 }
 

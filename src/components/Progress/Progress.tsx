@@ -1,24 +1,23 @@
+import React, { useEffect, useState } from 'react'
 import { ProgressItem } from './ProgressItem'
 import { progressData } from './progressdata'
 import { useSelector } from 'react-redux'
-import React,{ useEffect,useState } from 'react'
+import { ReducerType } from '../../redux/reducers/reducer.types'
+
 
 function Progress() {
-  const stepState = useSelector((state: any) => state.stepReducer.step)
-  const [disable, setdisable] = useState<String[]>()
-  
+  const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
+  const [disable, setdisable] = useState<String[]>([])
+
   useEffect(() => {
     let index = progressData.findIndex(x => x.id === stepState)
     let newProgressArray = progressData.slice(index + 1, progressData.length)
-    
     let disabledBar = newProgressArray.map((item) => {
       return item.id
     })
-
     setdisable(disabledBar)
-
   }, [stepState])
- 
+
 
 
   return (

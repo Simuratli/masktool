@@ -4,5 +4,5 @@ export interface ProgresItemPropTypes {
     icon: ReactElement ,
     text:String,
     id:String,
-    disabled:any
+    disabled:String[] | undefined
 }

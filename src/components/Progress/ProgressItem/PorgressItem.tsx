@@ -6,7 +6,6 @@ import { setStep } from '../../../redux/actions'
 
 function PorgressItem({ icon, text, id, disabled }: ProgresItemPropTypes) {
     const dispatch = useDispatch()
-
     const travelBetweenSteps = () => {
         !disabled?.includes(id) && dispatch(setStep(id))
     }

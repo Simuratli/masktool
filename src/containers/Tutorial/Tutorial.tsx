@@ -1,36 +1,22 @@
-import React, { useState, useCallback } from 'react'
-import { Header, Button, Dropdown, NotificationBox } from '../../components'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import { Header, Button } from '../../components'
+import { TutorialDropdown } from '../'
+import { useSelector, useDispatch } from 'react-redux'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 import { tutorialText } from './tutorial.data'
-import { notificationData } from '../Notification/notification.data'
+import { setStep } from '../../redux/actions'
 
 function Tutorial() {
     const notificationState = useSelector((state: ReducerType) => state.notificationReducer)
-    const [openNotifications, setopenNotifications] = useState<boolean>(false)
+    const dispatch = useDispatch()
 
-    const notificationDropdown = useCallback(
-        () => {
-            setopenNotifications(!openNotifications);
-        },
-        [openNotifications],
-    )
+
 
     return (
         <section>
-            <NotificationBox
-                text="See all notifications"
-                button={true}
-                rotate={openNotifications}
-                onClick={notificationDropdown}
-            />
-            <Dropdown open={openNotifications}>
-                {
-                    notificationData.map((data) => {
-                        return <NotificationBox onClick={() => { console.log("approveAgreement") }} key={data.id} text={data.text} button={false} />
-                    })
-                }
-            </Dropdown>
+
+            <TutorialDropdown/>
+            
             <div className="tutorial">
                 <Header
                     text="How to use it"
@@ -48,7 +34,7 @@ function Tutorial() {
                 </div>
 
                 <div className="tutorial__button">
-                    <Button disabled={!notificationState.approveAgreement} text="Next" />
+                    <Button onClick={() => { dispatch(setStep("rules")) }} disabled={!notificationState.approveAgreement} text="Next" />
                 </div>
             </div>
         </section>

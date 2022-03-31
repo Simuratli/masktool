@@ -1,12 +1,14 @@
-import { Navbar, Progress, Footer } from '../../components'
-import { Notification, Tutorial } from '../../containers'
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { Navbar, Progress, Footer } from '../../components'
+import { Notification, Tutorial, MaskingRules } from '../../containers'
+import { ReducerType } from '../../redux/reducers/reducer.types'
+
 
 
 function Main() {
 
-  const stepState = useSelector((state: any) => state.stepReducer.step)
+  const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
   const [component, setComponent] = useState<React.ReactNode>(<Notification />)
 
   useEffect(() => {
@@ -16,6 +18,9 @@ function Main() {
         break;
       case "tutorial":
         setComponent(<Tutorial />)
+        break;
+      case "rules":
+        setComponent(<MaskingRules />)
         break;
       default:
         break;
