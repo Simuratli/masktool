@@ -1,0 +1,23 @@
+.input{
+    background: var(--white);
+    border: 1px solid var(--progres-text-active);
+    box-sizing: border-box;
+    border-radius: rem(6);
+    padding: rem(6) rem(5) rem(6) rem(12);
+    outline: none;
+
+    &.together{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    &:disabled{
+        border: 1px solid var(--disable-text-color);
+        cursor: no-drop;
+
+        &::placeholder { 
+            color: var(--disable-text-color);
+            opacity: 1;
+        }
+    }
+}

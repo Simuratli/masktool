@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
-import { Checkbox } from '../'
+import { Checkbox, SelectHeader } from '../'
 import { DownIcon, DeleteIcon } from './icons'
 
 function Select() {
@@ -46,24 +46,19 @@ function Select() {
     }
 
     return (
-        <div className='select' ref={ref}>
-            <div className="select__main">
-                <span className="select__main__text">
-                    {text.length === 0 ? "Choose rule type" : text.map((item, index) => {
-                        return <span key={index} className="select__main__badge">
-                            {item}
-                            <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
-                        </span>
-                    })}
-                </span>
-                <span onClick={toggle} className={`select__main__icon`}>
-                    <DownIcon toggleElements={toggleElements} />
-                </span>
-            </div>
-            <div className={`select__elemets ${toggleElements && "open"}`}>
+        <div className='multiple__select' ref={ref}>
+            <SelectHeader IconClick={toggle} iconProp={toggleElements}>
+                {text.length === 0 ? "Choose rule type" : text.map((item, index) => {
+                    return <span key={index} className="multiple__select__main__badge">
+                        {item}
+                        <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
+                    </span>
+                })}
+            </SelectHeader>
+            <div className={`multiple__select__elemets ${toggleElements && "open"}`}>
                 {
                     FAKE_DATA.map((rule) => {
-                        return <div key={rule} className="select__elemets__item" >
+                        return <div key={rule} className="multiple__select__elemets__item" >
                             <Checkbox checked={text.includes(rule)} value={rule} text={rule} onChange={chose} />
                         </div>
                     })

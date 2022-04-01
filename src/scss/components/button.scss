@@ -23,4 +23,31 @@
         cursor: no-drop;
         filter:none
     }
+
+    &.small{
+        height: rem(32);
+        display: grid;
+        place-content: center;
+        min-width: rem(116);
+        padding: rem(7) rem(7) rem(8) rem(7);
+        filter: none;
+    }
+
+    &.outlined{
+        border: 2px solid var(--blue);
+        color: var(--blue);
+        border-radius: rem(5);
+        background-color: var(--white);
+
+        &:disabled{
+            border: 2px solid var(--disable-text-color);
+            color: var(--disable-text-color);
+        }
+    }
+
+    &.together{
+        padding: rem(6) rem(12) rem(7) rem(12);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }

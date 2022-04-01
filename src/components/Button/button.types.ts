@@ -1,5 +1,7 @@
 export interface ButtonPropTypes {
     text?: String,
     disabled?: boolean,
-    onClick?: () => void
+    onClick?: () => void,
+    type?:string,
+    size?:string
 }
