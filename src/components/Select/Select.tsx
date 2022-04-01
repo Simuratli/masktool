@@ -1,10 +1,10 @@
-import React, { useState,useEffect,useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { SelectHeader } from '../'
 
 function Select() {
     const [toggleElements, settoggleElements] = useState(false)
-    const [selectedElement, setSelectedElement] = useState('Choose saved')
-    const ref = useRef<any>()
+    const [selectedElement, setSelectedElement] = useState<string | null>('Choose saved')
+    const ref = useRef<HTMLDivElement>(null)
 
     let FAKE_DATA = [
         {
@@ -18,9 +18,9 @@ function Select() {
     ]
 
 
-    const selectItem = (e: any) => {
-        console.log(e.target.textContent)
-        setSelectedElement(e.target.textContent)
+    const selectItem = (e:React.MouseEvent<HTMLSpanElement>) => {
+        const input = e.target as HTMLElement;
+        setSelectedElement(input.textContent)
     }
 
 
@@ -42,7 +42,7 @@ function Select() {
             <SelectHeader onClick={() => { settoggleElements((prev) => !prev) }} iconProp={toggleElements}>
                 {selectedElement}
             </SelectHeader>
-            
+
             <div className={`select__dropdown ${toggleElements && 'open'}`}>
                 {
                     FAKE_DATA.map((data) => {

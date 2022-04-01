@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { Checkbox, SelectHeader } from '../'
-import { DownIcon, DeleteIcon } from './icons'
+import { DeleteIcon } from './icons'
+
 
 function Select() {
     const [text, setText] = useState<String[]>([])
     const [toggleElements, setToggleElements] = useState(false)
     let FAKE_DATA = ["Data rule", "Text rule", "Money Rule", "Multiline rules"]
-    const ref = useRef<any>()
+    const ref = useRef<HTMLDivElement>(null)
 
     const toggle = useCallback(
-        (e) => {
-            e.stopPropagation()
+        () => {
             setToggleElements((prev) => !prev)
         },
         [],
@@ -18,7 +18,7 @@ function Select() {
 
     let arrayOfOptions: String[] = []
 
-    const chose = (e: any) => {
+    const chose = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked) {
             arrayOfOptions = [...text, e.target.value]
         } else {
@@ -28,7 +28,8 @@ function Select() {
     }
 
     useEffect(() => {
-        const checkIfClickedOutside = (e: any) => {
+        const checkIfClickedOutside = (e:any) => {
+            console.log(e)
             if (toggleElements && ref.current && !ref.current.contains(e.target)) {
                 setToggleElements(false)
             }

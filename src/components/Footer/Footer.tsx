@@ -9,7 +9,7 @@ function Footer() {
             <Header headerType="big" text="Need help?" />
             <p className="footer__text">Feel free to contact us by Skype or Email</p>
             <div className="footer__icons">
-                <a href="mailto: abc@example.com" className="mail">
+                <a href="mailto: portal@uds.systems" className="mail">
                     <Mail/> <span>portal@uds.systems</span>
                 </a>
                 <a href="skype:uds.systems?chat" className="mail">
