@@ -46,7 +46,7 @@ function Select() {
             <div className={`select__dropdown ${toggleElements && 'open'}`}>
                 {
                     FAKE_DATA.map((data) => {
-                        return <>
+                        return <div key={data.name}>
                             <div key={data.name} className="select__dropdown__element">
                                 <span className="select__dropdown__element__text select__dropdown__element__text--header">{data.name}</span>
                             </div>
@@ -63,7 +63,7 @@ function Select() {
                                 </div>
                             })}
 
-                        </>
+                        </div>
                     })
                 }
 

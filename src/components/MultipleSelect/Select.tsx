@@ -1,12 +1,14 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { Checkbox, SelectHeader } from '../'
 import { DeleteIcon } from './icons'
+import { MultiplePropTypes } from './multipleSelect.types'
 
 
-function Select() {
-    const [text, setText] = useState<String[]>([])
+function Select({ chose, values, deleteFunc, data }: MultiplePropTypes) {
+
     const [toggleElements, setToggleElements] = useState(false)
-    let FAKE_DATA = ["Data rule", "Text rule", "Money Rule", "Multiline rules"]
+
+
     const ref = useRef<HTMLDivElement>(null)
 
     const toggle = useCallback(
@@ -16,20 +18,8 @@ function Select() {
         [],
     )
 
-    let arrayOfOptions: String[] = []
-
-    const chose = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.checked) {
-            arrayOfOptions = [...text, e.target.value]
-        } else {
-            arrayOfOptions = text.filter(word => word !== e.target.value);
-        }
-        setText(arrayOfOptions)
-    }
-
     useEffect(() => {
-        const checkIfClickedOutside = (e:any) => {
-            console.log(e)
+        const checkIfClickedOutside = (e: any) => {
             if (toggleElements && ref.current && !ref.current.contains(e.target)) {
                 setToggleElements(false)
             }
@@ -41,15 +31,12 @@ function Select() {
     }, [toggleElements])
 
 
-    const deleteFunc = (item: String) => {
-        const result = text.filter(word => word !== item);
-        setText(result)
-    }
+
 
     return (
         <div className='multiple__select' ref={ref}>
             <SelectHeader IconClick={toggle} iconProp={toggleElements}>
-                {text.length === 0 ? "Choose rule type" : text.map((item, index) => {
+                {values.length === 0 ? "Choose rule type" : values.map((item: string, index: number) => {
                     return <span key={index} className="multiple__select__main__badge">
                         {item}
                         <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
@@ -58,9 +45,9 @@ function Select() {
             </SelectHeader>
             <div className={`multiple__select__elemets ${toggleElements && "open"}`}>
                 {
-                    FAKE_DATA.map((rule) => {
-                        return <div key={rule} className="multiple__select__elemets__item" >
-                            <Checkbox checked={text.includes(rule)} value={rule} text={rule} onChange={chose} />
+                    data.map((rule: string, index: number) => {
+                        return <div key={index} className="multiple__select__elemets__item" >
+                            <Checkbox checked={values.includes(rule)} value={rule} text={rule} onChange={chose} />
                         </div>
                     })
                 }
