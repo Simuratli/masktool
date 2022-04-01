@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { setCodeEditorValue } from '../../redux/actions'
+import { useDispatch, useSelector } from 'react-redux'
 
 function CodeEditor() {
-
-    const [code, setCode] = useState({
-        data: ` var Singleton = (function() {
-            var privateVariable = "…";
-                            this.publicMethod = function()    {…};
-                            function privateMethod() {…};
-            })();`
-    })
+    const dispatch = useDispatch()
+    const codeEditorState = useSelector((state:any)=>state.codeEditorReducer.data)
 
     const writeCode = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setCode((prev) => ({
-            ...prev,
-            data: e.target.value
-        }))
+        dispatch(setCodeEditorValue(e.target.value))
     }
     return (
-        <textarea onChange={writeCode} value={code.data} className='editor' />
+        <textarea onChange={writeCode} value={codeEditorState} className='editor' />
     )
 }
 
