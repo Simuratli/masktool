@@ -1,0 +1,1 @@
+export const SET_TOGGLE_MODAL = "SET_TOGGLE_MODAL"

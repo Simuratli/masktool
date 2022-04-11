@@ -2,11 +2,13 @@ import { setNotificationAllowance, setAproveNotificationAgreement } from './noti
 import { setStep } from './stepper.action'
 import { setSelectMultipleItem } from './multipleselect'
 import { setCodeEditorValue } from './codeeditor.action'
+import { setToggleModal } from './modal.action'
 
 export {
     setNotificationAllowance,
     setAproveNotificationAgreement,
     setStep,
     setSelectMultipleItem,
-    setCodeEditorValue
+    setCodeEditorValue,
+    setToggleModal
 } 
