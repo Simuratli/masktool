@@ -1,7 +1,12 @@
 import React from 'react'
-import { Button ,Modal } from '../../components'
+import { Button, Modal } from '../../components'
+import { useDispatch,useSelector } from 'react-redux'
+import { setToggleModal } from '../../redux/actions'
 
 function Rules() {
+    const dispatch = useDispatch()
+    const modalState = useSelector((state:any)=>state.modalReducer.open)
+    console.log(modalState,'modalState')
     return (
         <div className='rules'>
             <div className="rules__button">
@@ -14,12 +19,10 @@ function Rules() {
             <div className="rules__drop">Slava Ukraini!</div>
 
             <div className="rules__button">
-                <Button text="RUN" />
+                <Button onClick={()=>{dispatch(setToggleModal(true))}} text="RUN" />
             </div>
 
-            <Modal>
-                Hellooo
-            </Modal>
+            {modalState && <Modal>Hellooo</Modal>}
         </div>
     )
 }
