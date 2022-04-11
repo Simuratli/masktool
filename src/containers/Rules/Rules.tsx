@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../../components'
+import { Button ,Modal } from '../../components'
 
 function Rules() {
     return (
@@ -16,6 +16,10 @@ function Rules() {
             <div className="rules__button">
                 <Button text="RUN" />
             </div>
+
+            <Modal>
+                Hellooo
+            </Modal>
         </div>
     )
 }
