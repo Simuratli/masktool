@@ -16,11 +16,16 @@ function CalendarM() {
     )
 
 
+    let onChangeDate = (item:any) => {
+        let selection = item.selection;
+        setDate([selection])
+    }
+
     return (
         <div className='calendar'>
             <DateRange
                 editableDateInputs={false}
-                onChange={(item:any) => setDate([item.selection])}
+                onChange={onChangeDate}
                 moveRangeOnFirstSelection={false}
                 ranges={date}
                 dateDisplayFormat="dd/MM/yyyy"

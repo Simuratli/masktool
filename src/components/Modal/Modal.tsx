@@ -1,7 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { setToggleModal } from '../../redux/actions'
-function Modal({ children }: any) {
+import { ModapPropTypes } from './modal.types'
+
+function Modal({ children }: ModapPropTypes) {
 
   const dispatch = useDispatch()
 

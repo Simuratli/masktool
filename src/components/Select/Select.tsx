@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { SelectPropTypes } from './select.types'
 import { SelectHeader } from '../'
 
-function Select({ data, placeholder }: any) {
+function Select({ data, placeholder }: SelectPropTypes) {
     const [toggleElements, settoggleElements] = useState(false)
     const [selectedElement, setSelectedElement] = useState<string | null>('')
     const ref = useRef<HTMLDivElement>(null)
