@@ -19,5 +19,4 @@ function MaskRulesRightActions() {
         </div>
     )
 }
-
 export default React.memo(MaskRulesRightActions)

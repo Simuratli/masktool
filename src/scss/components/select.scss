@@ -25,6 +25,11 @@
             display: flex;
             flex-wrap: wrap;
             gap: rem(5);
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+            color: #696D8C;
         }
 
         &__badge{
@@ -109,10 +114,11 @@
         border-radius: rem(6);
         overflow: hidden;
         max-height: 0;  
-        transition: max-height 0.2s ease-in-out;   
+        transition: max-height 0.2s ease-in-out;  
 
         &.open{
-            max-height:rem(500);  
+            max-height:rem(160);  
+            overflow-y: scroll; 
             transition: max-height 0.2s ease-in-out; 
         }
 

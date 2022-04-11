@@ -1,0 +1,116 @@
+.calendar{
+    width: rem(390);
+    border: 1px solid var(--disable-text-color);
+    background: var(--white);
+    border-radius: 6px;
+    padding: rem(20) rem(20) rem(23) rem(20);
+
+    .rdrDateDisplayWrapper{
+        background: var(--select-background-color);
+
+        .rdrDateInput{
+            border: 1px solid var(--progres-text-active);
+            box-sizing: border-box;
+            border-radius: rem(6);
+            height: rem(32);
+            display: grid;
+            place-content: center;
+            input{
+                text-align: left;
+                height: rem(32);
+                padding: rem(6) rem(12) rem(6) rem(12);
+                font-size: rem(14);
+                line-height: 140%;
+                color: var(--blue);
+            }
+        }
+    }
+
+    .rdrMonthAndYearWrapper{
+        .rdrNextPrevButton {
+            width: rem(32);
+            height: rem(32);
+            display: grid;
+            place-content: center;
+            background: var(--select-background-color);
+            i{
+                border: solid var(--tutorial-text-color);
+                border-width: 0 rem(1) rem(1) 0;
+                display: inline-block;
+                padding: rem(2);
+            }
+            
+        }
+        
+        .rdrPprevButton{
+            i{
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+                position: relative;
+                left: rem(2);
+            }
+        }
+        
+        
+
+        .rdrNextButton{
+            i{
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+                position: relative;
+                left: rem(-4);
+            }
+        }
+
+
+        .rdrMonthPicker,.rdrYearPicker{
+            border-radius: rem(6);
+            &:hover{
+                background: var(--disable-text-color);
+            }
+            select{
+                font-family: 'Montserrat';
+                font-style: normal;
+                font-weight: 400;
+                font-size: rem(14);
+                line-height: 140%;
+                text-align: center;
+                color: var(--blue);
+                padding: rem(6) rem(12);
+                width: rem(100);
+
+                option{
+                    background-color: var(--white);
+                }
+            }
+        }
+
+        
+    }
+
+
+    .rdrDayToday .rdrDayNumber span:after{
+        height: 0;
+        width: 0;
+    }
+
+    .rdrDay{
+        span{
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(14);
+            line-height: 140%;
+            text-align: center;
+            padding: rem(5);
+            color: var(--blue);
+        }
+    }
+
+    .rdrWeekDay{
+        font-style: normal;
+        font-weight: 400;
+        font-size: rem(14);
+        line-height: 140%;
+        color:var(--blue);
+    }
+}
