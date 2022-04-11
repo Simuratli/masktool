@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navbar, Progress, Footer } from '../../components'
-import { Notification, Tutorial, MaskingRules } from '../../containers'
+import { Notification, Tutorial, MaskingRules, Rules } from '../../containers'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 
 
@@ -20,7 +20,7 @@ function Main() {
         setComponent(<Tutorial />)
         break;
       case "rules":
-        setComponent(<MaskingRules />)
+        setComponent(<Rules />)
         break;
       default:
         break;
