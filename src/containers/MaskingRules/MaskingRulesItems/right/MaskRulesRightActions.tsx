@@ -8,7 +8,7 @@ function MaskRulesRightActions() {
 
     return (
         <div className="masking__rules__right__actions">
-            <Button disabled={codeEditorState === "" ? true : false} type='outlined' size='small' text="Validate" />
+            <Button disabled={!codeEditorState  ? true : false} type='outlined' size='small' text="Validate" />
 
             <div className="masking__rules__right__actions__input">
                 <Input disabled={true} stil="together" type='text' placeholder='Create name' name='name' />

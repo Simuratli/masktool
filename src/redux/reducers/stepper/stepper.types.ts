@@ -1,8 +1,8 @@
 export interface StepReducerTypes {
-    type:String;
+    type: String;
     payload: String;
 }
 
 export interface StepStateTypes {
-    step:String;
+    step: 'notifications' | 'tutorial' | 'rules' | 'tutorial' | 'progress' | 'results';
 }

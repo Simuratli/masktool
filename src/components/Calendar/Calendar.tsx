@@ -18,7 +18,7 @@ function CalendarM() {
 
     let onChangeDate = (item:any) => {
         let selection = item.selection;
-        setDate([selection])
+        setDate([selection]);
     }
 
     return (

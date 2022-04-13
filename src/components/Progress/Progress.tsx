@@ -3,19 +3,22 @@ import { ProgressItem } from './ProgressItem'
 import { progressData } from './progressdata'
 import { useSelector } from 'react-redux'
 import { ReducerType } from '../../redux/reducers/reducer.types'
+import { ProgresStateTypes } from './progress.types'
 
 
 function Progress() {
   const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
-  const [disable, setdisable] = useState<String[]>([])
+
+  const [progressBar, setProgressBar] = useState<ProgresStateTypes[]>([])
 
   useEffect(() => {
-    let index = progressData.findIndex(x => x.id === stepState)
-    let newProgressArray = progressData.slice(index + 1, progressData.length)
-    let disabledBar = newProgressArray.map((item) => {
-      return item.id
+    let newProgressBar = progressData.map((item) => {
+      if (item.id === stepState) {
+        item.disabled = true
+      }
+      return item
     })
-    setdisable(disabledBar)
+    setProgressBar(newProgressBar)
   }, [stepState])
 
 
@@ -23,12 +26,12 @@ function Progress() {
   return (
     <div className='progress'>
       {
-        progressData.map((item) => {
+        progressBar.map((item) => {
           return <ProgressItem
-            disabled={disable}
+            disabled={item.disabled}
             key={item.id}
             id={item.id}
-            icon={item.icon === "button" ? <button disabled={true} className='progress__upload__button'>Upload</button> : <span className='progress__item__icon' dangerouslySetInnerHTML={{ __html: item.icon }}></span>}
+            icon={<span className='progress__item__icon' dangerouslySetInnerHTML={{ __html: item.icon }}></span>}
             text={item.text}
           />
         })

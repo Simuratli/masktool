@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Navbar, Progress, Footer } from '../../components'
-import { Notification, Tutorial, MaskingRules, Rules } from '../../containers'
+import { Notification, Tutorial, Rules } from '../../containers'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 
 
@@ -13,7 +13,7 @@ function Main() {
 
   useEffect(() => {
     switch (stepState) {
-      case "main":
+      case "notifications":
         setComponent(<Notification />)
         break;
       case "tutorial":

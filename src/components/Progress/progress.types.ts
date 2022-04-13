@@ -4,5 +4,13 @@ export interface ProgresItemPropTypes {
     icon: ReactElement;
     text: String;
     id: String;
-    disabled: String[] | undefined;
+    disabled: boolean;
+}
+
+
+export interface ProgresStateTypes {
+    id: string;
+    text: string;
+    disabled: boolean;
+    icon: string;
 }

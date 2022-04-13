@@ -2,7 +2,7 @@ import { CHANGE_STEP } from '../../constants/stepper'
 import { StepReducerTypes,StepStateTypes } from './stepper.types'
 
 const initialState: StepStateTypes = {
-    step: "main",
+    step: "notifications",
 }
 
 export const stepReducer = (state = initialState, action: StepReducerTypes) => {
