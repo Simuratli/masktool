@@ -1,4 +1,4 @@
 export interface HeaderPropTypes {
-    headerType:String,
-    text:String
+    headerType:string;
+    text:string;
 }

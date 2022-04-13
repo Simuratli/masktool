@@ -1,18 +1,18 @@
 export interface MultipleSelectStateTypes {
-    data: string[]
+    data: string[];
 }
 
 
 export interface MultipleSelectActionTypes {
-    type: String;
+    type: string;
     payload: {
-        checked: Boolean,
-        data: string
+        checked: boolean;
+        data: string;
     }
 }
 
 
 export interface MultipleSelectPayloadTypes {
-    checked: Boolean,
-    data: string
+    checked: boolean;
+    data: string;
 }

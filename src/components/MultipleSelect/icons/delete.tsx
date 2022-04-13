@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 interface DownPropTypes {
-    deleteFunc: () => void,
+    deleteFunc: () => void;
 }
 
 function Delete({ deleteFunc }: DownPropTypes) {
@@ -13,4 +13,4 @@ function Delete({ deleteFunc }: DownPropTypes) {
     )
 }
 
-export default Delete
+export default React.memo(Delete);

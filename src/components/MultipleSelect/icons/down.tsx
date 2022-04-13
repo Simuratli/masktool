@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 interface DownPropTypes {
-    toggleElements:Boolean
+    toggleElements:Boolean;
 }
 
 function Down({toggleElements}:DownPropTypes) {
@@ -12,4 +12,4 @@ function Down({toggleElements}:DownPropTypes) {
     )
 }
 
-export default Down
+export default React.memo(Down)

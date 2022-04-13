@@ -1,11 +1,11 @@
 export interface CodeEditorStateTypes {
-    data: string
+    data: string;
 }
 
 
 export interface CodeEditorActionTypes {
-    type: String;
-    payload: string
+    type: string;
+    payload: string;
 }
 
 

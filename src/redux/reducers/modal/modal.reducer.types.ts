@@ -1,9 +1,9 @@
 export interface ModalStateTypes {
-    open:Boolean
+    open:boolean;
 }
 
 export interface ModalActionTypes {
-    type: String;
-    payload: boolean
+    type: string;
+    payload: boolean;
 }
 

@@ -1,8 +1,8 @@
 export interface StepReducerTypes {
     type:String;
-    payload: String
+    payload: String;
 }
 
 export interface StepStateTypes {
-    step:String
+    step:String;
 }

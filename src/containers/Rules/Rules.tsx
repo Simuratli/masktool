@@ -1,17 +1,18 @@
-import React from 'react'
-import { Button, Modal } from '../../components'
-import { useDispatch, useSelector } from 'react-redux'
-import { setToggleModal } from '../../redux/actions'
-import { ReducerType } from '../../redux/reducers/reducer.types'
+import React from 'react';
+import { Button, Modal } from '../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { setToggleModal } from '../../redux/actions';
+import { ReducerType } from '../../redux/reducers/reducer.types';
 
 function Rules() {
-    const dispatch = useDispatch()
-    const modalState = useSelector((state: ReducerType) => state.modalReducer.open)
-    console.log(modalState, 'modalState')
+    const dispatch = useDispatch();
+    const modalState = useSelector((state: ReducerType) => state.modalReducer.open);
+    console.log(modalState, 'modalState');
+    
     return (
         <div className='rules'>
             <div className="rules__button">
-                <Button text="ADD ENTITY" />
+                <Button size="big" text="ADD ENTITY" />
             </div>
 
             <div className="rules__drop">Slava Ukraini!</div>

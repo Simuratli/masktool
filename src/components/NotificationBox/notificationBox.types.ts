@@ -1,6 +1,6 @@
 export interface NotificationBoxPropTypes {
-    text: String,
-    button: Boolean,
-    onClick?: () => void,
+    text: string;
+    button: boolean;
+    onClick?: () => void;
     rotate?:boolean
 }
