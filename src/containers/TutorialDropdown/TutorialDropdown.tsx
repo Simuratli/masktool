@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { notificationData } from '../Notification/notification.data'
-import { NotificationBox, Dropdown } from '../../components'
+import { NotificationBox, NotificationDropdown } from '../../components'
 
 function TutorialDropdown() {
     const [openNotifications, setopenNotifications] = useState<boolean>(false)
@@ -19,13 +19,13 @@ function TutorialDropdown() {
                 rotate={openNotifications}
                 onClick={notificationDropdown}
             />
-            <Dropdown open={openNotifications}>
+            <NotificationDropdown open={openNotifications}>
                 {
                     notificationData.map((data) => {
                         return <NotificationBox key={data.id} text={data.text} button={false} />
                     })
                 }
-            </Dropdown>
+            </NotificationDropdown>
         </div>
     )
 }

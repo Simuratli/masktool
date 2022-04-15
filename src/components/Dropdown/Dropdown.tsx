@@ -1,13 +1,29 @@
-import React from 'react'
-import { DropdownPropTypes } from './dropdown.types'
+import React, { useState, useEffect, useRef } from 'react';
+import { DropdownHeader, DropdownContent } from './DropdownElements';
 
-function Dropdown({ children, open }: DropdownPropTypes) {
+function Dropdown({ actions, name, table }: any) {
+    const ref = useRef<HTMLDivElement>(null);
+    const [toggle, setToggle] = useState(false);
 
- 
+    // useEffect(() => {
+    //     const checkIfClickedOutside = (e: any) => {
+    //         if (toggle && ref.current && !ref.current.contains(e.target)) {
+    //             setToggle(false);
+    //         }
+    //     }
+    //     document.addEventListener("mousedown", checkIfClickedOutside);
+    //     return () => {
+    //         document.removeEventListener("mousedown", checkIfClickedOutside);
+    //     }
+    // }, [toggle])
+
 
     return (
-        <div className={`dropdown ${open && 'open'}`}>
-            {children}
+        <div ref={ref} className={`dropdown ${toggle && "openedDropdown"}`}>
+            <DropdownHeader name={name} actions={actions} setToggle={setToggle} />
+
+            <DropdownContent table={table} />
+            <div className="dropdown__border"></div>
         </div>
     )
 }
