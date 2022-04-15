@@ -1,7 +1,8 @@
 import React from "react";
 import { ToggleIcon } from "./icons";
+import { DropdownHeaderPorpTypes } from '../Dropdown.types'
 
-function DropdownHeader({ setToggle, name, actions }: any) {
+function DropdownHeader({ setToggle, name, actions }: DropdownHeaderPorpTypes) {
     return (
         <div className="dropdown__header">
             <h1 onClick={() => { setToggle((prev: boolean) => !prev); }}>{name}</h1>

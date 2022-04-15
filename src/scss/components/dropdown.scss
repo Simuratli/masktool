@@ -1,21 +1,21 @@
 .dropdown {
     border-bottom: 1px solid;
     border-image: linear-gradient(to right, var(--dropdown--border) 98%, transparent 50%) 100% 1;
+
     &__header {
         background-color: var(--select-background-color);
         display: flex;
-        // justify-content: space-between;  
-        cursor: pointer;    
-       
-        
-        &:hover{
+        cursor: pointer;
+
+
+        &:hover {
             background-color: var(--disable-text-color);
-            
-            .dropdown__header__icon__delete{
+
+            .dropdown__header__icon__delete {
                 display: block;
             }
-            
-            .dropdown__header__icon__delete__container{
+
+            .dropdown__header__icon__delete__container {
                 background-color: var(--disable-text-color);
             }
         }
@@ -41,13 +41,14 @@
             width: rem(70);
             height: rem(54);
             display: flex;
-            align-items:center;
+            align-items: center;
             gap: rem(5);
             width: rem(80);
-            &__delete{
+
+            &__delete {
                 display: none;
 
-                &__container{
+                &__container {
                     width: 100%;
                     background-color: var(--select-background-color);
                     height: 106%;
@@ -63,7 +64,7 @@
                 place-content: center;
                 height: rem(54);
                 width: rem(50);
-                
+
             }
 
         }
@@ -78,7 +79,7 @@
             font-size: rem(14);
             line-height: rem(17);
             color: var(--blue);
-           
+
         }
 
     }
@@ -94,8 +95,6 @@
         }
     }
 
-
-
 }
 
 
@@ -103,15 +102,15 @@
 
     .dropdown__header {
         background-color: var(--white);
-       
-        .dropdown__header__icon__delete__container{
+
+        .dropdown__header__icon__delete__container {
             background-color: var(--white);
         }
 
-        &:hover{
+        &:hover {
             background-color: var(--white);
 
-            .dropdown__header__icon__delete__container{
+            .dropdown__header__icon__delete__container {
                 background-color: var(--white);
             }
         }

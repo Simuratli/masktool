@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { DropdownHeader, DropdownContent } from './DropdownElements';
+import { DropdownPorpTypes } from './Dropdown.types'
 
-function Dropdown({ actions, name, table }: any) {
+function Dropdown({ actions, name, table }: DropdownPorpTypes) {
     const ref = useRef<HTMLDivElement>(null);
     const [toggle, setToggle] = useState(false);
 

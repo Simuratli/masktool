@@ -1,7 +1,8 @@
 import React from 'react'
 import { Box } from '../../../containers'
+import {DropdownContentPorpTypes} from '../Dropdown.types'
 
-function DropdownContent({table}:any) {
+function DropdownContent({table}:DropdownContentPorpTypes) {
     return (
         <div className="dropdown__content">
             <div className="dropdown__content__head">
