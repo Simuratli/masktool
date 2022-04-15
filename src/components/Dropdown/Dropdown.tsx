@@ -21,9 +21,7 @@ function Dropdown({ actions, name, table }: any) {
     return (
         <div ref={ref} className={`dropdown ${toggle && "openedDropdown"}`}>
             <DropdownHeader name={name} actions={actions} setToggle={setToggle} />
-
             <DropdownContent table={table} />
-            <div className="dropdown__border"></div>
         </div>
     )
 }

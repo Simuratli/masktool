@@ -1,6 +1,6 @@
 .dropdown {
     border-bottom: 1px solid;
-    border-image: linear-gradient(to right, var(--dropdown--border) 96.6%, transparent 50%) 100% 1;
+    border-image: linear-gradient(to right, var(--dropdown--border) 100%, transparent 50%) 100% 1;
     &__header {
         background-color: var(--select-background-color);
         display: flex;
@@ -13,6 +13,10 @@
             
             .dropdown__header__icon__delete{
                 display: block;
+            }
+            
+            .dropdown__header__icon__delete__container{
+                background-color: var(--disable-text-color);
             }
         }
 
@@ -40,16 +44,27 @@
             display: flex;
             align-items:center;
             gap: rem(5);
+            width: rem(80);
             &__delete{
                 display: none;
+
+                &__container{
+                    width: 100%;
+                    background-color: var(--select-background-color);
+                    height: 106%;
+                    display: grid;
+                    place-content: center;
+                    position: relative;
+                    top: 1px;
+                }
             }
 
             &__border {
-                height: 20px;
                 display: grid;
                 place-content: center;
                 height: rem(54);
                 width: rem(50);
+                
             }
 
         }
@@ -58,7 +73,7 @@
             flex-grow: 4;
             margin: 0;
             padding: 0;
-            min-width: rem(460);
+            min-width: rem(1360);
             padding: rem(21) rem(0) rem(15.5) rem(30);
             height: rem(54);
             font-weight: 400;
@@ -81,12 +96,6 @@
         }
     }
 
-
-    // &__border{
-    //     width: 96.6%;
-    //     height: 1px;
-    //     background-color: var(--dropdown--border);
-    // }
 }
 
 
@@ -95,8 +104,16 @@
     .dropdown__header {
         background-color: var(--white);
        
+        .dropdown__header__icon__delete__container{
+            background-color: var(--white);
+        }
+
         &:hover{
             background-color: var(--white);
+
+            .dropdown__header__icon__delete__container{
+                background-color: var(--white);
+            }
         }
 
         h1 {
