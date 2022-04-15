@@ -3,6 +3,7 @@
         display: flex;
         width: 100%;
         justify-content: end;
+        padding: rem(30) rem(30) rem(20) rem(30);
     }
 
     &__drop{
@@ -12,5 +13,11 @@
         margin: 20px 0;
         display: grid;
         place-content: center;
+    }
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        padding: rem(30) rem(30) rem(20) rem(30);
     }
 }

@@ -38,6 +38,9 @@
         color: var(--blue);
         border-radius: rem(5);
         background-color: var(--white);
+        padding: rem(11) rem(22) rem(12) rem(22);
+
+        filter: none;
 
         &:disabled{
             border: 2px solid var(--disable-text-color);

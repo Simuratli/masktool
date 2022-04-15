@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Navbar() {
+
     return (
         <nav className='navbar'>
             <svg width="99" height="64" viewBox="0 0 99 64" fill="none" xmlns="http://www.w3.org/2000/svg">

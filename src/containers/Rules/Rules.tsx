@@ -1,28 +1,25 @@
 import React from 'react';
-import { Button, Modal } from '../../components';
-import { useDispatch, useSelector } from 'react-redux';
-import { setToggleModal } from '../../redux/actions';
+import { Modal } from '../../components';
+import { useSelector } from 'react-redux';
 import { ReducerType } from '../../redux/reducers/reducer.types';
+import { RulesHeader, RulesFooter } from './RulesElements'
+
+import Box from '../Box'
 
 function Rules() {
-    const dispatch = useDispatch();
     const modalState = useSelector((state: ReducerType) => state.modalReducer.open);
-    console.log(modalState, 'modalState');
-    
+
     return (
         <div className='rules'>
-            <div className="rules__button">
-                <Button size="big" text="ADD ENTITY" />
-            </div>
 
-            <div className="rules__drop">Slava Ukraini!</div>
-            <div className="rules__drop">Slava Ukraini!</div>
-            <div className="rules__drop">Slava Ukraini!</div>
-            <div className="rules__drop">Slava Ukraini!</div>
+            <Box>
+                <RulesHeader />
 
-            <div className="rules__button">
-                <Button onClick={() => { dispatch(setToggleModal(true)) }} text="RUN" />
-            </div>
+
+                <RulesFooter />
+            </Box>
+
+
 
             {modalState && <Modal>Hellooo</Modal>}
         </div>
