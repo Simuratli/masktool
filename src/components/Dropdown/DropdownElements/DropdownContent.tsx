@@ -12,7 +12,7 @@ function DropdownContent({table}:any) {
 
             <div className="dropdown__content__table">
                     {table}
-                </div>
+            </div>
         </div>
     )
 }

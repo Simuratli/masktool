@@ -1,10 +1,10 @@
 .dropdown {
     border-bottom: 1px solid;
-    border-image: linear-gradient(to right, var(--dropdown--border) 100%, transparent 50%) 100% 1;
+    border-image: linear-gradient(to right, var(--dropdown--border) 98%, transparent 50%) 100% 1;
     &__header {
         background-color: var(--select-background-color);
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;  
         cursor: pointer;    
        
         
@@ -35,8 +35,7 @@
         }
 
         &__icon {
-            flex-grow: 0.1;
-            margin: 0;
+            margin-left: auto;
             padding: 0;
             text-align: start;
             width: rem(70);
@@ -70,10 +69,9 @@
         }
 
         p {
-            flex-grow: 4;
             margin: 0;
-            padding: 0;
-            min-width: rem(1360);
+            min-width: rem(560);
+            width: 85%;
             padding: rem(21) rem(0) rem(15.5) rem(30);
             height: rem(54);
             font-weight: 400;
@@ -95,6 +93,8 @@
             margin: rem(40) rem(10);
         }
     }
+
+
 
 }
 
