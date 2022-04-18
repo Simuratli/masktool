@@ -25,6 +25,14 @@
         &:disabled{
             background: var(--white);  
             cursor: no-drop;
+
+            svg,path{
+                fill:var(--progres-text-active)
+            }
+        }
+
+        svg,path{
+            fill:var(--tutorial-text-color)
         }
     }
 }
