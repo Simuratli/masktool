@@ -1,0 +1,26 @@
+.radio__container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: rem(20);
+    width: rem(150);
+}
+
+.radio__container  {
+    height: rem(20);
+    min-width: rem(80);
+}
+
+.radio__text {
+    position: relative;
+    left: rem(12);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.327273px;
+    text-transform: uppercase;
+
+    color: #757689;
+    top: -6.5px;
+}

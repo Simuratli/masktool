@@ -95,6 +95,29 @@
         }
     }
 
+
+    &__box__container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__main{
+            display: flex;
+            gap: rem(20);
+        }
+
+
+        &__actions{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: rem(100);
+            gap: rem(10);
+        }
+    }
+
+    
+
 }
 
 
