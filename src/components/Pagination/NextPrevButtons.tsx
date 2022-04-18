@@ -8,7 +8,6 @@ function NextPrevButtons({ setPage, type, disabled }: NextPrevButtonPropTypes) {
 
     let changePage = useCallback(
         (type) => {
-            console.log(type)
             switch (type) {
                 case 'prev':
                     setPage((prev) => ({ ...prev, current: prev.current - 1 }))
