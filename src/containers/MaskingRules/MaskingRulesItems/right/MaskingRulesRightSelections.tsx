@@ -19,7 +19,7 @@ function MaskingRulesRightSelections() {
     return (
         <div className="masking__rules__right__selectitems">
             <MultipleSelect data={FAKE_DATA} deleteFunc={deleteFunc} values={sellectState} chose={chose} />
-            <Select />
+            <Select type="big" />
         </div>
     )
 }

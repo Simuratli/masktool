@@ -1,0 +1,30 @@
+.pagination {
+    display: flex;
+    gap: rem(10);
+    align-items: center;
+
+    &__text{
+        font-style: normal;
+        font-weight: 400;
+        font-size: rem(14);
+        line-height: 130%;
+        color: var(--tutorial-text-color);
+    }
+
+
+    &__button {
+        background: var(--disable-text-color);
+        border-radius: rem(6);
+        height: rem(42);
+        width: rem(42);
+        border: 0;
+        display: grid;
+        place-content: center;
+        cursor: pointer;
+
+        &:disabled{
+            background: var(--white);  
+            cursor: no-drop;
+        }
+    }
+}

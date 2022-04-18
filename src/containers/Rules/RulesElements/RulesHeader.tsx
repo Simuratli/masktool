@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button } from '../../../components';
+import { Button, Pagination } from '../../../components';
 
 function RulesHeader() {
     return (
         <div className="rules__header">
             <div className="rules__pagination">
-                Rows per page
+                <Pagination />
             </div>
             <Button type='outlined' size="big" text="ADD ENTITY" />
         </div>

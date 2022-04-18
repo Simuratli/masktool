@@ -115,6 +115,29 @@
     width: rem(190);
     position: relative;
 
+
+    &.small{
+        width: rem(50);
+
+        .multiple__select__main__text{
+            font-style: normal;
+            font-weight: 400;
+            font-size: rem(14);
+            line-height: 130%;
+            color: var(--tutorial-text-color);
+            padding: 0;
+            
+        }
+
+        .multiple__select__main{
+            padding: rem(5) rem(5) rem(7) rem(8);
+        }
+        
+    }
+
+
+    
+
     &__dropdown {
         position: absolute;
         width: 100%;
