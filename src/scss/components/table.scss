@@ -1,0 +1,45 @@
+.table {
+    &__header {
+        background: var(--white);
+        border-radius: rem(6) rem(6) 0px 0px;
+        padding: rem(20) rem(30);
+        margin-bottom: rem(20);
+        display: flex;
+
+        &__shadow {
+            height: rem(12);
+            width: 100%;
+            background: linear-gradient(180deg, #EFEFEF 0%, #F2F3F3 9.7%, #FFFFFF 100%);
+            mix-blend-mode: multiply;
+        }
+
+        .table__cell {
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(12);
+            line-height: rem(16);
+            letter-spacing: rem(0.327273);
+            text-transform: uppercase;
+            display: flex;
+            gap: rem(10);
+            align-items: center;
+            color: var(--table-header-color);
+        }
+
+
+        .plus{
+            border-radius: 50%;
+            background-color: var(--blue);
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+            height: rem(20);
+            width: rem(20);
+            border: 0;
+        }
+    }
+
+    &__cell {
+        width: rem(330);
+    }
+}
