@@ -1,52 +1,60 @@
-.multiple__select{
+.multiple__select {
     width: rem(234);
     position: relative;
-    &__main{
-        background: var(--white);
-        border: 1px solid var(--progres-text-active);
+
+    &__main {
+        background: var(--select-background-color);
         box-sizing: border-box;
-        border-radius: 6px;
+        border-radius: rem(6);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: rem(5) rem(12) rem(5) rem(12);
+        padding: rem(5) rem(12) rem(6) rem(12);
 
-        &__icon{
+        &__icon {
             position: relative;
             top: rem(-2);
             cursor: pointer;
 
-            .rotate{
+            .rotate {
                 transform: rotate(180deg);
             }
         }
 
-        &__text{
+        &__text {
             display: flex;
             flex-wrap: wrap;
             gap: rem(5);
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 21px;
-            color: #696D8C;
+            font-size: rem(16);
+            line-height: rem(21);
+            display: flex;
+            align-items: center;
+            color: var(--blue);
         }
 
-        &__badge{
+        &__badge {
             background: var(--disable-text-color);
             border-radius: rem(6);
             padding: rem(2) rem(7);
             margin-right: rem(4);
-            display: grid;
-            place-content: center;
             display: inline-block;
             font-style: normal;
             font-weight: 400;
-            font-size: 14px;
-            line-height: 19px;
-            color: #696D8C;
+            font-size: rem(14);
+            line-height: rem(19);
+            color: var(--progres-text-active);
+            display: flex;
+            align-items: center;
 
-            svg{
+            span {
+                width: rem(50);
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            svg {
                 cursor: pointer;
                 position: relative;
                 top: rem(1.4);
@@ -55,34 +63,34 @@
         }
     }
 
-    &__elemets{
+    &__elemets {
         display: flex;
         flex-direction: column;
-        border-radius: rem(6);
-        margin-top: rem(5);
         max-height: 0;
         transition: max-height 0.2s ease-in-out;
         overflow: hidden;
         position: absolute;
         width: 100%;
 
-        &__item{
+        &__item {
             padding: rem(8) rem(10) rem(8) rem(10);
             cursor: pointer;
             background: var(--select-background-color);
-            &:hover{
+
+            &:hover {
                 background-color: var(--disable-text-color);
-                span{
+
+                span {
                     color: var(--tutorial-text-color);
                 }
             }
 
-            div{
+            div {
                 position: relative;
                 left: rem(30);
             }
 
-            span{
+            span {
                 font-style: normal;
                 font-weight: 400;
                 font-size: rem(14);
@@ -93,7 +101,7 @@
 
         }
 
-        &.open{
+        &.open {
             max-height: 500px;
             transition: max-height 0.2s ease-in;
         }
@@ -103,59 +111,59 @@
 
 
 
-.select{
+.select {
     width: rem(190);
     position: relative;
 
-    &__dropdown{
+    &__dropdown {
         position: absolute;
         width: 100%;
         background: var(--select-background-color);
         border-radius: rem(6);
         overflow: hidden;
-        max-height: 0;  
-        transition: max-height 0.2s ease-in-out;  
+        max-height: 0;
+        transition: max-height 0.2s ease-in-out;
 
-        &.open{
-            max-height:rem(160);  
-            overflow-y: scroll; 
-            transition: max-height 0.2s ease-in-out; 
+        &.open {
+            max-height: rem(160);
+            overflow-y: scroll;
+            transition: max-height 0.2s ease-in-out;
         }
 
-        &__element{
+        &__element {
             padding: rem(5) rem(6) rem(5) rem(10);
             display: flex;
             justify-content: space-between;
             height: rem(27);
             align-items: center;
             cursor: pointer;
-            
 
-            &:hover{
+
+            &:hover {
                 background: var(--disable-text-color);
-                
-                .select__dropdown__element__icon{
+
+                .select__dropdown__element__icon {
                     display: block;
                 }
 
-                .select__dropdown__element__text{
+                .select__dropdown__element__text {
                     color: var(--tutorial-text-color);
                 }
 
             }
 
-            &__icon{
+            &__icon {
                 display: none;
             }
 
-            &__text{
+            &__text {
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 120%;
                 width: 100%;
                 color: var(--progres-text-active);
 
-                &--header{
+                &--header {
                     font-weight: 400;
                     font-size: rem(16);
                     line-height: 120%;

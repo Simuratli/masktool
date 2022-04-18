@@ -31,14 +31,12 @@ function Select({ chose, values, deleteFunc, data }: MultiplePropTypes) {
     }, [toggleElements])
 
 
-
-
     return (
         <div className='multiple__select' ref={ref}>
             <SelectHeader IconClick={toggle} iconProp={toggleElements}>
                 {values.length === 0 ? "Choose rule type" : values.map((item: string, index: number) => {
                     return <span key={index} className="multiple__select__main__badge">
-                        {item}
+                        <span>{item}</span>
                         <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
                     </span>
                 })}

@@ -55,7 +55,7 @@
                     display: grid;
                     place-content: center;
                     position: relative;
-                    top: 1px;
+                    top: rem(1);
                 }
             }
 
@@ -87,36 +87,55 @@
 
     &__content {
         max-height: 0;
-        overflow: hidden;
-        transition: 0.1s ease-out;
+        display: none;
+        transition: 0.3s ease-out;
 
         &__head {
             margin: rem(40) rem(10);
         }
+
+        &__table {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.2s ease;
+
+            &.show {
+                max-height: rem(200);
+                transition: 0.2s ease;
+            }
+        }
     }
 
 
-    &__box__container{
+    &__box__container {
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        &__main{
+        &__main {
             display: flex;
-            gap: rem(20);
+            gap: rem(30);
+            align-items: center;
+
+            &__filter {
+                position: relative;
+                display: flex;
+                gap: rem(10);
+                align-items: center;
+            }
         }
 
 
-        &__actions{
+        &__actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-right: rem(100);
-            gap: rem(10);
+            gap: rem(30);
         }
     }
 
-    
+
 
 }
 
@@ -157,6 +176,7 @@
 
     .dropdown__content {
         max-height: rem(1000);
+        display: block;
         transition: 0.5s ease-in-out;
     }
 }
