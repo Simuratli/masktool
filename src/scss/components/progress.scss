@@ -4,7 +4,7 @@
     box-shadow: 0px rem(3) rem(6) rgba(14, 31, 53, 0.08), 0px rem(6) rem(12) rgba(14, 31, 53, 0.12), 0px rem(8) rem(24) rgba(14, 31, 53, 0.08);
     border-radius: rem(6);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     height: rem(70);
     margin-bottom: rem(36);
 
@@ -82,5 +82,31 @@
         }
     }
 
+
+    &__settings{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: rem(26.5);
+        background-color: var(--white);
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        font-style: normal;
+        font-weight: 600;
+        font-size: rem(12);
+        line-height: 140%;
+        text-transform: uppercase;
+        color: var(--progres-text-active);
+        border-radius: rem(6);
+        min-width: rem(80);
+
+        &__icon{
+            width: rem(40);
+            text-align: right;
+            position: relative;
+            top: rem(2);
+        }
+    }
 
 }

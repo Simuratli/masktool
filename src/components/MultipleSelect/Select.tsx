@@ -34,7 +34,7 @@ function Select({ chose, values, deleteFunc, placeholder, data }: MultiplePropTy
     return (
         <div className='multiple__select' ref={ref}>
             <SelectHeader IconClick={toggle} iconProp={toggleElements}>
-                {values.length === 0 ? placeholder : values.map((item: string, index: number) => {
+                {values.length === 0 ? <span onClick={()=>{setToggleElements((prev)=>!prev)}}>{ placeholder }</span> : values.map((item: string, index: number) => {
                     return <span key={index} className="multiple__select__main__badge">
                         <span>{item}</span>
                         <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
