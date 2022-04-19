@@ -1,5 +1,10 @@
 import React from "react";
 
 export interface TableRowPropTypes {
-    mask:string
+    mask: string
+}
+
+
+export interface TableCellPropTypes {
+    children: React.ReactNode
 }

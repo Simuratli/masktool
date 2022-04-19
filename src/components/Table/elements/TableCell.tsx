@@ -1,6 +1,7 @@
 import React from 'react'
+import { TableCellPropTypes } from '../table.types'
 
-function TableCell({ children }: any) {
+function TableCell({ children }: TableCellPropTypes) {
     return (
         <div className='table__cell'>
             {children}
