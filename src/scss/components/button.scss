@@ -33,14 +33,32 @@
         filter: none;
     }
 
+    &.normal__modal{
+        width: rem(120) !important;
+        height: rem(40) !important;
+        padding: rem(11) rem(36) rem(12) rem(34);
+    }
+
     &.outlined {
         border: 2px solid var(--blue);
         color: var(--blue);
         border-radius: rem(5);
         background-color: var(--white);
         padding: rem(11) rem(22) rem(12) rem(22);
-
         filter: none;
+
+        &__modal {
+            width: rem(120);
+            height: rem(40);
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            border-radius: rem(5);
+            background-color: var(--white);
+            filter: none;
+            padding: rem(11) rem(36) rem(12) rem(34);
+        }
+
+
 
         &:disabled {
             border: 2px solid var(--disable-text-color);

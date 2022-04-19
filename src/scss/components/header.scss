@@ -10,4 +10,18 @@
   &.big {
     font-size: rem(28);
   }
+
+
+  &.modal__header{
+    font-style: normal;
+    font-weight: 600;
+    font-size: rem(20);
+    line-height: 130%;
+    letter-spacing: 0.01em;
+    color: var(--blue);
+    background: -webkit-linear-gradient(#0d3b7c, #0d3b7c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
 }

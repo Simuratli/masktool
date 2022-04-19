@@ -4,9 +4,10 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100000;
 
     &__backdrop {
-        background-color: rgba($color: #000000, $alpha: 0.6);
+        background: rgba(140, 151, 183, 0.4056);
         height: 100%;
         width: 100%;
         position: absolute;
@@ -16,13 +17,47 @@
 
     &__content {
         background-color: var(--white);
-        width: rem(500);
-        height: rem(500);
+        width: rem(519);
+        height: rem(222);
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 100;
-        padding: rem(10);
+        padding: rem(30);
+
+        background: var(--white);
+        border: 1px solid var(--disable-text-color);
+        box-sizing: border-box;
+        box-shadow: 0px 3px 6px rgba(14, 31, 53, 0.08), 0px 6px 12px rgba(14, 31, 53, 0.12), 0px 8px 24px rgba(14, 31, 53, 0.08);
+        border-radius: 5px;
+    }
+
+    &__close{
+        margin-bottom: rem(20);
+        display: flex;
+        justify-content: end;
+
+        svg{
+            cursor: pointer;
+        }
+    }
+
+
+    &__buttons{
+        display: flex;
+        gap: rem(10);
+        justify-content: end;
+        align-items: center;
+        margin-top: rem(20);
+    }
+
+    &__text{
+        font-weight: 400;
+        font-size: rem(14px);
+        line-height: 140%;
+        color: var(--tutorial-text-color);
+        margin-top: rem(20);
+        margin-bottom: 0;
     }
 }
