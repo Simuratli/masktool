@@ -2,17 +2,16 @@ import React, { useState, useEffect, useRef } from 'react'
 import { SelectPropTypes } from './select.types'
 import { SelectHeader } from '../'
 
-function Select({ data, placeholder, type }: SelectPropTypes) {
+function Select({ data, placeholder, type, customData }: SelectPropTypes) {
     const [toggleElements, settoggleElements] = useState(false)
     const [selectedElement, setSelectedElement] = useState<string | null>('')
     const ref = useRef<HTMLDivElement>(null)
 
-
     const selectItem = (e: React.MouseEvent<HTMLSpanElement>) => {
         const input = e.target as HTMLElement;
         setSelectedElement(input.textContent)
+        settoggleElements(false)
     }
-
 
     useEffect(() => {
         const checkIfClickedOutside = (e: any) => {
@@ -34,7 +33,15 @@ function Select({ data, placeholder, type }: SelectPropTypes) {
             </SelectHeader>
 
             <div className={`select__dropdown ${toggleElements && 'open'}`}>
-                {data}
+                {customData && customData}
+
+                {
+                    data && data.map((item: string) => {
+                        return <div onClick={selectItem} key={item} className="select__dropdown__element">
+                            <span className="select__dropdown__element__text">{item}</span>
+                        </div>
+                    })
+                }
             </div>
         </div>
     )

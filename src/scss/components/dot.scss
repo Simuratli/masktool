@@ -1,0 +1,13 @@
+.dot {
+    border: 3px solid var(--green);
+    box-sizing: border-box;
+    display: block;
+    height: rem(14);
+    width: rem(14);
+    border-radius: 50%;
+}
+
+
+.mask {
+    background-color: var(--green);
+}

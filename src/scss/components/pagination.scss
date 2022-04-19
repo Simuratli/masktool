@@ -3,7 +3,7 @@
     gap: rem(10);
     align-items: center;
 
-    &__text{
+    &__text {
         font-style: normal;
         font-weight: 400;
         font-size: rem(14);
@@ -22,17 +22,19 @@
         place-content: center;
         cursor: pointer;
 
-        &:disabled{
-            background: var(--white);  
+        &:disabled {
+            background: var(--white);
             cursor: no-drop;
 
-            svg,path{
-                fill:var(--progres-text-active)
+            svg,
+            path {
+                fill: var(--progres-text-active)
             }
         }
 
-        svg,path{
-            fill:var(--tutorial-text-color)
+        svg,
+        path {
+            fill: var(--tutorial-text-color)
         }
     }
 }

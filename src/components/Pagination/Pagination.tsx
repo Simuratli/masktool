@@ -39,7 +39,7 @@ function Pagination() {
     return (
         <div className='pagination'>
             <div className="pagination__text">Rows per page</div>
-            <Select placeholder={`${page.current}-${page.rangeView}`} type="small" data={Pagination_options} />
+            <Select placeholder={`${page.current}-${page.rangeView}`} type="small" customData={Pagination_options} />
             <div className="pagination__text">of {page.pageCount}</div>
             <NextPrevButtons type="prev" setPage={setPage} disabled={page.current === 1} />
             <NextPrevButtons type="next" setPage={setPage} disabled={page.current >= page.pageCount} />

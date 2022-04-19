@@ -17,21 +17,21 @@
   &::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   /* Track */
   &::-webkit-scrollbar-track {
-    background: var(--select-background-color); 
+    background: var(--select-background-color);
   }
-   
+
   /* Handle */
   &::-webkit-scrollbar-thumb {
     background: var(--disable-text-color);
-     
+
   }
-  
+
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
-    background: var(--disable-text-color); 
+    background: var(--disable-text-color);
   }
 
 }

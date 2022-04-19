@@ -131,6 +131,8 @@
 
         .multiple__select__main{
             padding: rem(5) rem(5) rem(7) rem(8);
+            position: relative;
+            z-index: 1;
         }
         
     }
@@ -146,7 +148,7 @@
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.2s ease-in-out;
-
+        z-index: 1000;
         &.open {
             max-height: rem(160);
             overflow-y: scroll;

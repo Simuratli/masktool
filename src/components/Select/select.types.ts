@@ -1,7 +1,8 @@
 import React from "react";
 
 export interface SelectPropTypes {
-    data?:React.ReactNode;
-    placeholder?:string;
-    type:string;
+    data?: string[];
+    placeholder?: string;
+    type: string;
+    customData?: React.ReactNode
 }

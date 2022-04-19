@@ -7,14 +7,11 @@
         display: flex;
         cursor: pointer;
 
-
         &:hover {
             background-color: var(--disable-text-color);
-
             .dropdown__header__icon__delete {
                 display: block;
             }
-
             .dropdown__header__icon__delete__container {
                 background-color: var(--disable-text-color);
             }
@@ -100,7 +97,7 @@
             transition: 0.2s ease;
 
             &.show {
-                max-height: rem(200);
+                max-height: rem(2000);
                 transition: 0.2s ease;
             }
         }
