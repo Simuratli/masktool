@@ -83,7 +83,7 @@
     }
 
 
-    &__settings{
+    &__settings {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -101,19 +101,79 @@
         border-radius: rem(6);
         min-width: rem(80);
 
-        &__icon{
+        &__icon {
             width: rem(40);
             text-align: right;
             position: relative;
             top: rem(2);
         }
 
-        &.disabled{
-            svg,path{
-                fill: #E8EBFE;
+        &.disabled {
+
+            svg,
+            path {
+                fill: var(--disable-text-color);
                 cursor: no-drop;
             }
         }
     }
+
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: rem(20);
+        width: rem(450);
+        justify-content: space-between;
+
+        &__bar {
+            display: flex;
+            flex-direction: column;
+            gap: rem(2);
+        }
+
+        &__text {
+            margin: 0;
+            font-style: normal;
+            font-weight: 600;
+            font-size: rem(12);
+            line-height: 140%;
+            text-transform: uppercase;
+            color: var(--progres-text-active);
+            margin-bottom: rem(5);
+        }
+
+        &__buttons {
+            display: flex;
+            gap: rem(20);
+            position: relative;
+            top: rem(4);
+
+            svg {
+                cursor: pointer;
+            }
+        }
+    }
+
+}
+
+
+.divided__progress__loader {
+    width: 100%;
+    display: flex;
+    gap: rem(2);
+
+    &__item {
+        display: block;
+        width: rem(24);
+        height: rem(4);
+        background: #E8EBFE;
+        border-radius: rem(3);
+
+        &.complated {
+            background-color: var(--green);
+        }
+    }
+
 
 }

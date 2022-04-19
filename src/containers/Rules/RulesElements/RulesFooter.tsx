@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { Button } from '../../../components';
-import { setToggleModal } from '../../../redux/actions';
+import { setStep } from '../../../redux/actions';
 
 function RulesFooter() {
     const dispatch = useDispatch();
 
     return (
         <div className="rules__button">
-            <Button onClick={() => { dispatch(setToggleModal(true)) }} text="RUN" />
+            <Button onClick={() => { dispatch(setStep('progress')) }} text="RUN" />
         </div>
     )
 }

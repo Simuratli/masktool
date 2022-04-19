@@ -9,16 +9,16 @@ function PorgressItem({ icon, text, id, disabled }: ProgresItemPropTypes) {
     const dispatch = useDispatch();
 
     const travelBetweenSteps = () => {
-        disabled && dispatch(setStep(id));
+        !disabled && id !== "progress" && dispatch(setStep(id));
     }
 
     return (
         <>
-            <div onClick={travelBetweenSteps} className={`progress__item ${!disabled && 'progress__item--disable'}`}>
+            <div onClick={travelBetweenSteps} className={`progress__item ${disabled && 'progress__item--disable'}`}>
                 <span className='progress__item__text'>{text}</span>
                 {icon}
             </div>
-            {id !== "done" && <Dvider />}
+            {id !== "progress" && <Dvider />}
         </>
     )
 }

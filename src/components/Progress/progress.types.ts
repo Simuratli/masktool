@@ -14,3 +14,8 @@ export interface ProgresStateTypes {
     disabled: boolean;
     icon: string;
 }
+
+
+export interface ProgresSettingsPropTypes {
+    stepState:string;
+}

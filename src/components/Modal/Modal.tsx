@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { setToggleModal } from '../../redux/actions'
 import { ModapPropTypes } from './modal.types'
+import Button from '../Button'
 
 function Modal({ children }: ModapPropTypes) {
 
@@ -17,6 +18,12 @@ function Modal({ children }: ModapPropTypes) {
           </svg>
         </div>
         {children}
+
+        <div className="modal__buttons">
+          <Button onClick={() => { dispatch(setToggleModal(false)) }} type='outlined__modal' text='Back' />
+          <Button type='normal__modal' text='Confirm' />
+        </div>
+
       </div>
     </div>
   )
