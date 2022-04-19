@@ -2,6 +2,7 @@ export interface InputPropTypes {
     name:string;
     type:string;
     placeholder:string;
-    stil?:string;
+    className?:string;
     disabled?:boolean;
 }
+

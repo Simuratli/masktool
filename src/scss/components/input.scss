@@ -20,4 +20,36 @@
             opacity: 1;
         }
     }
+
+    &.search {
+        width: rem(342);
+        height: rem(42);
+        padding: rem(6) rem(5) rem(6) rem(42);
+
+    }
+
+
+    &__button {
+        background-color: transparent;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        left: rem(35);
+        top: rem(3);
+
+        svg,
+        path {
+            fill: var(--tutorial-text-color);
+        }
+
+        &:disabled {
+            cursor: no-drop;
+
+            svg,
+            path {
+                fill: var(--disable-text-color);
+            }
+        }
+    }
 }
