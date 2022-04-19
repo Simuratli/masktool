@@ -3,4 +3,5 @@ export interface MultiplePropTypes {
     values: string[];
     deleteFunc: (item:string) => void;
     data: string[];
+    placeholder:string;
 }

@@ -47,7 +47,7 @@ function DropdownContentHeader({ checked, setChecked }: DropdownHeaderPropsTypes
                         <RadioButton name="all" color="blue" checked={checked.records} onChange={handleSelectFilter} label={"All records"} />
                         <div className="dropdown__box__container__main__filter">
                             <RadioButton name="special" color="blue" checked={!checked.records} onChange={handleSelectFilter} />
-                            <MultipleSelect data={FAKE_DATA} deleteFunc={deleteFunc} values={filter} chose={chose} />
+                            <MultipleSelect placeholder='Select view to edit' data={FAKE_DATA} deleteFunc={deleteFunc} values={filter} chose={chose} />
                         </div>
                     </div>
                     <div className="dropdown__box__container__actions">

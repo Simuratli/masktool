@@ -4,7 +4,7 @@ import { DeleteIcon } from './icons'
 import { MultiplePropTypes } from './multipleSelect.types'
 
 
-function Select({ chose, values, deleteFunc, data }: MultiplePropTypes) {
+function Select({ chose, values, deleteFunc, placeholder, data }: MultiplePropTypes) {
 
     const [toggleElements, setToggleElements] = useState(false)
 
@@ -34,7 +34,7 @@ function Select({ chose, values, deleteFunc, data }: MultiplePropTypes) {
     return (
         <div className='multiple__select' ref={ref}>
             <SelectHeader IconClick={toggle} iconProp={toggleElements}>
-                {values.length === 0 ? "Choose rule type" : values.map((item: string, index: number) => {
+                {values.length === 0 ? placeholder : values.map((item: string, index: number) => {
                     return <span key={index} className="multiple__select__main__badge">
                         <span>{item}</span>
                         <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
