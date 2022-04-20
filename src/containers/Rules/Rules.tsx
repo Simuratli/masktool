@@ -14,10 +14,10 @@ function Rules() {
 
             <Box>
                 <RulesHeader />
-                <Dropdown name="Entity 1" actions="View - all accounts, masking 8 fields" table={<Table />} />
-                <Dropdown name="Entity 2" actions="Nothing selected" table={<Table />} />
-                <Dropdown name="Entity 3" actions="View - all accounts, masking 8 fields" table={<Table />} />
-                <Dropdown name="Entity 4" actions="Nothing selected" table={<Table />} />
+                <Dropdown success={true} name="Entity 1" actions="View - all accounts, masking 8 fields" table={<Table />} />
+                <Dropdown success={false} name="Entity 2" actions="Nothing selected" table={<Table />} />
+                <Dropdown success={false} name="Entity 3" actions="View - all accounts, masking 8 fields" table={<Table />} />
+                <Dropdown success={null} name="Entity 4" actions="Nothing selected" table={<Table />} />
                 <RulesFooter />
             </Box>
 

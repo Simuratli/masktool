@@ -1,5 +1,7 @@
 import ToggleIcon from './toggle'
+import SuccessIcon from './success'
 
 export {
-    ToggleIcon
+    ToggleIcon,
+    SuccessIcon
 }

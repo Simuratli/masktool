@@ -3,15 +3,34 @@
     border-image: linear-gradient(to right, var(--dropdown--border) 98%, transparent 50%) 100% 1;
 
     &__header {
+
+
+        &.true {
+            h1 {
+                color: var(--progres-text-active);
+                gap: rem(10);
+            }
+        }
+
+        &.false {
+            h1 {
+                color: var(--danger);
+                gap: rem(10);
+            }
+        }
+
+
         background-color: var(--select-background-color);
         display: flex;
         cursor: pointer;
 
         &:hover {
             background-color: var(--disable-text-color);
+
             .dropdown__header__icon__delete {
                 display: block;
             }
+
             .dropdown__header__icon__delete__container {
                 background-color: var(--disable-text-color);
             }
@@ -28,6 +47,8 @@
             letter-spacing: 0.01em;
             color: var(--blue);
             height: rem(54);
+            display: flex;
+            align-items: center;
 
         }
 
@@ -161,7 +182,7 @@
         }
 
         p {
-            span{
+            span {
                 display: none;
             }
         }

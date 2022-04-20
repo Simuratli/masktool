@@ -5,10 +5,16 @@ export interface DropdownContentPorpTypes {
 };
 
 
+export interface DropdownSuccessIcon {
+    success:boolean | null;
+};
+
+
 export interface DropdownHeaderPorpTypes {
     setToggle:React.Dispatch<React.SetStateAction<boolean>>;
     name:string;
     actions:string;
+    success:boolean | null;
 };
 
 
@@ -16,4 +22,5 @@ export interface DropdownPorpTypes {
     table:React.ReactNode;
     name:string;
     actions:string;
+    success:boolean | null;
 };

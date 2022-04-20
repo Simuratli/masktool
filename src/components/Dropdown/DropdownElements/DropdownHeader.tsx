@@ -1,19 +1,22 @@
 import React from "react";
-import { ToggleIcon } from "./icons";
+import { ToggleIcon, SuccessIcon } from "./icons";
 import { DropdownHeaderPorpTypes } from '../Dropdown.types'
 import { setToggleModal } from '../../../redux/actions';
 import { ReducerType } from '../../../redux/reducers/reducer.types';
 import { useDispatch, useSelector } from 'react-redux';
 import ProgressLoader from '../../ProgressLoader'
 
-function DropdownHeader({ setToggle, name, actions }: DropdownHeaderPorpTypes) {
+function DropdownHeader({ setToggle, name, actions, success }: DropdownHeaderPorpTypes) {
     const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
 
     const dispatch = useDispatch();
 
     return (
-        <div className="dropdown__header">
-            <h1 onClick={() => { setToggle((prev: boolean) => !prev); }}>{name}</h1>
+        <div className={`dropdown__header ${success}`}>
+            <h1 onClick={() => { setToggle((prev: boolean) => !prev); }}>
+                <SuccessIcon success={success} />
+                <span>{name}</span>
+            </h1>
             <p onClick={() => { setToggle((prev: boolean) => !prev); }}>
                 {stepState === "progress" ? <ProgressLoader bgcolor="#80BB5B" completed={50} /> : <span>{actions}</span>}
             </p>
