@@ -1,30 +1,34 @@
-export const choseActionForRecords = (name: string) => {
-    let initialValues = {
-        records: true,
-        delete: false
-    }
+let initialValues = {
+    records: true,
+    delete: true
+}
 
+export const choseActionForRecords = (name: string) => {
     switch (name) {
         case "all":
-            return {
+            initialValues = {
                 ...initialValues,
                 records: true
             }
+            return initialValues
         case "special":
-            return {
+            initialValues = {
                 ...initialValues,
                 records: false
             }
+            return initialValues
         case "delete":
-            return {
+            initialValues = {
                 ...initialValues,
                 delete: true
             }
+            return initialValues
         case "masking":
-            return {
+            initialValues = {
                 ...initialValues,
                 delete: false
             }
+            return initialValues
         default:
             return initialValues;
     }

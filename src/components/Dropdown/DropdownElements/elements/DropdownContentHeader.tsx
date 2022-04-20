@@ -24,6 +24,7 @@ function DropdownContentHeader({ checked, setChecked }: DropdownHeaderPropsTypes
         (e: React.ChangeEvent<HTMLInputElement>) => {
             if (e.target.checked) {
                 setfilter((prev) => ([...prev, e.target.value]))
+                setChecked(choseActionForRecords('special'))
             } else {
                 setfilter(filter.filter((word: string) => word !== e.target.value))
             }

@@ -7,8 +7,6 @@ function Navbar() {
 
     const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
 
-    console.log(stepState, 'steppp')
-
     return (
         <nav className='navbar'>
             <a target='_blank' rel="noreferrer"  href="https://uds.systems/">

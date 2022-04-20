@@ -15,7 +15,7 @@ function Tutorial() {
     return (
         <section>
 
-            <TutorialDropdown/>
+            {/* <TutorialDropdown/> */}
             
             <div className="tutorial">
                 <Header

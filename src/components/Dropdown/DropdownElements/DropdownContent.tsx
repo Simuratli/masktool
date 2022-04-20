@@ -8,17 +8,15 @@ function DropdownContent({ table }: DropdownContentPorpTypes) {
 
     const [checked, setChecked] = useState<DropdownCheckedTypes>({
         records: true,
-        delete: true
+        delete: true,
     })
-
-
 
 
     return (
         <div className="dropdown__content">
             <DropdownContentHeader checked={checked} setChecked={setChecked} />
 
-            <div className={`dropdown__content__table ${!checked.delete && "show"}`}>
+            <div className={`dropdown__content__table show`}>
                 {table}
             </div>
         </div>
