@@ -1,5 +1,5 @@
-import { ButtonPropTypes } from './button.types'
-import React from 'react'
+import { ButtonPropTypes } from './button.types';
+import React from 'react';
 
 function Button({ text, disabled, onClick, type, size }: ButtonPropTypes) {
     return (
@@ -9,4 +9,4 @@ function Button({ text, disabled, onClick, type, size }: ButtonPropTypes) {
     )
 }
 
-export default React.memo(Button)
+export default React.memo(Button);

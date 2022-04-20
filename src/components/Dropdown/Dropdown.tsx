@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DropdownHeader, DropdownContent } from './DropdownElements';
-import { DropdownPorpTypes } from './Dropdown.types'
+import { DropdownPorpTypes } from './Dropdown.types';
 
 function Dropdown({ actions, name, table, success }: DropdownPorpTypes) {
     const [toggle, setToggle] = useState(false);

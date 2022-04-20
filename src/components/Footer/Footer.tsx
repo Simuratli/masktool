@@ -1,7 +1,7 @@
-import React from 'react'
-import Mail from './icons/mail'
-import Skype from './icons/skype'
-import Header from '../Header'
+import React from 'react';
+import Mail from './icons/mail';
+import Skype from './icons/skype';
+import Header from '../Header';
 
 function Footer() {
     return (
@@ -10,12 +10,11 @@ function Footer() {
             <p className="footer__text">Feel free to contact us by Skype or Email</p>
             <div className="footer__icons">
                 <a href="mailto: portal@uds.systems" className="mail">
-                    <Mail/> <span>portal@uds.systems</span>
+                    <Mail /> <span>portal@uds.systems</span>
                 </a>
                 <a href="skype:uds.systems?chat" className="mail">
-                    <Skype/> <span>uds.systems</span>
+                    <Skype /> <span>uds.systems</span>
                 </a>
-                
             </div>
         </footer>
     )

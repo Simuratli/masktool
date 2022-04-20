@@ -1,5 +1,5 @@
-import React from 'react'
-import { InputPropTypes } from './input.types'
+import React from 'react';
+import { InputPropTypes } from './input.types';
 
 function Input({ type, name, placeholder, className, disabled }: InputPropTypes) {
     return (
@@ -16,4 +16,4 @@ function Input({ type, name, placeholder, className, disabled }: InputPropTypes)
     )
 }
 
-export default React.memo(Input)
+export default React.memo(Input);

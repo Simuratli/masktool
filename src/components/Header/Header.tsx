@@ -1,5 +1,5 @@
-import React from 'react'
-import { HeaderPropTypes } from './header.types'
+import React from 'react';
+import { HeaderPropTypes } from './header.types';
 
 function Header({ headerType, text }: HeaderPropTypes) {
     return (
@@ -7,4 +7,4 @@ function Header({ headerType, text }: HeaderPropTypes) {
     )
 }
 
-export default Header
+export default React.memo(Header);
