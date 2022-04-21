@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header, Button } from '../../components'
-import { TutorialDropdown } from '../'
 import { useSelector, useDispatch } from 'react-redux'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 import { tutorialText } from './tutorial.data'
@@ -15,7 +14,6 @@ function Tutorial() {
     return (
         <section>
 
-            {/* <TutorialDropdown/> */}
             
             <div className="tutorial">
                 <Header

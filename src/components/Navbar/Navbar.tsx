@@ -1,15 +1,39 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import Input from '../Input'
-import { ReducerType } from '../../redux/reducers/reducer.types'
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Input from '../Input';
+import { ReducerType } from '../../redux/reducers/reducer.types';
+import { GetEntities, GetAttributesByEntity, GetViewsByEntity, GetVocabularesList, GetDefaultTasks } from '../../api'
 
 function Navbar() {
 
-    const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
+    const stepState = useSelector((state: ReducerType) => state.stepReducer.step);
+    useEffect(() => {
+        GetEntities().then((data) => {
+            console.log(data, 'getEntities')
+        })
+
+        GetAttributesByEntity().then((data) => {
+            console.log(data, 'GetAttributesByEntity')
+        })
+
+        GetViewsByEntity().then((data) => {
+            console.log(data, 'GetViewsByEntity')
+        })
+
+        GetVocabularesList().then((data) => {
+            console.log(data, 'GetVocabularesList')
+        })
+
+        GetDefaultTasks().then((data) => {
+            console.log(data, 'GetDefaultTasks')
+        })
+
+    }, [])
+
 
     return (
         <nav className='navbar'>
-            <a target='_blank' rel="noreferrer"  href="https://uds.systems/">
+            <a target='_blank' rel="noreferrer" href="https://uds.systems/">
                 <svg width="99" height="64" viewBox="0 0 99 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M33.9062 45.27H64.9053V0H33.9062V45.27Z" fill="#FF8F3E" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M0 45.27H30.999V0H0V45.27Z" fill="#1A4F95" />
