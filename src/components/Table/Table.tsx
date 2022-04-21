@@ -1,16 +1,18 @@
 import React from 'react';
 import { TableHeader, TableRow } from './elements';
+import { TablePropTypes } from './table.types'
 
-function Table() {
+function Table({ fields }: TablePropTypes) {
   return (
     <div className='table'>
       <TableHeader />
-      <TableRow mask="nomask" />
-      <TableRow mask="mask" />
-      <TableRow mask="nomask" />
-      <TableRow mask="nomask" />
-      <TableRow mask="mask" />
-      <TableRow mask="nomask" />
+
+      {fields.length !== 0 ? fields.map((field) => (
+        <TableRow name={field.logicalName} mask="mask" />
+      ))
+        : <div className='table__nodata'>NO DATA</div>
+      }
+
     </div>
   )
 }

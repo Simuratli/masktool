@@ -118,7 +118,7 @@
             transition: 0.2s ease;
 
             &.show {
-                max-height: rem(2000);
+                max-height: rem(100000);
                 transition: 0.2s ease;
             }
         }
@@ -134,6 +134,14 @@
             display: flex;
             gap: rem(30);
             align-items: center;
+
+            &__text{
+                font-weight: 600;
+                font-size: rem(12);
+                line-height: 140%;
+                text-transform: uppercase;
+                color: var(--blue);
+            }
 
             &__filter {
                 position: relative;

@@ -16,7 +16,12 @@ function Rules() {
                 <RulesHeader />
                 {
                     defaultTasksState.length !== 0 && defaultTasksState.map((task) => {
-                        return <Dropdown success={null} name={task.entityName} actions="View - all accounts, masking 8 fields" table={<Table />} />
+                        return <Dropdown
+                            success={null}
+                            name={task.entityName}
+                            fields={task.fields}
+                            actions="View - all accounts, masking 8 fields"
+                        />
                     })
                 }
                 <RulesFooter />

@@ -11,6 +11,7 @@ function Navbar() {
 
     useEffect(() => {
         GetDefaultTasks().then((data) => {
+            console.log(data,'GetDefaultTasks')
             dispatch(setDefaultTasks(data))
             dispatch(setLoader(false))
         })

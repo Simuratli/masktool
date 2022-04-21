@@ -90,4 +90,17 @@
             border: 0;
         }
     }
+
+
+    &__nodata{
+        background-color: var(--white);
+        text-align: center;
+        font-weight: 600;
+        font-size: rem(16);
+        line-height: rem(16);
+        letter-spacing: 0.327273px;
+        text-transform: uppercase;
+        color: var(--table-header-color);
+        padding: rem(15) 0;
+    }
 }

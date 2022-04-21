@@ -4,7 +4,7 @@ import TableCell from './TableCell'
 import Select from '../../Select'
 import Dot from '../../Dot'
 
-function TableRow({ mask }: TableRowPropTypes) {
+function TableRow({ mask, name }: TableRowPropTypes) {
     const [selectedRule, setselectedRule] = useState("List")
 
     let example_select_data = ["Random letters", "List", "Email", "Custom", "Clear"]
@@ -21,7 +21,7 @@ function TableRow({ mask }: TableRowPropTypes) {
     return (
         <div className='table__row'>
             <TableCell>
-                <div className="table__cell__name">Field</div>
+                <div className="table__cell__name">{name}</div>
             </TableCell>
             <TableCell>
                 <Select data={example_select_data} placeholder={selectedRule} type="big" />

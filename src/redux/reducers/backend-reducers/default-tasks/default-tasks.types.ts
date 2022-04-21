@@ -1,3 +1,9 @@
+export interface DefaultTasksFieldsTypes {
+    logicalName: string;
+    parameters: string[];
+    rule: string;
+}
+
 export interface DefaultTasksTypes {
     entityName: string;
     errorRecords: number;
@@ -17,6 +23,6 @@ export interface DefaultTasksStateTypes {
 
 
 export interface DefaultTasksActionTypes {
-    type:string;
-    payload:DefaultTasksTypes[]
+    type: string;
+    payload: DefaultTasksTypes[]
 }

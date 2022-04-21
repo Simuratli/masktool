@@ -6,10 +6,9 @@ import MultipleSelect from '../../../MultipleSelect'
 import { DropdownHeaderPropsTypes } from '../DropdownContent.types'
 
 
-function DropdownContentHeader({ checked, setChecked }: DropdownHeaderPropsTypes) {
+function DropdownContentHeader({ checked, setChecked, filter, setfilter }: DropdownHeaderPropsTypes) {
 
     let FAKE_DATA = ["All accounts", "Active accounts", "Inactive accounts"]
-    const [filter, setfilter] = useState<string[]>([])
 
 
     const handleSelectFilter = useCallback(
@@ -51,10 +50,13 @@ function DropdownContentHeader({ checked, setChecked }: DropdownHeaderPropsTypes
                             <MultipleSelect placeholder='Select view to edit' data={FAKE_DATA} deleteFunc={deleteFunc} values={filter} chose={chose} />
                         </div>
                     </div>
-                    <div className="dropdown__box__container__actions">
-                        <RadioButton name="delete" color="green" checked={checked.delete} onChange={handleSelectFilter} label={"Delete"} />
-                        <RadioButton name="masking" color="green" checked={!checked.delete} onChange={handleSelectFilter} label={"Maksing"} />
-                    </div>
+                    {
+                        checked.records ? <div className="dropdown__box__container__actions">
+                            <RadioButton name="delete" color="green" checked={checked.delete} onChange={handleSelectFilter} label={"Delete"} />
+                            <RadioButton name="masking" color="green" checked={!checked.delete} onChange={handleSelectFilter} label={"Maksing"} />
+                        </div> :
+                            <div className="dropdown__box__container__actions"></div>
+                    }
                 </div>
             </Box>
         </div>
