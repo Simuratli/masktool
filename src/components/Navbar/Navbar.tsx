@@ -1,34 +1,20 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Input from '../Input';
 import { ReducerType } from '../../redux/reducers/reducer.types';
-import { GetEntities, GetAttributesByEntity, GetViewsByEntity, GetVocabularesList, GetDefaultTasks } from '../../api'
+import { setLoader, setDefaultTasks } from '../../redux/actions';
+import { GetDefaultTasks } from '../../api'
 
 function Navbar() {
-
+    const dispatch = useDispatch();
     const stepState = useSelector((state: ReducerType) => state.stepReducer.step);
-    // useEffect(() => {
-    //     GetEntities().then((data) => {
-    //         console.log(data, 'getEntities')
-    //     })
 
-    //     GetAttributesByEntity().then((data) => {
-    //         console.log(data, 'GetAttributesByEntity')
-    //     })
-
-    //     GetViewsByEntity().then((data) => {
-    //         console.log(data, 'GetViewsByEntity')
-    //     })
-
-    //     GetVocabularesList().then((data) => {
-    //         console.log(data, 'GetVocabularesList')
-    //     })
-
-    //     GetDefaultTasks().then((data) => {
-    //         console.log(data, 'GetDefaultTasks')
-    //     })
-
-    // }, [])
+    useEffect(() => {
+        GetDefaultTasks().then((data) => {
+            dispatch(setDefaultTasks(data))
+            dispatch(setLoader(false))
+        })
+    }, [])
 
 
     return (

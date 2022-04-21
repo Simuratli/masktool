@@ -2,7 +2,7 @@ import { SET_TOGGLE_LOADER } from '../../constants/loader'
 import { LoaderReducerStateType, LoaderActionType } from './loader.reducer.types'
 
 const initialState: LoaderReducerStateType = {
-    loading: false,
+    loading: true,
 }
 
 export const loaderReducer = (state = initialState, action: LoaderActionType) => {
@@ -10,7 +10,7 @@ export const loaderReducer = (state = initialState, action: LoaderActionType) =>
         case SET_TOGGLE_LOADER:
             return {
                 ...state,
-                open: action.payload
+                loading: action.payload
             }
         default:
             return { ...state }

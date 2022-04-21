@@ -3,12 +3,14 @@ import { StepStateTypes } from './stepper/stepper.types';
 import { MultipleSelectStateTypes } from './multipleselect/multipleSelect.types';
 import { CodeEditorStateTypes } from './codeEditor/codeeditor.types';
 import { ModalStateTypes } from './modal/modal.reducer.types';
-import {LoaderReducerStateType} from './loader/loader.reducer.types'
+import { LoaderReducerStateType } from './loader/loader.reducer.types';
+import { DefaultTasksStateTypes } from './backend-reducers/default-tasks/default-tasks.types';
 export interface ReducerType {
     notificationReducer: NotificationStateTypes;
     stepReducer: StepStateTypes;
     multipleSelectReducer: MultipleSelectStateTypes;
     codeEditorReducer: CodeEditorStateTypes;
-    modalReducer:ModalStateTypes;
-    loaderReducer:LoaderReducerStateType;
+    modalReducer: ModalStateTypes;
+    loaderReducer: LoaderReducerStateType;
+    defaultTasksReducer: DefaultTasksStateTypes
 }

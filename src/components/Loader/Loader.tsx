@@ -6,8 +6,8 @@ import styled from "styled-components";
 const LoaderComponent = styled.div<any>`
   width: 100%;
   height: 100vh;
-  position: absolute;
-  top: ${({ scrollY }: any) => scrollY};
+  position: fixed;
+  top: 0;
   background: rgba(255, 255, 255, 0.8);
   z-index: 100000;
 
@@ -38,8 +38,8 @@ const LoaderComponent = styled.div<any>`
     height: 48px;
     margin-top: 64px;
     margin-left: 0;
-    animation: ${({ animationConfig }: any) =>
-        `anime1 ${animationConfig?.duration} ${animationConfig?.delay} forwards ${animationConfig?.timeFunction} infinite;`};
+    animation: ${({ animationConfig }) =>
+    `anime1 ${animationConfig?.duration} ${animationConfig?.delay} forwards ${animationConfig?.timeFunction} infinite;`};
   }
 
   .box2 {
@@ -47,16 +47,16 @@ const LoaderComponent = styled.div<any>`
     height: 48px;
     margin-top: 0;
     margin-left: 0;
-    animation: ${({ animationConfig }: any) =>
-        `anime2 ${animationConfig?.duration} ${animationConfig?.delay} forwards ${animationConfig?.timeFunction} infinite;`};
+    animation: ${({ animationConfig }) =>
+    `anime2 ${animationConfig?.duration} ${animationConfig?.delay} forwards ${animationConfig?.timeFunction} infinite;`};
   }
   .box3 {
     width: 48px;
     height: 48px;
     margin-top: 0;
     margin-left: 64px;
-    animation: ${({ animationConfig }: any) =>
-        `anime3 ${animationConfig?.duration} ${animationConfig?.delay} forwards ${animationConfig?.timeFunction} infinite;`};
+    animation: ${({ animationConfig }) =>
+    `anime3 ${animationConfig?.duration} ${animationConfig?.delay} forwards ${animationConfig?.timeFunction} infinite;`};
   }
 
   @keyframes anime1 {
@@ -250,13 +250,7 @@ const LoaderComponent = styled.div<any>`
   }
 `;
 
-interface animationConfigTypes {
-    timeFunction: "ease-in-out",
-    duration: "2s",
-    delay: "0s",
-}
-
-const animationConfig: animationConfigTypes = {
+const animationConfig = {
     timeFunction: "ease-in-out",
     duration: "2s",
     delay: "0s",
@@ -265,16 +259,16 @@ const animationConfig: animationConfigTypes = {
 const Loader = () => {
 
     return (
-        <LoaderComponent
-            animationConfig={animationConfig}
-            scrollY={window.screenX}>
-            <div className="container">
-                <div className="box1" />
-                <div className="box2" />
-                <div className="box3" />
-            </div>
-        </LoaderComponent>
+            <LoaderComponent
+                animationConfig={animationConfig}
+                scrollY={window.screenX}>
+                <div className="container">
+                    <div className="box1" />
+                    <div className="box2" />
+                    <div className="box3" />
+                </div>
+            </LoaderComponent>
     );
 };
 
-export default React.memo(Loader);
+export default Loader;

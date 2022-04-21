@@ -7,17 +7,18 @@ import Box from '../Box'
 
 function Rules() {
     const modalState = useSelector((state: ReducerType) => state.modalReducer.open);
-
+    const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks);
 
     return (
         <div className='rules'>
 
             <Box>
                 <RulesHeader />
-                <Dropdown success={true} name="Entity 1" actions="View - all accounts, masking 8 fields" table={<Table />} />
-                <Dropdown success={false} name="Entity 2" actions="Nothing selected" table={<Table />} />
-                <Dropdown success={false} name="Entity 3" actions="View - all accounts, masking 8 fields" table={<Table />} />
-                <Dropdown success={null} name="Entity 4" actions="Nothing selected" table={<Table />} />
+                {
+                    defaultTasksState.length !== 0 && defaultTasksState.map((task) => {
+                        return <Dropdown success={null} name={task.entityName} actions="View - all accounts, masking 8 fields" table={<Table />} />
+                    })
+                }
                 <RulesFooter />
             </Box>
 
