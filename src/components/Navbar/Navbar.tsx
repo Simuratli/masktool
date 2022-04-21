@@ -7,28 +7,28 @@ import { GetEntities, GetAttributesByEntity, GetViewsByEntity, GetVocabularesLis
 function Navbar() {
 
     const stepState = useSelector((state: ReducerType) => state.stepReducer.step);
-    useEffect(() => {
-        GetEntities().then((data) => {
-            console.log(data, 'getEntities')
-        })
+    // useEffect(() => {
+    //     GetEntities().then((data) => {
+    //         console.log(data, 'getEntities')
+    //     })
 
-        GetAttributesByEntity().then((data) => {
-            console.log(data, 'GetAttributesByEntity')
-        })
+    //     GetAttributesByEntity().then((data) => {
+    //         console.log(data, 'GetAttributesByEntity')
+    //     })
 
-        GetViewsByEntity().then((data) => {
-            console.log(data, 'GetViewsByEntity')
-        })
+    //     GetViewsByEntity().then((data) => {
+    //         console.log(data, 'GetViewsByEntity')
+    //     })
 
-        GetVocabularesList().then((data) => {
-            console.log(data, 'GetVocabularesList')
-        })
+    //     GetVocabularesList().then((data) => {
+    //         console.log(data, 'GetVocabularesList')
+    //     })
 
-        GetDefaultTasks().then((data) => {
-            console.log(data, 'GetDefaultTasks')
-        })
+    //     GetDefaultTasks().then((data) => {
+    //         console.log(data, 'GetDefaultTasks')
+    //     })
 
-    }, [])
+    // }, [])
 
 
     return (

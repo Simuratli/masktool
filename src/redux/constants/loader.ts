@@ -1,0 +1,1 @@
+export const SET_TOGGLE_LOADER = 'SET_TOGGLE_LOADER'
