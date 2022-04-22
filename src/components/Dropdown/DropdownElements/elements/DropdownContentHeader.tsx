@@ -51,7 +51,7 @@ function DropdownContentHeader({ checked, setChecked, filter, setfilter }: Dropd
                         </div>
                     </div>
                     {
-                        checked.records ? <div className="dropdown__box__container__actions">
+                        filter.length >= 0 ? <div className="dropdown__box__container__actions">
                             <RadioButton name="delete" color="green" checked={checked.delete} onChange={handleSelectFilter} label={"Delete"} />
                             <RadioButton name="masking" color="green" checked={!checked.delete} onChange={handleSelectFilter} label={"Maksing"} />
                         </div> :
