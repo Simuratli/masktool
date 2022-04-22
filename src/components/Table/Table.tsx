@@ -8,7 +8,7 @@ function Table({ fields }: TablePropTypes) {
       <TableHeader />
 
       {fields.length !== 0 ? fields.map((field) => (
-        <TableRow name={field.logicalName} mask="mask" />
+        <TableRow name={field.displayName ? field.displayName : field.logicalName} mask="mask" />
       ))
         : <div className='table__nodata'>NO DATA</div>
       }

@@ -9,22 +9,19 @@ export const GetEntities = async () => {
 
 export const GetAttributesByEntity = async () => {
     let obj = {
-        description: "Business that represents a customer or potential customer. The company that is billed in business transactions.",
-        displayName: "Account",
         etc: 1,
         logicalName: "account"
     }
+
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetAttributesByEntity", RequestObj: JSON.stringify(obj) }))
     let response = await makeRequest(request)
     return response
 }
 
-export const GetViewsByEntity = async () => {
+export const GetViewsByEntity = async (name: string, etc?: number) => {
     let obj = {
-        description: "Business that represents a customer or potential customer. The company that is billed in business transactions.",
-        displayName: "Account",
-        etc: 1,
-        logicalName: "account"
+        etc: etc,
+        logicalName: name
     }
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetViewsByEntity", RequestObj: JSON.stringify(obj) }))
     let response = await makeRequest(request)

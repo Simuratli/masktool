@@ -1,14 +1,12 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Box } from '../../../../containers'
 import RadioButton from '../../../Radio'
 import { choseActionForRecords } from '../../../../utils/DropdownChoseAction'
 import MultipleSelect from '../../../MultipleSelect'
-import { DropdownHeaderPropsTypes } from '../DropdownContent.types'
+import { DropdownHeaderPropsTypes } from '../DropdownContent.types';
 
 
-function DropdownContentHeader({ checked, setChecked, filter, setfilter }: DropdownHeaderPropsTypes) {
-
-    let FAKE_DATA = ["All accounts", "Active accounts", "Inactive accounts"]
+function DropdownContentHeader({ name, checked, setChecked, filter, setfilter, selectData }: DropdownHeaderPropsTypes) {
 
 
     const handleSelectFilter = useCallback(
@@ -18,6 +16,8 @@ function DropdownContentHeader({ checked, setChecked, filter, setfilter }: Dropd
         },
         [],
     )
+
+
 
     const chose = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +30,7 @@ function DropdownContentHeader({ checked, setChecked, filter, setfilter }: Dropd
         },
         [filter],
     )
+
 
     const deleteFunc = useCallback(
         (item: string) => {
@@ -47,11 +48,11 @@ function DropdownContentHeader({ checked, setChecked, filter, setfilter }: Dropd
                         <RadioButton name="all" color="blue" checked={checked.records} onChange={handleSelectFilter} label={"All records"} />
                         <div className="dropdown__box__container__main__filter">
                             <RadioButton name="special" color="blue" checked={!checked.records} onChange={handleSelectFilter} />
-                            <MultipleSelect placeholder='Select view to edit' data={FAKE_DATA} deleteFunc={deleteFunc} values={filter} chose={chose} />
+                            <MultipleSelect placeholder='Select view to edit' data={selectData} deleteFunc={deleteFunc} values={filter} chose={chose} />
                         </div>
                     </div>
                     {
-                        filter.length >= 0 ? <div className="dropdown__box__container__actions">
+                        filter.length === 0 ? <div className="dropdown__box__container__actions">
                             <RadioButton name="delete" color="green" checked={checked.delete} onChange={handleSelectFilter} label={"Delete"} />
                             <RadioButton name="masking" color="green" checked={!checked.delete} onChange={handleSelectFilter} label={"Maksing"} />
                         </div> :

@@ -19,6 +19,7 @@ function Rules() {
                         return <Dropdown
                             success={null}
                             name={task.entityName}
+                            etc={task.etc}
                             fields={task.fields}
                             actions="View - all accounts, masking 8 fields"
                         />

@@ -71,6 +71,7 @@
         overflow: hidden;
         position: absolute;
         width: 100%;
+        z-index: 10000;
 
         &__item {
             padding: rem(8) rem(10) rem(8) rem(10);
@@ -102,7 +103,8 @@
         }
 
         &.open {
-            max-height: 500px;
+            max-height: 200px;
+            overflow-y: scroll;
             transition: max-height 0.2s ease-in;
         }
     }

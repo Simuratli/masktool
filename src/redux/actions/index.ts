@@ -7,6 +7,8 @@ import { setLoader } from './loader.action';
 
 // backend actions 
 import { setDefaultTasks } from './backend-actions/default-tasks.actions'
+import { setAllEntities } from './backend-actions/get-entities.actions'
+import { setViewsByEntity } from './backend-actions/entity-by-view.actions'
 
 export {
     setNotificationAllowance,
@@ -16,5 +18,7 @@ export {
     setCodeEditorValue,
     setToggleModal,
     setLoader,
-    setDefaultTasks
+    setDefaultTasks,
+    setAllEntities,
+    setViewsByEntity
 } 

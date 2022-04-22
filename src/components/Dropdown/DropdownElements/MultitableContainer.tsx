@@ -3,7 +3,7 @@ import { Box } from '../../../containers';
 import { RadioButton, Table } from '../..';
 import { MultitableContainerPropTypes } from './DropdownContent.types'
 
-function MultitableContainer({ name }: MultitableContainerPropTypes) {
+function MultitableContainer({ name, fields }: MultitableContainerPropTypes) {
     const [deleteAction, setDeleteAction] = useState<boolean>(false)
 
     const handleSelectFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ function MultitableContainer({ name }: MultitableContainerPropTypes) {
                     </div>
                 </div>
             </Box>
-            <Table fields={[]} />
+            <Table fields={fields} />
         </div>
     )
 }

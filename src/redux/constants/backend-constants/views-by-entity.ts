@@ -1,0 +1,1 @@
+export const GET_VIEWS_BY_ENTITY = "GET_VIEWS_BY_ENTITY";

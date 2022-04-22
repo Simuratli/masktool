@@ -2,12 +2,13 @@ export interface DefaultTasksFieldsTypes {
     logicalName: string;
     parameters: string[];
     rule: string;
+    displayName?:string;
 }
 
 export interface DefaultTasksTypes {
     entityName: string;
     errorRecords: number;
-    fields: any;
+    fields: DefaultTasksFieldsTypes[];
     filterViewId: string | null;
     maskOperation: boolean;
     previousTaskId: null | string;
@@ -15,6 +16,7 @@ export interface DefaultTasksTypes {
     taskId: null | string;
     taskStatus: number;
     totalRecords: number;
+    etc?: number;
 }
 
 export interface DefaultTasksStateTypes {
