@@ -4,6 +4,7 @@ import { DefaultTasksFieldsTypes } from '../../redux/reducers/backend-reducers/d
 export interface DropdownContentPorpTypes {
     fields: DefaultTasksFieldsTypes[];
     name:string;
+    deleteOrMask?:boolean;
 };
 
 
@@ -31,4 +32,5 @@ export interface DropdownPorpTypes {
     success: boolean | null;
     fields: DefaultTasksFieldsTypes[];
     etc?:number;
+    deleteOrMask?:boolean
 };

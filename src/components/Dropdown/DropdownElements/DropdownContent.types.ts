@@ -3,7 +3,6 @@ import { DefaultTasksFieldsTypes } from '../../../redux/reducers/backend-reducer
 
 export interface DropdownCheckedTypes {
     records: boolean,
-    delete: boolean
 }
 
 
@@ -13,7 +12,8 @@ export interface DropdownHeaderPropsTypes {
     filter: string[];
     setfilter: React.Dispatch<React.SetStateAction<string[]>>;
     name: string;
-    selectData: string[]
+    deleteOrMask?:boolean;
+    selectData: string[];
 }
 
 

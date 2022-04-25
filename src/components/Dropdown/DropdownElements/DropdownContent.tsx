@@ -9,7 +9,7 @@ import { ReducerType } from '../../../redux/reducers/reducer.types'
 import MultitableContainer from './MultitableContainer';
 import { EntityByViewMainType, EntityByViewType, EntityByViewCellsType } from '../../../redux/reducers/backend-reducers/entity-by-view/entity-by-view.types'
 
-function DropdownContent({ fields, name }: DropdownContentPorpTypes) {
+function DropdownContent({ fields, name, deleteOrMask }: DropdownContentPorpTypes) {
     const [filter, setfilter] = useState<string[]>([])
     const [dropdownData, setDropdownData] = useState<string[]>([])
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer.entities)
@@ -17,12 +17,9 @@ function DropdownContent({ fields, name }: DropdownContentPorpTypes) {
 
     const [checked, setChecked] = useState<DropdownCheckedTypes>({
         records: true,
-        delete: true,
     })
 
     useEffect(() => {
-        console.log('viewsByEntityState', viewsByEntityState)
-
         viewsByEntityState.map((view: EntityByViewMainType) => {
             if (view.name === name) {
                 view.data.map((data: EntityByViewType) => {
@@ -31,13 +28,12 @@ function DropdownContent({ fields, name }: DropdownContentPorpTypes) {
                 })
             }
         })
-
     }, [viewsByEntityState, name])
 
 
     return (
         <div className="dropdown__content">
-            <DropdownContentHeader selectData={dropdownData} name={name} filter={filter} setfilter={setfilter} checked={checked} setChecked={setChecked} />
+            <DropdownContentHeader selectData={dropdownData} name={name} deleteOrMask={deleteOrMask} filter={filter} setfilter={setfilter} checked={checked} setChecked={setChecked} />
 
             <div className={`dropdown__content__table show`}>
                 {

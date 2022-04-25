@@ -17,20 +17,33 @@ export const choseActionForRecords = (name: string) => {
                 records: false
             }
             return initialValues
-        case "delete":
-            initialValues = {
-                ...initialValues,
-                delete: true
-            }
-            return initialValues
-        case "masking":
-            initialValues = {
-                ...initialValues,
-                delete: false
-            }
-            return initialValues
         default:
             return initialValues;
+    }
+
+}
+
+
+
+
+export const choseDeleteOrMask = async (array: any, name: string, actionName: string) => {
+    switch (actionName) {
+        case "masking":
+            return array.map((task: any) => {
+                if (task.entityName === name) {
+                    task.delete = false
+                }
+                return task
+            })
+        case "delete":
+            return array.map((task: any) => {
+                if (task.entityName === name) {
+                    task.delete = true
+                }
+                return task
+            })
+        default:
+            return array;
     }
 
 }

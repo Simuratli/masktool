@@ -1,18 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
 import { Box } from '../../../../containers'
 import RadioButton from '../../../Radio'
-import { choseActionForRecords } from '../../../../utils/DropdownChoseAction'
+import { choseActionForRecords, choseDeleteOrMask } from '../../../../utils/DropdownChoseAction'
 import MultipleSelect from '../../../MultipleSelect'
 import { DropdownHeaderPropsTypes } from '../DropdownContent.types';
+import { useSelector, useDispatch } from 'react-redux';
+import { ReducerType } from '../../../../redux/reducers/reducer.types';
+import { setDefaultTasks } from '../../../../redux/actions'
 
 
-function DropdownContentHeader({ name, checked, setChecked, filter, setfilter, selectData }: DropdownHeaderPropsTypes) {
-
+function DropdownContentHeader({ name, deleteOrMask, checked, setChecked, filter, setfilter, selectData }: DropdownHeaderPropsTypes) {
+    const dispatch = useDispatch();
+    const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks);
 
     const handleSelectFilter = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
+        async (e: React.ChangeEvent<HTMLInputElement>) => {
             let actionValue = choseActionForRecords(e.target.name)
             setChecked(actionValue)
+            let newTasks = await choseDeleteOrMask(defaultTasksState, name, e.target.name)
+            dispatch(setDefaultTasks(newTasks))
+
         },
         [],
     )
@@ -53,8 +60,8 @@ function DropdownContentHeader({ name, checked, setChecked, filter, setfilter, s
                     </div>
                     {
                         filter.length === 0 ? <div className="dropdown__box__container__actions">
-                            <RadioButton name="delete" color="green" checked={checked.delete} onChange={handleSelectFilter} label={"Delete"} />
-                            <RadioButton name="masking" color="green" checked={!checked.delete} onChange={handleSelectFilter} label={"Maksing"} />
+                            <RadioButton name="delete" color="green" checked={typeof deleteOrMask === 'boolean' && deleteOrMask} onChange={handleSelectFilter} label={"Delete"} />
+                            <RadioButton name="masking" color="green" checked={!deleteOrMask} onChange={handleSelectFilter} label={"Maksing"} />
                         </div> :
                             <div className="dropdown__box__container__actions"></div>
                     }

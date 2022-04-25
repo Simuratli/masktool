@@ -17,6 +17,7 @@ export interface DefaultTasksTypes {
     taskStatus: number;
     totalRecords: number;
     etc?: number;
+    delete?:boolean;
 }
 
 export interface DefaultTasksStateTypes {

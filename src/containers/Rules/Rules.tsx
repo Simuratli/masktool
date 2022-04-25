@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Dropdown, Table, Header } from '../../components';
+import { Modal, Dropdown, Header } from '../../components';
 import { useSelector } from 'react-redux';
 import { ReducerType } from '../../redux/reducers/reducer.types';
 import { RulesHeader, RulesFooter } from './RulesElements'
@@ -8,6 +8,8 @@ import Box from '../Box'
 function Rules() {
     const modalState = useSelector((state: ReducerType) => state.modalReducer.open);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks);
+
+
 
     return (
         <div className='rules'>
@@ -21,6 +23,7 @@ function Rules() {
                             name={task.entityName}
                             etc={task.etc}
                             fields={task.fields}
+                            deleteOrMask={task.delete}
                             actions="View - all accounts, masking 8 fields"
                         />
                     })

@@ -5,6 +5,7 @@ import { AllEntitiesTypes } from '../redux/reducers/backend-reducers/get-entitie
 export const defaultTaskAddETC = async (entities: AllEntitiesTypes[], tasks: DefaultTasksTypes[]) => {
     entities.map((entity: AllEntitiesTypes) => {
         tasks.map((task: DefaultTasksTypes) => {
+            task.delete = true
             if (entity.logicalName === task.entityName) {
                 task.etc = entity.etc;
             }
