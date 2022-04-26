@@ -1,3 +1,5 @@
+import { DefaultTasksTypes } from '../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
+
 let initialValues = {
     records: true,
 }
@@ -22,17 +24,17 @@ export const choseActionForRecords = (name: string) => {
 
 }
 
-export const choseDeleteOrMask = async (array: any, name: string, actionName: string) => {
+export const choseDeleteOrMask = async (array: DefaultTasksTypes[], name: string, actionName: string) => {
     switch (actionName) {
         case "masking":
-            return array.map((task: any) => {
+            return array.map((task: DefaultTasksTypes) => {
                 if (task.entityName === name) {
                     task.delete = false
                 }
                 return task
             })
         case "delete":
-            return array.map((task: any) => {
+            return array.map((task: DefaultTasksTypes) => {
                 if (task.entityName === name) {
                     task.delete = true
                 }

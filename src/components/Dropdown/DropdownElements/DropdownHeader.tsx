@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { SuccessIcon } from "./icons";
 import { DropdownHeaderPorpTypes } from '../Dropdown.types';
 import { ReducerType } from '../../../redux/reducers/reducer.types';
@@ -38,7 +38,6 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success }
 
 
     const scrollView = () => {
-        console.log('scroll')
         let element: HTMLElement | null = document.getElementById(name)
         element && element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
     }

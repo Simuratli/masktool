@@ -1,7 +1,7 @@
 import { GET_CUSTOM_RULES } from '../../constants/backend-constants/custom-rules';
-// import { DefaultTasksTypes } from '../../reducers/backend-reducers/default-tasks/default-tasks.types';
+import { CustomRuleTypes } from '../../reducers/backend-reducers/custom-rules/custom-rules.types';
 
-export const getCustomRules = (payload: any[]) => ({
+export const getCustomRules = (payload: CustomRuleTypes[]) => ({
     type: GET_CUSTOM_RULES,
     payload
 })
