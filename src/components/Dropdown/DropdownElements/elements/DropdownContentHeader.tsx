@@ -17,6 +17,7 @@ function DropdownContentHeader({ name, deleteOrMask, checked, setChecked, filter
         async (e: React.ChangeEvent<HTMLInputElement>) => {
             let actionValue = choseActionForRecords(e.target.name)
             setChecked(actionValue)
+            actionValue.records && setfilter([])
             let newTasks = await choseDeleteOrMask(defaultTasksState, name, e.target.name)
             dispatch(setDefaultTasks(newTasks))
 

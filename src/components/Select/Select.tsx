@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { SelectPropTypes } from './select.types'
 import { SelectHeader } from '../'
 
-function Select({ data, placeholder, type, customData }: SelectPropTypes) {
+function Select({ data, placeholder, type, customData, onChange }: SelectPropTypes) {
     const [toggleElements, settoggleElements] = useState(false)
     const [selectedElement, setSelectedElement] = useState<string | null>('')
     const ref = useRef<HTMLDivElement>(null)
@@ -11,6 +11,7 @@ function Select({ data, placeholder, type, customData }: SelectPropTypes) {
         const input = e.target as HTMLElement;
         setSelectedElement(input.textContent)
         settoggleElements(false)
+        if (onChange) onChange(input.textContent)
     }
 
     useEffect(() => {

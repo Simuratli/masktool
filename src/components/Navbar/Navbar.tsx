@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from '../Input';
 import { ReducerType } from '../../redux/reducers/reducer.types';
-import { setLoader, setDefaultTasks, setAllEntities } from '../../redux/actions';
-import { GetDefaultTasks, GetEntities } from '../../api';
+import { setLoader, setDefaultTasks, setAllEntities, getCustomRules } from '../../redux/actions';
+import { GetDefaultTasks, GetEntities, GetCustomRules } from '../../api';
 import Logo from './logo';
 import { defaultTaskAddETC } from '../../utils/DefaultTaskETC'
 
@@ -16,10 +16,12 @@ function Navbar() {
     const getEntitiesAndTasks = async () => {
         let entities = await GetEntities();
         dispatch(setAllEntities(entities));
-        let tasks = await GetDefaultTasks()
-        let newTasks = await defaultTaskAddETC(entities,tasks);
-        dispatch(setDefaultTasks(newTasks))
-        dispatch(setLoader(false))
+        let tasks = await GetDefaultTasks();
+        let newTasks = await defaultTaskAddETC(entities, tasks);
+        dispatch(setDefaultTasks(newTasks));
+        let customRules = await GetCustomRules();
+        dispatch(getCustomRules(customRules))
+        dispatch(setLoader(false));
     }
 
 

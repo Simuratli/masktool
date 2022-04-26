@@ -23,6 +23,7 @@ export interface DropdownHeaderPorpTypes {
     actions: string;
     success: boolean | null;
     etc?:number;
+    deleteOrMask?:boolean
 };
 
 

@@ -1,6 +1,5 @@
 let initialValues = {
     records: true,
-    delete: true
 }
 
 export const choseActionForRecords = (name: string) => {
@@ -22,9 +21,6 @@ export const choseActionForRecords = (name: string) => {
     }
 
 }
-
-
-
 
 export const choseDeleteOrMask = async (array: any, name: string, actionName: string) => {
     switch (actionName) {

@@ -12,23 +12,23 @@ import { EntityByViewMainType, EntityByViewType, EntityByViewCellsType } from '.
 function DropdownContent({ fields, name, deleteOrMask }: DropdownContentPorpTypes) {
     const [filter, setfilter] = useState<string[]>([])
     const [dropdownData, setDropdownData] = useState<string[]>([])
-    const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer.entities)
-    const [SpecialTableData, setSpecialTableData] = useState<EntityByViewCellsType[] | never[]>([])
+    const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer)
 
     const [checked, setChecked] = useState<DropdownCheckedTypes>({
         records: true,
     })
 
     useEffect(() => {
-        viewsByEntityState.map((view: EntityByViewMainType) => {
+
+        viewsByEntityState.entities.map((view: EntityByViewMainType) => {
             if (view.name === name) {
                 view.data.map((data: EntityByViewType) => {
                     setDropdownData((prev) => ([...prev, data.name]))
-                    setSpecialTableData(data.cells)
                 })
             }
         })
-    }, [viewsByEntityState, name])
+    }, [viewsByEntityState, name, deleteOrMask])
+
 
 
     return (
@@ -38,7 +38,7 @@ function DropdownContent({ fields, name, deleteOrMask }: DropdownContentPorpType
             <div className={`dropdown__content__table show`}>
                 {
                     checked.records ? <Table fields={fields} /> :
-                        (filter.length === 0 ? <div className='table__nodata'>PLEASE SELECT VIEW</div> : filter.map((item) => (<MultitableContainer fields={SpecialTableData} name={item} />)))
+                        (filter.length === 0 ? <div className='table__nodata'>PLEASE SELECT VIEW</div> : viewsByEntityState.entities.map((view) => view.name === name && view.data.map((item) => filter.includes(item.name) && <MultitableContainer mainName={name} deleteOrMask={item.delete} fields={item.cells} name={item.name} />)))
                 }
             </div>
         </div>

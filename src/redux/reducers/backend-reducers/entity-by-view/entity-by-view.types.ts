@@ -4,7 +4,8 @@ export interface EntityByViewStateTypes {
 
 export interface EntityByViewMainType {
     name: string;
-    data: EntityByViewType[]
+    data: EntityByViewType[],
+    delete?:boolean
 }
 
 export interface EntityByViewCellsType {
@@ -18,6 +19,7 @@ export interface EntityByViewType {
     isDefault: true;
     name: string;
     viewId: string;
+    delete?:boolean
 }
 
 export interface EntityByViewActionsTypes {

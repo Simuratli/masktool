@@ -15,3 +15,8 @@ export interface TablePropTypes {
 export interface TableCellPropTypes {
     children: React.ReactNode
 }
+
+
+export interface FilteredTableRowPropTypes {
+    attributeTypeCode: number
+}

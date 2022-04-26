@@ -11,6 +11,21 @@
         border-bottom-right-radius: 0;
     }
 
+    &.filtered{
+        width: rem(234);
+        padding: rem(6) rem(5) rem(6) rem(12);
+
+        &::placeholder {
+            color: var(--progres-text-active);
+            opacity: 1;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+        }
+
+    }
+
     &:disabled {
         border: 1px solid var(--disable-text-color);
         cursor: no-drop;

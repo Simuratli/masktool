@@ -58,6 +58,14 @@ export const GetDefaultTasks = async () => {
     return response
 }
 
+
+export const GetCustomRules = async () => {
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetCustomRules" }))
+    let response = await makeRequest(request)
+    return response
+}
+
+
 export const CreateTask = async () => {
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "CreateTask" }))
     let response = await makeRequest(request)

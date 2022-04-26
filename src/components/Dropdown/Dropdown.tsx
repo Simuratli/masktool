@@ -7,7 +7,7 @@ function Dropdown({ actions, name, deleteOrMask, success, fields, etc }: Dropdow
 
     return (
         <div className={`dropdown ${toggle && "openedDropdown"}`}>
-            <DropdownHeader etc={etc} success={success} name={name} actions={actions} setToggle={setToggle} />
+            <DropdownHeader deleteOrMask={deleteOrMask} etc={etc} success={success} name={name} actions={actions} setToggle={setToggle} />
             <DropdownContent deleteOrMask={deleteOrMask} name={name} fields={fields} />
         </div>
     )

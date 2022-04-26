@@ -5,6 +5,47 @@
     border-radius: 6px;
     padding: rem(20) rem(20) rem(23) rem(20);
 
+
+    &__container{
+        position: absolute;
+        margin-top: rem(-16);
+        
+        &__header{
+            width: rem(234);
+            height: rem(32);
+            background: var(--select-background-color);
+            border: rem(1) solid var(--select-background-color);
+            box-sizing: border-box;
+            border-radius: rem(6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: rem(5) rem(15) rem(5) rem(12);
+        }
+
+        &__text{
+            font-style: normal;
+            font-weight: 400;
+            font-size: var(16);
+            line-height: var(21);
+            color: var(--blue);
+        }
+
+        &__content{
+            display: none;
+
+            &.open{
+                display: block;
+            }
+
+            .calendar{
+                position: absolute;
+                z-index: 10000;
+            }
+        }
+    }
+
+
     .rdrDateDisplayWrapper {
         background: var(--select-background-color);
 

@@ -19,5 +19,7 @@ export interface DropdownHeaderPropsTypes {
 
 export interface MultitableContainerPropTypes {
     name: string;
-    fields: EntityByViewCellsType[] | DefaultTasksFieldsTypes[]
+    fields: EntityByViewCellsType[] | DefaultTasksFieldsTypes[];
+    deleteOrMask?:boolean,
+    mainName:string;
 }

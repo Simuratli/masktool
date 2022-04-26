@@ -120,6 +120,7 @@
             &.show {
                 max-height: rem(100000);
                 transition: 0.2s ease;
+                overflow: initial;
             }
         }
     }
