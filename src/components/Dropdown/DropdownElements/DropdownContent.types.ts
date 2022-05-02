@@ -12,7 +12,7 @@ export interface DropdownHeaderPropsTypes {
     filter: string[];
     setfilter: React.Dispatch<React.SetStateAction<string[]>>;
     name: string;
-    deleteOrMask?:boolean;
+    deleteOrMask?: boolean;
     selectData: string[];
 }
 
@@ -20,6 +20,7 @@ export interface DropdownHeaderPropsTypes {
 export interface MultitableContainerPropTypes {
     name: string;
     fields: EntityByViewCellsType[] | DefaultTasksFieldsTypes[];
-    deleteOrMask?:boolean,
-    mainName:string;
+    deleteOrMask?: boolean,
+    mainName: string;
+    searchName?: string
 }

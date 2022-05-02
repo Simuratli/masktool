@@ -9,4 +9,4 @@ function TableCell({ children }: TableCellPropTypes) {
     )
 }
 
-export default React.memo(TableCell)
+export default TableCell

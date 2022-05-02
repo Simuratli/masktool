@@ -1,23 +1,28 @@
 import React, { useCallback } from 'react'
 import Icon from './icon'
 import { NextPrevButtonPropTypes } from './pagination.types'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { ReducerType } from '../../redux/reducers/reducer.types';
+import { setCurrentPage } from '../../redux/actions';
 
 
 function NextPrevButtons({ setPage, type, disabled }: NextPrevButtonPropTypes) {
+    const dispatch = useDispatch();
+    const paginationState = useSelector((state: ReducerType) => state.paginationReducer)
+
 
     let changePage = useCallback(
         (type) => {
             switch (type) {
                 case 'prev':
-                    setPage((prev) => ({ ...prev, current: prev.current - 1 }))
+                    dispatch(setCurrentPage(paginationState.current - 1))
                     break;
                 case 'next':
-                    setPage((prev) => ({ ...prev, current: prev.current + 1 }))
+                    dispatch(setCurrentPage(paginationState.current + 1))
                     break;
             }
         },
-        [],
+        [paginationState],
     )
 
 

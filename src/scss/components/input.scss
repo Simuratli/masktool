@@ -6,12 +6,23 @@
     padding: rem(6) rem(5) rem(6) rem(12);
     outline: none;
 
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
     &.together {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
 
-    &.filtered{
+    &.filtered {
         width: rem(234);
         padding: rem(6) rem(5) rem(6) rem(12);
 

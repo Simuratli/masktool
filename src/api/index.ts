@@ -7,10 +7,10 @@ export const GetEntities = async () => {
 }
 
 
-export const GetAttributesByEntity = async () => {
+export const GetAttributesByEntity = async (name: string, etc: number | undefined) => {
     let obj = {
-        etc: 1,
-        logicalName: "account"
+        etc: etc,
+        logicalName: name
     }
 
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetAttributesByEntity", RequestObj: JSON.stringify(obj) }))

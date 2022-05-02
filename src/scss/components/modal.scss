@@ -18,7 +18,7 @@
     &__content {
         background-color: var(--white);
         width: rem(519);
-        height: rem(222);
+        min-height: rem(222);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -33,18 +33,18 @@
         border-radius: 5px;
     }
 
-    &__close{
+    &__close {
         margin-bottom: rem(20);
         display: flex;
         justify-content: end;
 
-        svg{
+        svg {
             cursor: pointer;
         }
     }
 
 
-    &__buttons{
+    &__buttons {
         display: flex;
         gap: rem(10);
         justify-content: end;
@@ -52,12 +52,22 @@
         margin-top: rem(20);
     }
 
-    &__text{
+    &__text {
         font-weight: 400;
         font-size: rem(14px);
         line-height: 140%;
         color: var(--tutorial-text-color);
         margin-top: rem(20);
         margin-bottom: 0;
+    }
+
+    &__header__container {
+        display: flex;
+        gap: rem(5);
+
+        svg{
+            position: relative;
+            top: rem(2);
+        }
     }
 }

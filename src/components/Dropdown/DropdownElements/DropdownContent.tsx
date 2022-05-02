@@ -7,7 +7,7 @@ import Table from '../../Table';
 import { useSelector } from 'react-redux';
 import { ReducerType } from '../../../redux/reducers/reducer.types'
 import MultitableContainer from './MultitableContainer';
-import { EntityByViewMainType, EntityByViewType, EntityByViewCellsType } from '../../../redux/reducers/backend-reducers/entity-by-view/entity-by-view.types'
+import { EntityByViewMainType, EntityByViewType } from '../../../redux/reducers/backend-reducers/entity-by-view/entity-by-view.types'
 
 function DropdownContent({ fields, name, deleteOrMask }: DropdownContentPorpTypes) {
     const [filter, setfilter] = useState<string[]>([])
@@ -37,12 +37,12 @@ function DropdownContent({ fields, name, deleteOrMask }: DropdownContentPorpType
 
             <div className={`dropdown__content__table show`}>
                 {
-                    checked.records ? <Table fields={fields} /> :
-                        (filter.length === 0 ? <div className='table__nodata'>PLEASE SELECT VIEW</div> : viewsByEntityState.entities.map((view) => view.name === name && view.data.map((item) => filter.includes(item.name) && <MultitableContainer mainName={name} deleteOrMask={item.delete} fields={item.cells} name={item.name} />)))
+                    checked.records ? <Table name={name} searchName="entities" fields={fields} /> :
+                        (filter.length === 0 ? <div className='table__nodata'>PLEASE SELECT VIEW</div> : viewsByEntityState.entities.map((view) => view.name === name && view.data.map((item) => filter.includes(item.name) && <MultitableContainer  searchName="views" mainName={name} deleteOrMask={item.delete} fields={item.cells} name={item.name} />)))
                 }
             </div>
         </div>
     )
 }
 
-export default React.memo(DropdownContent)
+export default DropdownContent

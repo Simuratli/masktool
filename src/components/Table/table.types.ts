@@ -5,10 +5,19 @@ import { EntityByViewCellsType } from '../../redux/reducers/backend-reducers/ent
 export interface TableRowPropTypes {
     mask: string;
     name: string;
+    rule: number | string;
+    searchName?: string;
+    rowName?: string;
+    mainName?: string;
+    value?: string;
+    attributeTypeCode?: number
 }
 
 export interface TablePropTypes {
-    fields: DefaultTasksFieldsTypes[] | EntityByViewCellsType[]
+    fields: DefaultTasksFieldsTypes[] | EntityByViewCellsType[];
+    name?: string;
+    searchName?: string;
+    mainName?: string
 }
 
 
@@ -18,5 +27,12 @@ export interface TableCellPropTypes {
 
 
 export interface FilteredTableRowPropTypes {
-    attributeTypeCode: number
+    name: string;
+    rule?: number | string;
+    rowName?: string;
+    searchName?: string;
+    itemName: string;
+    mainName?: string;
+    attributeTypeCode?: number
+
 }

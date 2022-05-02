@@ -13,4 +13,4 @@ function Dropdown({ actions, name, deleteOrMask, success, fields, etc }: Dropdow
     )
 }
 
-export default React.memo(Dropdown)
+export default Dropdown

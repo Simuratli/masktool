@@ -39,6 +39,14 @@
         padding: rem(11) rem(36) rem(12) rem(34);
     }
 
+    &.success__modal{
+        width: rem(120) !important;
+        height: rem(40) !important;
+        padding: rem(11) rem(36) rem(12) rem(34);
+        background-color: var(--green-button);
+        filter: none;
+    }
+
     &.outlined {
         border: 2px solid var(--blue);
         color: var(--blue);

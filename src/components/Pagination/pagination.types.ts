@@ -1,9 +1,7 @@
 import React from 'react';
 
 export interface PageStateTypes {
-    range: number;
     rangeView: number;
-    current: number;
     pageCount: number;
 }
 

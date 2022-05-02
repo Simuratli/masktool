@@ -12,7 +12,7 @@ function MaskRulesRightActions() {
             <Button disabled={!codeEditorState  ? true : false} type='outlined' size='small' text="Validate" />
 
             <div className="masking__rules__right__actions__input">
-                <Input disabled={true} className="together" type='text' placeholder='Create name' name='name' />
+                <Input  onChange={(e) => { console.log(e) }} value="" disabled={true} className="together" type='text' placeholder='Create name' name='name' />
                 <Button disabled={true} type="together" size='small' text="Save As New" />
             </div>
 

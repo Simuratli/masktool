@@ -11,14 +11,14 @@ import { setDefaultTasks } from '../../../../redux/actions'
 
 function DropdownContentHeader({ name, deleteOrMask, checked, setChecked, filter, setfilter, selectData }: DropdownHeaderPropsTypes) {
     const dispatch = useDispatch();
-    const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks);
+    const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer);
 
     const handleSelectFilter = useCallback(
         async (e: React.ChangeEvent<HTMLInputElement>) => {
             let actionValue = choseActionForRecords(e.target.name)
             setChecked(actionValue)
             actionValue.records && setfilter([])
-            let newTasks = await choseDeleteOrMask(defaultTasksState, name, e.target.name)
+            let newTasks = await choseDeleteOrMask(defaultTasksState.tasks, name, e.target.name)
             dispatch(setDefaultTasks(newTasks))
 
         },

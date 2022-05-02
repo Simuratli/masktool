@@ -1,6 +1,6 @@
 .dropdown {
-    border-bottom: 1px solid;
-    border-image: linear-gradient(to right, var(--dropdown--border) 98%, transparent 50%) 100% 1;
+    border-bottom: 1px solid var(--dropdown--border);
+    // border-image: linear-gradient(to right, var(--dropdown--border) 98%, transparent 50%) 100% 1;
 
     &__header {
 
@@ -32,14 +32,13 @@
             }
 
             .dropdown__header__icon__delete__container {
-                background-color: var(--disable-text-color);
+                background-color:transparent;
             }
         }
 
         h1 {
             margin: 0;
             padding: 0;
-            min-width: rem(211);
             padding: rem(15.5) rem(0) rem(15.5) rem(30);
             font-weight: 600;
             font-size: rem(18);
@@ -50,6 +49,8 @@
             display: flex;
             align-items: center;
             text-transform: capitalize;
+            width: rem(400);
+            text-overflow: ellipsis;
         }
 
         &__icon {
@@ -68,8 +69,7 @@
 
                 &__container {
                     width: 100%;
-                    background-color: var(--select-background-color);
-                    height: 106%;
+                    height: 90%;
                     display: grid;
                     place-content: center;
                     position: relative;

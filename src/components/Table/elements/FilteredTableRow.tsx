@@ -1,17 +1,25 @@
 import React from 'react';
 import { FilteredTableRowPropTypes } from '../table.types';
+import { RandomDate, RandomLine, CustomRule, RandomLetters } from './FilteredRowItems'
 
-import { Input, Calendar } from '../../'
+function FilteredTableRow({ name, rowName, searchName, rule, itemName, mainName , attributeTypeCode}: FilteredTableRowPropTypes) {
 
-function FilteredTableRow({ attributeTypeCode }: FilteredTableRowPropTypes) {
-  switch (attributeTypeCode) {
-    case 14:
-      return <Input className='filtered' placeholder="8 symbols" name="Name" type="text" />
-    case 2:
-      return <Calendar/>
-    default:
-      return <div></div>;
+  if (rule === "RandomLetters" || rule === "RandomLetter" || rule === 14) {
+    return <RandomLetters itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
+  else if (rule === "RandomDate" || rule === 2 || rule === "BirthDay Dates") {
+    return <RandomDate itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+  }
+  else if (rule === "CustomRule") {
+    return <CustomRule attributeTypeCode={attributeTypeCode} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+  }
+  else if (rule === "RandomLine") {
+    return <RandomLine itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+  }
+  else {
+    return <div></div>;
+  }
+
 }
 
-export default React.memo(FilteredTableRow)
+export default FilteredTableRow

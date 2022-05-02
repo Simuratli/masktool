@@ -10,6 +10,7 @@ export interface DropdownContentPorpTypes {
 
 export interface DropdownHeaderToggleIconPropTypes {
     setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+    name:string
 };
 
 export interface DropdownSuccessIcon {

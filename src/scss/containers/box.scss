@@ -4,7 +4,14 @@
     border-radius: 6px;
     
     &.small{
-        padding: rem(26) rem(19) rem(26) rem(19);
+        padding: rem(20) rem(105) rem(20) rem(66);
+    }
+
+    &.small-multiple{
+        padding: rem(20) rem(83) rem(20) rem(78);
+        background: var(--disable-text-color);
+        border-radius: 6px;
+        box-shadow:none
     }
 }
 

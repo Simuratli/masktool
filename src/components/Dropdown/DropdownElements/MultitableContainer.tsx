@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { Box } from '../../../containers';
 import { RadioButton, Table } from '../..';
 import { MultitableContainerPropTypes } from './DropdownContent.types';
@@ -7,10 +7,10 @@ import { ReducerType } from '../../../redux/reducers/reducer.types';
 import { setAllViewsByEntity } from '../../../redux/actions';
 import { addDeleteOrMaskIndividual } from '../../../utils/ViewsByEntityUtils'
 
-function MultitableContainer({ mainName, name, fields, deleteOrMask }: MultitableContainerPropTypes) {
+
+function MultitableContainer({ mainName, name, fields, deleteOrMask, searchName }: MultitableContainerPropTypes) {
     const dispatch = useDispatch()
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer)
-
 
 
     const handleSelectFilter = useCallback(
@@ -23,11 +23,9 @@ function MultitableContainer({ mainName, name, fields, deleteOrMask }: Multitabl
 
 
 
-   
-
     return (
         <div className='multitable_container'>
-            <Box type='small'>
+            <Box type='small-multiple'>
                 <div className="dropdown__box__container">
                     <div className="dropdown__box__container__main">
                         <span className="dropdown__box__container__main__text">{name}</span>
@@ -38,9 +36,9 @@ function MultitableContainer({ mainName, name, fields, deleteOrMask }: Multitabl
                     </div>
                 </div>
             </Box>
-            <Table fields={fields} />
+            <Table name={name} mainName={mainName} searchName={searchName} fields={fields} />
         </div>
     )
 }
 
-export default React.memo(MultitableContainer)
+export default MultitableContainer

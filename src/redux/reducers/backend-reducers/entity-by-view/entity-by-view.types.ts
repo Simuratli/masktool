@@ -5,13 +5,15 @@ export interface EntityByViewStateTypes {
 export interface EntityByViewMainType {
     name: string;
     data: EntityByViewType[],
-    delete?:boolean
+    delete?: boolean
 }
 
 export interface EntityByViewCellsType {
     attributeTypeCode: number;
     displayName: string;
     logicalName: string;
+    value?: string;
+    rule?:string
 }
 
 export interface EntityByViewType {
@@ -19,7 +21,7 @@ export interface EntityByViewType {
     isDefault: true;
     name: string;
     viewId: string;
-    delete?:boolean
+    delete?: boolean
 }
 
 export interface EntityByViewActionsTypes {

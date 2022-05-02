@@ -3,6 +3,8 @@ export interface DefaultTasksFieldsTypes {
     parameters: string[];
     rule: string;
     displayName?:string;
+    value?:string;
+    attributeTypeCode?:number
 }
 
 export interface DefaultTasksTypes {
