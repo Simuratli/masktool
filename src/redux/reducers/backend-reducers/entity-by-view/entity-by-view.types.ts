@@ -13,7 +13,8 @@ export interface EntityByViewCellsType {
     displayName: string;
     logicalName: string;
     value?: string;
-    rule?:string
+    rule?: string,
+    parameters?: any
 }
 
 export interface EntityByViewType {
@@ -21,7 +22,7 @@ export interface EntityByViewType {
     isDefault: true;
     name: string;
     viewId: string;
-    delete?: boolean
+    maskOperation?: boolean
 }
 
 export interface EntityByViewActionsTypes {

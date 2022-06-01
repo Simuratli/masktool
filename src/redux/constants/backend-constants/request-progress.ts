@@ -1,0 +1,2 @@
+export const CURRENT_REQUEST = 'CURRENT_REQUEST'
+export const OLD_REQUEST = 'OLD_REQUEST'

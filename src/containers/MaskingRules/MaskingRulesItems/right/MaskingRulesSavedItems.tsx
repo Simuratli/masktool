@@ -1,31 +1,31 @@
 import React from 'react'
+import { ReducerType } from '../../../../redux/reducers/reducer.types'
+import { useSelector } from 'react-redux'
 
 function MaskingRulesSavedItems() {
+    const customRulesState = useSelector((state: ReducerType) => state.customRulesReducer)
 
-    let FAKE_DATA = [
-        {
-            name: "Text rules",
-            item: ["Custom 1", "Custom 2", "Custom 3"]
-        },
-        {
-            name: "Data rules",
-            item: ["Custom 6", "Custom 7", "Custom 9"]
-        }
-    ]
 
     return (
         <div className="masking__rules__right__saved">
             <p className="masking__rules__right__saved__header">
                 Your last saved parameters:
             </p>
-            {FAKE_DATA.map((data) => {
-                return <div key={data.name}>
-                    <p key={data.name} className="masking__rules__right__saved__main">{data.name}</p>
-                    {data.item.map(item => {
-                        return <p key={item} className="masking__rules__right__saved__item">{item}</p>
-                    })}
-                </div>
-            })}
+
+            <div className='masking__rules__right__saved__container'>
+                {
+                    customRulesState.categorized.map((item) => {
+                        return <div>
+                            <p className="masking__rules__right__saved__main">{item.name}</p>
+                            {
+                                item.data.slice(0,3).map((data) => {
+                                    return <p className="masking__rules__right__saved__item">{data}</p>
+                                })
+                            }
+                        </div>
+                    })
+                }
+            </div>
         </div>
     )
 }

@@ -10,4 +10,18 @@
         gap: rem(20);
         margin-top: rem(40);
     }
+
+    p{
+        margin: 0;
+        margin-top: rem(20);
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        color: #1E2432;
+    }
+
+    &_info{
+        padding: 0 rem(36);
+    }
 }

@@ -3,15 +3,19 @@ import React from 'react'
 function MaskingRulesLeft() {
   return (
     <div className='masking__rules__left'>
-      Template how to use it.
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Custom masking rule is available for multiline and text fields.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        You need to specify a template in the input field to set your parameters. This template may contain:
       </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      <ul className='list'>
+        <li>static text;</li>
+        <li>an arbitrary sequence of functions;</li>
+        <li>an arbitrary sequence of functions and static text.</li>
+      </ul>
+      <p className='note'>
+        *Note. Specify the function inside curly brackets, and the function's parameters (like list names or numbers) — inside round brackets.
       </p>
     </div>
   )

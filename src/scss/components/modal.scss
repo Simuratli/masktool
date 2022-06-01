@@ -47,9 +47,9 @@
     &__buttons {
         display: flex;
         gap: rem(10);
-        justify-content: end;
+        justify-content: center;
         align-items: center;
-        margin-top: rem(20);
+        margin-top: rem(30);
     }
 
     &__text {
@@ -59,15 +59,55 @@
         color: var(--tutorial-text-color);
         margin-top: rem(20);
         margin-bottom: 0;
+        text-align: center;
     }
 
     &__header__container {
         display: flex;
         gap: rem(5);
-
+        justify-content: center;
         svg{
             position: relative;
             top: rem(2);
         }
     }
+
+    &__info__icon{
+        text-align: center;
+        margin-bottom: rem(30);
+    }
+}
+
+
+.modal__for__run__content{
+    margin-top: rem(30);
+    padding-bottom: rem(15);
+    margin-bottom: rem(15);
+
+    .modal__for__run__item{
+        margin: rem(10) 0;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        color: var(--tutorial-text-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.modal__scroll__container{
+    display: flex;
+    flex-direction: column;
+    gap: rem(10);
+    margin: rem(20) 0;
+    overflow: hidden scroll;
+    padding: 10px 0;
+    height: rem(171);
+}
+
+.modal__checkbox{
+    padding: 14px;
+    background-color: var(--select-background-color);
 }

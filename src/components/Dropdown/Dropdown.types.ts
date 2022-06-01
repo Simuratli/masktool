@@ -3,14 +3,17 @@ import { DefaultTasksFieldsTypes } from '../../redux/reducers/backend-reducers/d
 
 export interface DropdownContentPorpTypes {
     fields: DefaultTasksFieldsTypes[];
-    name:string;
-    deleteOrMask?:boolean;
+    name: string;
+    deleteOrMask?: boolean;
+    etc:number,
+    filter:string[]
 };
 
 
 export interface DropdownHeaderToggleIconPropTypes {
     setToggle: React.Dispatch<React.SetStateAction<boolean>>;
-    name:string
+    name: string,
+    requestResult: boolean | null | undefined
 };
 
 export interface DropdownSuccessIcon {
@@ -23,8 +26,12 @@ export interface DropdownHeaderPorpTypes {
     name: string;
     actions: string;
     success: boolean | null;
-    etc?:number;
-    deleteOrMask?:boolean
+    etc?: number;
+    deleteOrMask?: boolean;
+    progress: string | undefined,
+    requestResult: boolean | null | undefined;
+    totalRecords:number,
+    successRecords:number
 };
 
 
@@ -33,6 +40,11 @@ export interface DropdownPorpTypes {
     actions: string;
     success: boolean | null;
     fields: DefaultTasksFieldsTypes[];
-    etc?:number;
-    deleteOrMask?:boolean
+    etc?: number;
+    deleteOrMask?: boolean;
+    progress: string | undefined,
+    requestResult: boolean | null | undefined;
+    filter:string[];
+    totalRecords: number;
+    successRecords:number
 };

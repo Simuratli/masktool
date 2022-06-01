@@ -34,4 +34,13 @@
     background: var(--disable-text-color);
   }
 
+
+  &.ERROR{
+    border: 1px solid #CE1E1E ;
+  }
+
+  &.SUCCESS{
+    border: 1px solid #84C15E;
+  }
+
 }

@@ -2,7 +2,7 @@ import { SET_CODE_EDITOR_VALUE } from '../../constants/codeEditor'
 import { CodeEditorStateTypes, CodeEditorActionTypes } from './codeeditor.types'
 
 const initialState: CodeEditorStateTypes = {
-    data: '',
+    level: null,
 }
 
 export const notificationReducer = (state = initialState, action: CodeEditorActionTypes) => {
@@ -10,7 +10,7 @@ export const notificationReducer = (state = initialState, action: CodeEditorActi
         case SET_CODE_EDITOR_VALUE:
             return {
                 ...state,
-                data: action.payload
+                level: action.payload
             }
         default:
             return { ...state }

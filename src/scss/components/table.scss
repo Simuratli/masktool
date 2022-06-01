@@ -89,6 +89,21 @@
         &:last-child{
             border: 0;
         }
+
+        .dropdown__header__icon__delete{
+            display: block;
+            visibility: hidden;
+            cursor: pointer;
+        }
+
+        &:hover{
+            .dropdown__header__icon__delete{
+                display: block;
+                position: relative;
+                visibility: visible;
+                right: rem(-34);
+            }
+        }
     }
 
 

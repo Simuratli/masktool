@@ -17,7 +17,8 @@ export interface TablePropTypes {
     fields: DefaultTasksFieldsTypes[] | EntityByViewCellsType[];
     name?: string;
     searchName?: string;
-    mainName?: string
+    mainName?: string;
+    etc:number
 }
 
 

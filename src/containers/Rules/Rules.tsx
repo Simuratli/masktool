@@ -1,66 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Dropdown, Header } from '../../components';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import { Dropdown } from '../../components';
+import { useSelector, useDispatch } from 'react-redux';
 import { ReducerType } from '../../redux/reducers/reducer.types';
+import { setModalToggleActions, setStep, setCurrentRequest, setProgressAdd, setDefaultTasks } from '../../redux/actions';
+import { ClearTasks, GetTasksStatus, CreateTask } from '../../api'
 import { RulesHeader, RulesFooter } from './RulesElements'
 import Box from '../Box';
 import { getPaginatedData } from '../../utils/pagiantionUtil';
-import { DefaultTasksTypes } from '../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
-
+import { setPaginatedTasks } from '../../redux/actions';
+import RulesModalForDelete from './RulesModalForDelete'
+import RulesModalForRun from './RulesModalForRun'
+import RulesModalForAddEntity from './RulesElements/RulesModalForAddEntity'
+import TableModalForFields from '../../components/Table/elements/TableModalForFields'
+import { prepareIndividualForDelete } from '../../utils/run.utils'
+let number = 0
+let numberforSuccess = 0
 function Rules() {
+    const dispatch = useDispatch();
     const modalState = useSelector((state: ReducerType) => state.modalReducer);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer);
     const paginationState = useSelector((state: ReducerType) => state.paginationReducer);
-    const [data, setData] = useState<DefaultTasksTypes[]>([])
+    const paginatedData = useSelector((state: ReducerType) => state.paginatedTasksdReducer);
+    const calculation = useMemo(() => getPaginatedData(defaultTasksState.tasks, paginationState.current, paginationState.range), [paginationState.current, paginationState.range, defaultTasksState]);
+    const deleteEntitiesReducer = useSelector((state: ReducerType) => state.preParedDeleteEntites.delete);
+    const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer);
 
-
-
+    const [deneme, setDeneme] = useState<any>([])
 
 
     useEffect(() => {
-        let paginationData = getPaginatedData(defaultTasksState.tasks, paginationState.current, paginationState.range)
-        setData(paginationData)
-    }, [paginationState, defaultTasksState])
-
+        dispatch(setPaginatedTasks(calculation))
+    }, [calculation])
 
 
     return (
         <div className='rules'>
-
             <Box>
                 <RulesHeader />
                 {
-                    data.length !== 0 && data.map((task) => {
+                    paginatedData.paginated.length !== 0 && paginatedData.paginated.map((task) => {
                         return <Dropdown
-                            success={null}
+                            progress={task.progress}
+                            requestResult={task.requestResult}
+                            success={task.errorMessage}
                             name={task.entityName}
                             etc={task.etc}
                             fields={task.fields}
-                            deleteOrMask={task.delete}
-                            actions={task.delete ? "Delete" : "Nothing selected"}
+                            deleteOrMask={task.maskOperation}
+                            actions={task.text}
+                            filter={task.filter}
+                            totalRecords={task.totalRecords}
+                            successRecords={task.successRecords}
                         />
                     })
                 }
                 <RulesFooter />
             </Box>
 
-            {modalState.open &&
-                <Modal>
-                    <div className="modal__header__container">
-                        <Header headerType='modal__header' text='Deleting Confirm' />{modalState.delete && <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 3.5C7.30558 3.5 3.5 7.30558 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5C16.6944 20.5 20.5 16.6944 20.5 12C20.5 7.30558 16.6944 3.5 12 3.5ZM10.75 13.4393L15.2197 8.96967C15.5126 8.67678 15.9874 8.67678 16.2803 8.96967C16.5466 9.23594 16.5708 9.6526 16.3529 9.94621L16.2803 10.0303L11.2803 15.0303C11.0141 15.2966 10.5974 15.3208 10.3038 15.1029L10.2197 15.0303L7.71967 12.5303C7.42678 12.2374 7.42678 11.7626 7.71967 11.4697C7.98594 11.2034 8.4026 11.1792 8.69621 11.3971L8.78033 11.4697L10.75 13.4393L15.2197 8.96967L10.75 13.4393Z" fill="#80BB5B" />
-                        </svg>}
-                    </div>
-                    {
-                        !modalState.delete ?
-                            <p className="modal__text">Are you sure you want to remove {modalState.name} from the list?</p>
-                            :
-                            <p className="modal__text">{modalState.name} was successfully removed.</p>
-                    }
+            {modalState.open && <RulesModalForDelete />}
 
-                </Modal>}
+            {modalState.runActionOpen && <RulesModalForRun />}
+            {modalState.addEntity && <RulesModalForAddEntity />}
+            {modalState.addFields && <TableModalForFields />}
         </div>
     )
 }
 
-export default Rules
+export default React.memo(Rules)

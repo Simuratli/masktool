@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar } from '../../../';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDefaultTasks, setAllViewsByEntity } from '../../../../redux/actions';
+import { setDefaultTasks, setAllViewsByEntity,prepareEntitiesForDeleteItemsPutThemAll } from '../../../../redux/actions';
 import { addValueForCell } from '../../../../utils/FilteredTableRowUtils';
 import { DDMMYYYY } from '../../../../utils/dateTimeUtil';
 import { ReducerType } from '../../../../redux/reducers/reducer.types';
+import { updateCellItems } from '../../../../utils/run.utils'
 
 interface RandomDatePropTypes {
     searchName: string | undefined;
@@ -18,6 +19,7 @@ function RandomDate({ searchName, rowName, itemName, mainName }: RandomDatePropT
     const dispatch = useDispatch();
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer);
+    const deleteEntitiesReducer = useSelector((state: ReducerType) => state.preParedDeleteEntites.delete);
 
     const [date, setDate] = useState(
         [
@@ -32,16 +34,19 @@ function RandomDate({ searchName, rowName, itemName, mainName }: RandomDatePropT
 
 
 
-    let onChangeDate = (item: any) => {
+    let onChangeDate = async (item: any) => {
         let selection = item.selection;
-        console.log(item, 'item')
-        let newData: any = addValueForCell(searchName, defaultTasksState.tasks, rowName, itemName, `${DDMMYYYY(selection.startDate)}-${DDMMYYYY(selection.endDate)}`, viewsByEntityState.entities, mainName)
+
+        let newData: any = addValueForCell(searchName, defaultTasksState.tasks, rowName, itemName, `${DDMMYYYY(selection.startDate)}-${DDMMYYYY(selection.endDate)}`, viewsByEntityState.entities, mainName, 'date', selection.startDate, selection.endDate)
+
         switch (newData.for) {
             case 'tasks':
                 dispatch(setDefaultTasks(newData.data));
                 break;
             case 'views':
                 dispatch(setAllViewsByEntity(newData.data));
+                let updatedCell = await updateCellItems(newData,deleteEntitiesReducer)
+                dispatch(prepareEntitiesForDeleteItemsPutThemAll(updatedCell))
                 break;
         }
 
@@ -50,7 +55,7 @@ function RandomDate({ searchName, rowName, itemName, mainName }: RandomDatePropT
 
 
     useEffect(() => {
-        onChangeDate({selection:date[0]})
+        onChangeDate({ selection: date[0] })
     }, [])
 
 

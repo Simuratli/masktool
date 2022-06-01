@@ -2,9 +2,10 @@ export interface DefaultTasksFieldsTypes {
     logicalName: string;
     parameters: string[];
     rule: string;
-    displayName?:string;
-    value?:string;
-    attributeTypeCode?:number
+    displayName?: string;
+    value?: string;
+    attributeTypeCode?: number,
+
 }
 
 export interface DefaultTasksTypes {
@@ -19,12 +20,24 @@ export interface DefaultTasksTypes {
     taskStatus: number;
     totalRecords: number;
     etc?: number;
-    delete?:boolean;
+    delete?: boolean;
+    progress?: string;
+    requestResult?: null | boolean;
+    text: string,
+    filter: string[],
+    errorMessage: boolean | null;
+
 }
 
 export interface DefaultTasksStateTypes {
     tasks: DefaultTasksTypes[];
 }
+
+export interface PaginatedStateTypes {
+    paginated: DefaultTasksTypes[]
+}
+
+
 
 
 export interface DefaultTasksActionTypes {

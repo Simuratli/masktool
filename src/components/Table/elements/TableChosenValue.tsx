@@ -1,7 +1,7 @@
 import React from 'react'
 
 function TableChosenValue({ rule, value }: any) {
-    if (rule === "RandomLetter" || rule === "RandomLetters" || rule === 14) {
+    if (rule === "RandomLetter" || rule === "RandomLetters" || rule === 14 || rule === "MultiLine" || rule === 7) {
         return (
             <div className="table__cell__chosen">{value ? `${value} symbols` : `0 symbol`} </div>
         )

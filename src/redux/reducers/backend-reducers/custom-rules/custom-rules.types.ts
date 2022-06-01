@@ -7,10 +7,15 @@ export interface CustomRuleTypes {
     template: string
 }
 
+interface CategorizedDataInterface {
+    name:string,
+    data:string[]
+}
 
 export interface CustomRulesStateTypes {
     rules: CustomRuleTypes[];
-    names: string[]
+    names: string[],
+    categorized:CategorizedDataInterface[]
 }
 
 

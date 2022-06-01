@@ -1,7 +1,11 @@
 export interface ModalStateTypes {
     open:boolean;
     name:string;
-    delete:boolean
+    delete:boolean,
+    runActionOpen: boolean,
+    runActionAllow: boolean,
+    addEntity:boolean,
+    addFields:boolean,
 }
 
 export interface ModalActionTypes {

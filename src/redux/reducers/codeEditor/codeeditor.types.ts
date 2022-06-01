@@ -1,5 +1,5 @@
 export interface CodeEditorStateTypes {
-    data: string;
+    level: string | null;
 }
 
 

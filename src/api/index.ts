@@ -1,4 +1,5 @@
 import { makeRequest, getRequestObjectForSend } from './main-request';
+import { CustomParametersStateTypes } from '../redux/reducers/backend-reducers/custom-parameters/custom-parameter.types'
 
 export const GetEntities = async () => {
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetEntities" }))
@@ -34,21 +35,23 @@ export const GetVocabularesList = async () => {
     return response
 }
 
-export const ValidateCustomRule = async () => {
-    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "ValidateCustomRule" }))
-    let response = await makeRequest(request)
+export const ValidateCustomRule = async (params: any) => {
+    console.log(params, "validationParams")
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "ValidateCustomRule", RequestObj: JSON.stringify(params) }))
+    let response = await makeRequest(request, true)
     return response
 }
 
-export const CreateCustomRule = async () => {
-    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "CreateCustomRule" }))
-    let response = await makeRequest(request)
+export const CreateCustomRule = async (params: any) => {
+    console.log(params, "CreateCustomRule prams")
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "CreateCustomRule", RequestObj: JSON.stringify(params) }))
+    let response = await makeRequest(request, true)
     return response
 }
 
-export const UpdateCustomRule = async () => {
-    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "UpdateCustomRule" }))
-    let response = await makeRequest(request)
+export const UpdateCustomRule = async (params: CustomParametersStateTypes) => {
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "UpdateCustomRule", RequestObj: JSON.stringify(params) }))
+    let response = await makeRequest(request, true)
     return response
 }
 
@@ -66,9 +69,9 @@ export const GetCustomRules = async () => {
 }
 
 
-export const CreateTask = async () => {
-    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "CreateTask" }))
-    let response = await makeRequest(request)
+export const CreateTask = async (obj: any) => {
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "CreateTask", RequestObj: JSON.stringify(obj) }))
+    let response = await makeRequest(request, true)
     return response
 }
 
@@ -78,8 +81,15 @@ export const TerminateTask = async () => {
     return response
 }
 
-export const GetTasksStatus = async () => {
-    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetTasksStatus" }))
+export const GetTasksStatus = async (id?: string) => {
+    let request
+
+    if (id) {
+        request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetTasksStatus", RequestObj: JSON.stringify(id) }))
+    } else {
+        request = await getRequestObjectForSend(JSON.stringify({ MethodName: "GetTasksStatus" }))
+    }
+    
     let response = await makeRequest(request)
     return response
 }

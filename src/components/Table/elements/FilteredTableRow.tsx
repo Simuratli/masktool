@@ -10,6 +10,9 @@ function FilteredTableRow({ name, rowName, searchName, rule, itemName, mainName 
   else if (rule === "RandomDate" || rule === 2 || rule === "BirthDay Dates") {
     return <RandomDate itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
+  else if (rule === "MultiLine" || rule === 7) {
+    return <RandomLetters itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+  }
   else if (rule === "CustomRule") {
     return <CustomRule attributeTypeCode={attributeTypeCode} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }

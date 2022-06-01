@@ -26,7 +26,7 @@ function Main() {
         setComponent(<Rules />)
         break;
       case "settings":
-        setComponent(<MaskingRules />)
+        setComponent(<Tutorial />)
         break;
       default:
         break;

@@ -17,5 +17,5 @@ export interface ProgresStateTypes {
 
 
 export interface ProgresSettingsPropTypes {
-    stepState:string;
+    stepState?:string;
 }

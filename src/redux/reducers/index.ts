@@ -11,6 +11,12 @@ import getEntitiesReducer from './backend-reducers/get-entities';
 import getEntitiesByViewReducer from './backend-reducers/entity-by-view';
 import customRulesReducer from './backend-reducers/custom-rules';
 import vocabularyListReducer from './backend-reducers/get-vocabulary-list';
+import progressReducer from './progress'
+import paginatedTasksdReducer from './backend-reducers/paginated-tasks';
+import preParedDeleteEntites from './backend-reducers/prepare-delete'
+import requestProgressReducer from './backend-reducers/request-progress'
+import customParametersReducer from './backend-reducers/custom-parameters'
+import stableDataReducer from './backend-reducers/stablep-data'
 
 export default combineReducers({
     notificationReducer,
@@ -24,5 +30,11 @@ export default combineReducers({
     getEntitiesByViewReducer,
     customRulesReducer,
     vocabularyListReducer,
-    paginationReducer
+    paginationReducer,
+    progressReducer,
+    paginatedTasksdReducer,
+    preParedDeleteEntites,
+    requestProgressReducer,
+    customParametersReducer,
+    stableDataReducer
 })

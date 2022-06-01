@@ -1,6 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { GetViewsByEntity, GetTasksStatus } from '../../api';
+import { setStableEntityByViews, setStableDefaultTasks } from '../../redux/actions'
+import { ReducerType } from '../../redux/reducers/reducer.types'
+import { fetchDefaultTaskForModal } from '../../containers/Rules/RulesElements/fetchData'
 
 function Logo() {
+    const dispatch = useDispatch();
+    const stableDataReducer = useSelector((state: ReducerType) => state.stableDataReducer)
+
+    const fetch = async () => {
+        let viewsByEntity = await GetViewsByEntity(stableDataReducer.mainName!, stableDataReducer.etc);
+        dispatch(setStableEntityByViews({ name: stableDataReducer.mainName, data: viewsByEntity }))
+
+        let status = await GetTasksStatus()
+
+
+        status.map((stat:any)=>{
+            if(stat.taskStatus === 1){
+                alert(`${stat.entityName} is in progress`)
+            }
+            
+        })
+    }
+
+
+    useEffect(() => {
+        fetch()
+        fetchDefaultTaskForModal().then((data) => {
+            dispatch(setStableDefaultTasks(data))
+        })
+
+
+
+
+    }, [])
+
+
+
+
     return (
         <a target='_blank' rel="noreferrer" href="https://uds.systems/">
             <svg width="99" height="64" viewBox="0 0 99 64" fill="none" xmlns="http://www.w3.org/2000/svg">

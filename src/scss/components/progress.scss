@@ -87,7 +87,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: rem(26.5);
+        // padding: rem(26.5);
         background-color: var(--white);
         border: 0;
         outline: none;
@@ -106,6 +106,7 @@
             text-align: right;
             position: relative;
             top: rem(2);
+            left: (-29);
         }
 
         &.disabled {

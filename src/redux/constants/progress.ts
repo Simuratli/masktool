@@ -1,0 +1,2 @@
+export const PROGRESS_ADD = "PROGRESS_ADD";
+export const RESET_PROGRESS = "RESET_PROGRESS";

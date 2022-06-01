@@ -3,7 +3,7 @@
     // border-image: linear-gradient(to right, var(--dropdown--border) 98%, transparent 50%) 100% 1;
 
     &__header {
-
+    padding-right: rem(35);
 
         &.true {
             h1 {
@@ -81,8 +81,6 @@
                 display: grid;
                 place-content: center;
                 height: rem(54);
-                width: rem(50);
-
             }
 
         }
@@ -92,7 +90,7 @@
             min-width: rem(560);
             width: 85%;
             padding: rem(21) rem(0) rem(15.5) rem(30);
-            height: rem(54);
+            min-height: rem(54);
             font-weight: 400;
             font-size: rem(14);
             line-height: rem(17);
@@ -159,6 +157,11 @@
             align-items: center;
             padding-right: rem(100);
             gap: rem(30);
+            background: var(--disable-text-color);
+            width: rem(205);
+            padding: rem(11) rem(10);
+            padding-right: rem(30);
+            border-radius: rem(6);
         }
     }
 

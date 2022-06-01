@@ -4,7 +4,7 @@ export const addDeleteOrMaskViaHeader = (array: EntityByViewMainType[], name: st
         array.map((view) => {
             view.data.map((item => {
                 if (view.name === name) {
-                    item.delete = deleteOrMask
+                    item.maskOperation = deleteOrMask
                 }
             }))
 
@@ -23,7 +23,7 @@ export const addDeleteOrMaskIndividual = async (array: EntityByViewMainType[], a
             if (view.name === mainName) {
                 view.data.map((item) => {
                     if (item.name === name) {
-                        item.delete = true
+                        item.maskOperation = false
                     }
                 })
             }
@@ -34,7 +34,7 @@ export const addDeleteOrMaskIndividual = async (array: EntityByViewMainType[], a
             if (view.name === mainName) {
                 view.data.map((item) => {
                     if (item.name === name) {
-                        item.delete = false
+                        item.maskOperation = true
                     }
                 })
             }

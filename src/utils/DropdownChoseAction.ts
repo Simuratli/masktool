@@ -29,14 +29,16 @@ export const choseDeleteOrMask = async (array: DefaultTasksTypes[], name: string
         case "masking":
             return array.map((task: DefaultTasksTypes) => {
                 if (task.entityName === name) {
-                    task.delete = false
+                    task.maskOperation = false
+                    task.text = "Delete"
                 }
                 return task
             })
         case "delete":
             return array.map((task: DefaultTasksTypes) => {
                 if (task.entityName === name) {
-                    task.delete = true
+                    task.maskOperation = true
+                    task.text = `All Records ${task.fields.length} fields are masked`
                 }
                 return task
             })

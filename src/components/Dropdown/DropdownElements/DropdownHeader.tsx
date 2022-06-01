@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SuccessIcon } from "./icons";
 import { DropdownHeaderPorpTypes } from '../Dropdown.types';
 import { ReducerType } from '../../../redux/reducers/reducer.types';
@@ -7,29 +7,99 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProgressLoader from '../../ProgressLoader';
 import DropdownHeaderToggleIcon from './elements/DropdownHeaderToggleIcon';
 import { GetViewsByEntity } from '../../../api';
-import { setViewsByEntity, setAllViewsByEntity } from '../../../redux/actions';
+import { setViewsByEntity, setAllViewsByEntity, setStableEntityByViews } from '../../../redux/actions';
 import { EntityByViewType } from '../../../redux/reducers/backend-reducers/entity-by-view/entity-by-view.types';
 import { addDeleteOrMaskViaHeader } from '../../../utils/ViewsByEntityUtils';
+import MultiProgress from './MultipleProgressBar'
 import { ToggleIcon } from './icons'
 
-
-function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success }: DropdownHeaderPorpTypes) {
+function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, progress, requestResult, totalRecords, successRecords }: DropdownHeaderPorpTypes) {
     const dispatch = useDispatch();
-    const stepState = useSelector((state: ReducerType) => state.stepReducer.step);
+
+
+    const [insideViews, setinsideViews] = useState<any>({
+        data: []
+    })
+    const stepState = useSelector((state: ReducerType) => state.stepReducer);
+    const requestProgressState = useSelector((state: ReducerType) => state.requestProgressReducer);
+    const progressState = useSelector((state: ReducerType) => state.progressReducer.number)
+
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer)
+    const [progressNumber, setprogressNumber] = useState(0)
+    const deleteEntitiesReducer = useSelector((state: ReducerType) => state.preParedDeleteEntites);
+
+
+
+
 
     let fetchViewsByEntityFunction = async () => {
         let viewsByEntity = await GetViewsByEntity(name, etc);
         viewsByEntity.map((view: EntityByViewType) => {
-            view.delete = deleteOrMask
+            view.maskOperation = deleteOrMask
         })
         dispatch(setViewsByEntity({ name: name, data: viewsByEntity }))
-
     }
 
     useEffect(() => {
-        fetchViewsByEntityFunction()
+        fetchViewsByEntityFunction();
     }, [])
+
+
+    useEffect(() => {
+        setprogressNumber(0)
+        if (progress === "START") {
+            setprogressNumber(0)
+        }
+
+        if (progress === "END") {
+            let stop: boolean = true
+            // let number: number = 0
+            // while (stop) {
+            //     if (number === 101) stop = false
+            //     setprogressNumber(number++)
+            // }
+            console.log(totalRecords, 'totoalll')
+            console.log(progressNumber, 'progressNumber')
+            console.log(progress, 'progress')
+            setprogressNumber((prev) => prev + (successRecords * 100 / totalRecords))
+            if (success === false) {
+                setprogressNumber(100)
+            }
+            console.log(progressNumber, 'pmimber')
+        }
+
+        return () => {
+            setprogressNumber(0)
+        }
+    }, [progress, successRecords, totalRecords])
+
+
+
+    useEffect(() => {
+        let data: any = []
+        deleteEntitiesReducer.delete.map((deletedItem) => {
+            if (deletedItem.entityName === name) {
+                viewsByEntityState.entities.map((view) => {
+                    if (view.name === name) {
+                        view.data.map((item) => {
+                            if (item.viewId === deletedItem.filterViewId) {
+                                data.push(item)
+                                setinsideViews((prev: any) => ({
+                                    ...prev,
+                                    data: data
+                                }))
+                            }
+                        })
+                    }
+                })
+            }
+        })
+
+    }, [deleteEntitiesReducer])
+
+
+
+
 
     useEffect(() => {
         let newViewByEntityState = addDeleteOrMaskViaHeader(viewsByEntityState.entities, name, deleteOrMask)
@@ -43,19 +113,17 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success }
     }
 
 
+
     return (
-        <div id={name} onClick={scrollView} className={`dropdown__header ${success}`}>
-            <h1 onClick={(e: any) => { setToggle((prev: boolean) => !prev); }}>
-                <div onClick={() => { setToggle((prev: boolean) => !prev); }} className="dropdown__header__icon__border">
-                    <ToggleIcon />
-                </div>
+        <div id={name} onClick={scrollView} className={`dropdown__header ${!success}`}>
+            <h1 onClick={() => { setToggle((prev: boolean) => !prev); }}>
                 <SuccessIcon success={success} />
                 <span>{name}</span>
             </h1>
             <p onClick={(e) => { setToggle((prev: boolean) => !prev); window.scrollTo(0, 0) }}>
-                {stepState === "progress" ? <ProgressLoader bgcolor="#80BB5B" completed={50} /> : <span>{actions}</span>}
+                {stepState.step === "progress" ? ((insideViews.data.length !== 0 ? insideViews.data.map((item: any) => (<MultiProgress progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress} name={item.name} />)) : <ProgressLoader bgcolor={`${!success ? '#80BB5B' : '#CE1E1E'}`} completed={progressNumber} />)) : <span>{actions}</span>}
             </p>
-            <DropdownHeaderToggleIcon name={name} setToggle={setToggle} />
+            <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggle} />
         </div>
     );
 }

@@ -1,0 +1,23 @@
+.multiple__progress__bar{
+    margin-bottom: rem(10);
+
+    &__name{
+        height: rem(19);
+        background: var(--disable-text-color);
+        border-radius: rem(6);
+        padding: rem(3) rem(5);
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        width: max-content;
+        margin-bottom: rem(10);
+        
+        &--success{
+            color: var(--blue);
+        }
+
+        &--error{
+            color: var(--danger);
+        }
+    }
+}

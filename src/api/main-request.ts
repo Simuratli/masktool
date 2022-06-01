@@ -1,13 +1,19 @@
 import { getVersion } from './url.api'
 import { requestTypes } from './request.types'
 
-export const makeRequest = async (request: requestTypes) => {
+export const makeRequest = async (request: requestTypes, createTask?: boolean) => {
     let url = await getVersion();
     let ReturnObject
     try {
         const response = await fetch(url + "/uds_BusinessDataMaskingService", request);
         let data = await response.json();
-        ReturnObject = JSON.parse(data.ResponseObj).data
+
+        if (createTask) {
+            ReturnObject = JSON.parse(data.ResponseObj)
+        } else {
+            ReturnObject = JSON.parse(data.ResponseObj).data
+        }
+
     } catch (error) {
         ReturnObject = error
     }

@@ -5,3 +5,5 @@ export const getCustomRules = (payload: CustomRuleTypes[]) => ({
     type: GET_CUSTOM_RULES,
     payload
 })
+
+

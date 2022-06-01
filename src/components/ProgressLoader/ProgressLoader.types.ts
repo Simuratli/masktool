@@ -1,6 +1,6 @@
 export interface ProgressBarPropTypes {
     bgcolor:string;
-    completed:number
+    completed:number,
 }
 
 export interface FillerStylesTypes{

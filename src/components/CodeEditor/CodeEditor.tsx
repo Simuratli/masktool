@@ -1,17 +1,22 @@
 import React from 'react';
-import { setCodeEditorValue } from '../../redux/actions';
+import { setCustomParameterCodeEditor, setCodeEditorValue } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerType } from '../../redux/reducers/reducer.types';
 
-function CodeEditor() {
+interface CodeEditorPropTypes {
+    border: string | null
+}
+
+function CodeEditor({ border }: CodeEditorPropTypes) {
     const dispatch = useDispatch();
-    const codeEditorState = useSelector((state: ReducerType) => state.codeEditorReducer.data);
+    const customParametersState = useSelector((state: ReducerType) => state.customParametersReducer.template)
 
     const writeCode = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(setCodeEditorValue(e.target.value));
+        dispatch(setCodeEditorValue(null))
+        dispatch(setCustomParameterCodeEditor(e.target.value));
     }
     return (
-        <textarea onChange={writeCode} value={codeEditorState} className='editor' />
+        <textarea onChange={writeCode} value={customParametersState} className={`editor ${border}`} />
     )
 }
 

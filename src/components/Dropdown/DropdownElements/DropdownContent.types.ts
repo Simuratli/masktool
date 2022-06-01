@@ -10,7 +10,6 @@ export interface DropdownHeaderPropsTypes {
     checked: DropdownCheckedTypes,
     setChecked: React.Dispatch<React.SetStateAction<DropdownCheckedTypes>>;
     filter: string[];
-    setfilter: React.Dispatch<React.SetStateAction<string[]>>;
     name: string;
     deleteOrMask?: boolean;
     selectData: string[];
@@ -22,5 +21,6 @@ export interface MultitableContainerPropTypes {
     fields: EntityByViewCellsType[] | DefaultTasksFieldsTypes[];
     deleteOrMask?: boolean,
     mainName: string;
-    searchName?: string
+    searchName?: string;
+    etc:number
 }
