@@ -13,7 +13,6 @@ const initialState: CustomParametersStateTypes = {
 export const customParameterReducer = (state = initialState, action: CustomParametersActionTypes) => {
     switch (action.type) {
         case CUSTOM_PAREMETER_RULE_TYPE:
-            console.log(action.payload, 'action.payload.name')
             return {
                 ...state,
                 id: '',
@@ -22,7 +21,6 @@ export const customParameterReducer = (state = initialState, action: CustomParam
                 attributeTypeCode: action.payload.attributeTypeCode,
             }
         case SELECT_SAVED_RULE:
-            console.log(action.payload, 'SELECT_SAVED_RULE')
             return {
                 ...state,
                 id: action.payload.id,

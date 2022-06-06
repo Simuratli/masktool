@@ -6,7 +6,7 @@ import { setToggleModal, setNameOfDeletedEntityForModal, setModalDeleted, setMod
 import { setLoader } from './loader.action';
 import { setCurrentPage, setPaginationRange } from './pagination.actions';
 import { setProgressAdd, setProgressReset } from './progress.action'
-
+import { setErroredTasks } from './backend-actions/erroredTasks'
 
 // backend actions 
 import { setDefaultTasks, setPaginatedTasks } from './backend-actions/default-tasks.actions';
@@ -59,5 +59,6 @@ export {
     setStableMainName,
     setStableName,
     setStableSearchName,
-    setStableEtc
+    setStableEtc,
+    setErroredTasks
 } 

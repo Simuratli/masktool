@@ -1,18 +1,22 @@
 @import '../util';
 
-.main__container{
+.main__container {
     padding: rem(30) rem(30) rem(50) rem(30);
     min-width: rem(1440);
 }
 
-.flex{
+.flex {
     display: flex;
 }
 
-.orange{
+.orange {
     color: var(--orange);
 }
 
-.danger{
+.danger {
     color: var(--danger);
+}
+
+.click {
+    cursor: pointer;
 }

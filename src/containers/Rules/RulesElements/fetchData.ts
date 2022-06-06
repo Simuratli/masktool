@@ -1,10 +1,9 @@
-import { GetEntities, GetDefaultTasks, GetAttributesByEntity } from '../../../api';
+import { GetEntities, GetDefaultTasks, GetAttributesByEntity, } from '../../../api';
 import { defaultTaskAddETC } from '../../../utils/DefaultTaskETC';
 import { DefaultTasksTypes } from '../../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
 
 export const fetchDefaultTaskForModal = async () => {
     let entities = await GetEntities();
-
     let tasks = await GetDefaultTasks();
     let newTasks = await defaultTaskAddETC(entities, tasks);
 
@@ -22,7 +21,6 @@ export const fetchDefaultTaskForModal = async () => {
             }
         }
     }
-
 
     return newTasks
 }

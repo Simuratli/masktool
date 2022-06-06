@@ -5,18 +5,27 @@ import { ReducerType } from '../../../redux/reducers/reducer.types';
 import { setModaleActionsAllow, setDefaultTasks, setModalDeleted, setToggleModal, setModalAddField, setModalAddEntity, setStableDefaultTasks } from '../../../redux/actions'
 import { DefaultTasksTypes } from '../../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
 
+function getDifference(array1: DefaultTasksTypes[], array2: DefaultTasksTypes[]) {
+    return array1.filter(object1 => {
+        return !array2.some(object2 => {
+            return object1.entityName === object2.entityName;
+        });
+    });
+}
 
 function RulesModalForAddEntity() {
     const dispatch = useDispatch();
     const paginatedDataState = useSelector((state: ReducerType) => state.paginatedTasksdReducer.paginated)
     const stableDataReducer = useSelector((state: ReducerType) => state.stableDataReducer.tasks)
+    const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks)
     const paginationState = useSelector((state: ReducerType) => state.paginationReducer.range)
     const [cuttedStableData, setcuttedStableData] = useState<DefaultTasksTypes[]>([])
-    const [selectedEntites, setselectedEntites] = useState<string[]>([])
+    const [selectedEntites, setselectedEntites] = useState<DefaultTasksTypes[]>([])
 
     useEffect(() => {
-        setcuttedStableData(stableDataReducer.slice(0, paginationState))
-    }, [paginationState, stableDataReducer])
+        let data = getDifference(stableDataReducer, defaultTasksState)
+        setcuttedStableData(data)
+    }, [defaultTasksState, paginationState, stableDataReducer])
 
 
 
@@ -29,17 +38,15 @@ function RulesModalForAddEntity() {
             let newArrayForDefaultTasks: any = [];
             stableDataReducer.map((task) => {
                 selectedEntites.map((ent) => {
-                    if (ent === task.entityName) {
-                        if (!paginatedDataState.some((value) => value.entityName === task.entityName)) {
+                    if (ent.entityName === task.entityName) {
+                        if (!paginatedDataState.some((value) => value.entityName === task.entityName || value.entityName === task.displayName)) {
                             newArrayForDefaultTasks.push(task)
-                            console.log(task, 'addedd newArrayForDefaultTasks')
                         }
                     }
                 })
             })
-            newArrayForDefaultTasks = [...paginatedDataState, ...newArrayForDefaultTasks]
+            newArrayForDefaultTasks = [...newArrayForDefaultTasks, ...paginatedDataState]
             dispatch(setDefaultTasks(newArrayForDefaultTasks))
-            console.log(newArrayForDefaultTasks, 'newArrayForDefaultTasks')
             dispatch(setModalAddEntity(false))
         },
         [paginatedDataState, selectedEntites, stableDataReducer],
@@ -55,14 +62,14 @@ function RulesModalForAddEntity() {
     }
 
 
-    const selectCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-
+    const selectCheckbox = (e: React.ChangeEvent<HTMLInputElement>, item: DefaultTasksTypes) => {
         if (e.target.checked) {
-            setselectedEntites((prev) => [...prev, e.target.value])
+            setselectedEntites((prev) => [...prev, item])
         } else {
-            setselectedEntites((prev) => prev.filter((value) => value !== e.target.value))
+            setselectedEntites((prev) => prev.filter((value) => value.entityName !== e.target.value))
         }
     }
+
 
 
     return (
@@ -73,7 +80,7 @@ function RulesModalForAddEntity() {
             <div className='modal__scroll__container'>
                 {
                     cuttedStableData.map((item) => {
-                        return <div className="modal__checkbox"><Checkbox value={item.entityName} onChange={selectCheckbox} text={item.entityName} /></div>
+                        return <div className="modal__checkbox"><Checkbox value={item.entityName} onChange={(e) => { selectCheckbox(e, item) }} text={item.entityName} /></div>
                     })
                 }
             </div>

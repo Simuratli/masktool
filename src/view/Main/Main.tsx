@@ -28,6 +28,9 @@ function Main() {
       case "settings":
         setComponent(<Tutorial />)
         break;
+      case "error":
+        setComponent(<Rules />)
+        break;
       default:
         break;
     }

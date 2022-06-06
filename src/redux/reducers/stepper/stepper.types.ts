@@ -4,5 +4,5 @@ export interface StepReducerTypes {
 }
 
 export interface StepStateTypes {
-    step: 'notifications' | 'tutorial' | 'rules' | 'tutorial' | 'progress' | 'results' | 'settings';
+    step: 'notifications' | 'tutorial' | 'rules' | 'tutorial' | 'progress' | 'results' | 'settings' | "error";
 }

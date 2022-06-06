@@ -1,40 +1,54 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { GetViewsByEntity, GetTasksStatus } from '../../api';
+import { GetAttributesByEntity, GetTasksStatus } from '../../api';
 import { setStableEntityByViews, setStableDefaultTasks } from '../../redux/actions'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 import { fetchDefaultTaskForModal } from '../../containers/Rules/RulesElements/fetchData'
+import { DefaultTasksTypes } from '../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
 
 function Logo() {
     const dispatch = useDispatch();
     const stableDataReducer = useSelector((state: ReducerType) => state.stableDataReducer)
-
+    const entitesState = useSelector((state: ReducerType) => state.getEntitiesReducer.entities)
     const fetch = async () => {
-        let viewsByEntity = await GetViewsByEntity(stableDataReducer.mainName!, stableDataReducer.etc);
-        dispatch(setStableEntityByViews({ name: stableDataReducer.mainName, data: viewsByEntity }))
-
-        let status = await GetTasksStatus()
-
-
-        status.map((stat:any)=>{
-            if(stat.taskStatus === 1){
-                alert(`${stat.entityName} is in progress`)
-            }
-            
-        })
+        let viewsByEntity = await GetAttributesByEntity(stableDataReducer.mainName, stableDataReducer.etc);
+        dispatch(setStableEntityByViews({ name: stableDataReducer.name, data: viewsByEntity }))
     }
+
 
 
     useEffect(() => {
         fetch()
+        let newArrayForEntity: any[] = []
+
+        for (const entity of entitesState) {
+            newArrayForEntity.push({
+                entityName: entity.displayName,
+                logicalName: entity.logicalName,
+                errorMessage: null,
+                delete: true,
+                errorRecords: 0,
+                etc: entity.etc,
+                fields: [],
+                filter: [],
+                filterViewId: null,
+                maskOperation: false,
+                previousTaskId: null,
+                progress: "NULL",
+                requestResult: null,
+                successRecords: 0,
+                taskId: null,
+                taskStatus: 0,
+                text: "Delete",
+                totalRecords: 0,
+            })
+        }
+
         fetchDefaultTaskForModal().then((data) => {
-            dispatch(setStableDefaultTasks(data))
+            dispatch(setStableDefaultTasks([...data, ...newArrayForEntity]))
         })
 
-
-
-
-    }, [])
+    }, [entitesState, stableDataReducer.mainName])
 
 
 

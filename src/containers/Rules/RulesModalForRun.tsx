@@ -2,9 +2,9 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { Modal, Button, Header } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducerType } from '../../redux/reducers/reducer.types';
-import { setPaginatedTasks, setModaleActionsAllow, setModalDeleted, setToggleModal, setProgressAdd, setCurrentRequest, setStep, setModalToggleActions, setDefaultTasks } from '../../redux/actions'
+import { setPaginatedTasks, setModaleActionsAllow, setModalDeleted, setToggleModal, setProgressAdd, setCurrentRequest, setStep, setModalToggleActions, setDefaultTasks, setErroredTasks } from '../../redux/actions'
 import { CreateTask, GetTasksStatus, ClearTasks } from '../../api';
-import { prepareIndividualForDelete } from '../../utils/run.utils'
+import { prepareIndividualForDelete } from '../../utils/run.utils';
 
 function RulesModalForRun({ onConfirm }: any) {
     const dispatch = useDispatch();
@@ -39,22 +39,55 @@ function RulesModalForRun({ onConfirm }: any) {
 
 
                 let requestMain: any
-
+                paginatedData.paginated.map((task) => {
+                    if (task.entityName === view.entityName) {
+                        task.progress = "END"
+                        task.requestResult = true
+                    }
+                })
+                dispatch(setPaginatedTasks(paginatedData.paginated))
                 if (!deleteEntitiesReducer.some((value) => value.entityName === view.entityName)) {
                     requestMain = await CreateTask(preparedItem);
 
-                    let stopAskStatus = false
-                    // while (!stopAskStatus) {
-                    //     let statusRequest = await GetTasksStatus(requestMain);
-                    //     console.log(statusRequest, 'statusRequest')
-                    //     // eslint-disable-next-line no-loop-func
-                    //     statusRequest.map((item: any) => {
-                    //         console.log(item, view.entityName, 'bura bax')
-                    //         if(item.taskStatus === 3 && item.taskStatus === 2 && item.taskStatus === 4){
-                    //             stopAskStatus = true
-                    //         }
-                    //     })
-                    // }
+
+                    await new Promise(resolve => {
+                        let interval = setInterval(async () => {
+                            let statusRequest = await GetTasksStatus();
+                            console.log(statusRequest, 'statusRequest')
+                            for (const iterator of statusRequest) {
+
+                                defaultTasksState.tasks.map((task) => {
+                                    if (task.entityName === view.entityName) {
+                                        task.successRecords = iterator.successRecords
+                                        task.totalRecords = iterator.totalRecords
+
+                                        if (iterator.taskStatus === 2) {
+                                            task.errorMessage = true
+                                        }
+
+
+                                        if (iterator.taskStatus === 3) {
+                                            task.errorMessage = false
+                                            // resolve('foo');
+                                            // clearInterval(interval)
+                                        }
+
+                                        if (iterator.taskStatus === 1 || iterator.taskStatus === 0) {
+                                            task.errorMessage = null
+                                        }
+
+                                        if (!statusRequest.some((value: any) => value.taskStatus === 0 || value.taskStatus === 1)) {
+                                            resolve('foo');
+                                            clearInterval(interval)
+                                        }
+                                    }
+                                })
+
+                                dispatch(setDefaultTasks(defaultTasksState.tasks))
+
+                            }
+                        }, 1500)
+                    })
 
                 }
 
@@ -65,14 +98,14 @@ function RulesModalForRun({ onConfirm }: any) {
                 for (const entity of deleteEntitiesReducer) {
                     if (view.entityName === entity.entityName) {
 
-                        console.log(deleteEntitiesReducer, 'preparedItem deleteEntitiesReducer')
-                        console.log(entity, 'entity')
                         dispatch(setCurrentRequest({
                             name: entity.entityName,
                             progress: "Start",
                             id: entity.filterViewId
                         }))
-                        let requestSecond
+
+
+                        let requestSecond: any
 
                         if (entity.maskOperation) {
                             requestSecond = await CreateTask({
@@ -90,7 +123,37 @@ function RulesModalForRun({ onConfirm }: any) {
 
                             });
                         }
+                        console.log(requestSecond, 'requestSecond')
 
+                        viewsByEntityState.entities.map((view) => {
+
+                            if (view.name === entity.entityName) {
+
+                                console.log(view, 'viewwwww')
+
+                                view.data.map((item) => {
+                                    if (item.viewId === entity.filterViewId) {
+                                        console.log(item, 'burasi calisdi')
+                                        if (requestSecond.level === "ERROR") {
+                                            item.errorMessage = true
+
+                                            defaultTasksState.tasks.map((task) => {
+                                                if (task.entityName === view.name) {
+                                                    task.errorMessage = true
+                                                }
+                                            })
+
+                                            dispatch(setDefaultTasks(defaultTasksState.tasks))
+                                        }
+                                        if (requestSecond.level === "SUCCESS") {
+                                            item.errorMessage = false
+                                        }
+
+                                    }
+                                })
+                            }
+                        })
+                        console.log(viewsByEntityState, 'entttt')
 
                         dispatch(setCurrentRequest({
                             name: entity.entityName,
@@ -103,53 +166,6 @@ function RulesModalForRun({ onConfirm }: any) {
 
 
 
-                paginatedData.paginated.map((task) => {
-                    if (task.entityName === view.entityName) {
-                        task.progress = "END"
-                        task.requestResult = true
-                    }
-                })
-
-                await new Promise(resolve => {
-                    let interval = setInterval(async () => {
-                        let statusRequest = await GetTasksStatus();
-                        console.log(statusRequest, 'statusRequest')
-
-                        for (const iterator of statusRequest) {
-                            console.log(iterator, view.entityName, 'bura bax')
-
-                            defaultTasksState.tasks.map((task) => {
-                                if (task.entityName === view.entityName) {
-                                    console.log(task.entityName, view.entityName,'names')
-                                    task.successRecords = iterator.successRecords
-                                    task.totalRecords = iterator.totalRecords
-                                    
-                                    if (iterator.taskStatus === 2) {
-                                        task.errorMessage = true
-                                        resolve('foo');
-                                        clearInterval(interval)
-                                    }
-
-                                    if (iterator.taskStatus === 3) {
-                                        task.errorMessage = false
-                                        // resolve('foo');
-                                        // clearInterval(interval)
-                                    }
-                                    if (iterator.taskStatus === 1 || iterator.taskStatus === 0) {
-                                        task.errorMessage = null
-                                    }
-                                }
-                            })
-
-                            dispatch(setDefaultTasks(defaultTasksState.tasks))
-
-                        }
-                    }, 2500)
-                })
-
-
-                dispatch(setPaginatedTasks(paginatedData.paginated))
-
                 dispatch(setProgressAdd(number++))
             }
 
@@ -158,7 +174,7 @@ function RulesModalForRun({ onConfirm }: any) {
 
 
         },
-        [modalState.name, defaultTasksState, deleteEntitiesReducer, viewsByEntityState, paginatedData.paginated],
+        [modalState.name, defaultTasksState, deleteEntitiesReducer, viewsByEntityState, paginatedData],
     )
 
 

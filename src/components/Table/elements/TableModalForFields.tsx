@@ -3,7 +3,15 @@ import { Modal, Button, Header, Checkbox } from '../../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducerType } from '../../../redux/reducers/reducer.types';
 import { setModaleActionsAllow, setStableEntityByViews, setAllViewsByEntity, setDefaultTasks, setStableDefaultTasks, setModalDeleted, setToggleModal, setModalAddEntity, setModalAddField } from '../../../redux/actions'
-import Loader from '../../Loader'
+import { GetAttributesByEntity } from '../../../api';
+
+function getDifference(array1: any[], array2: any[]) {
+    return array1.filter(object1 => {
+        return !array2.some(object2 => {
+            return object1.logicalName === object2.logicalName;
+        });
+    });
+}
 
 function TableModalForFields() {
     const dispatch = useDispatch();
@@ -12,9 +20,10 @@ function TableModalForFields() {
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer)
     const [dataFields, setdataFields] = useState<any[]>([])
     const [selectedFields, setselectedFields] = useState<any[]>([])
+    const getEntitiesState = useSelector((state: ReducerType) => state.getEntitiesReducer.entities)
 
 
-    // console.log('res seee', selectedFields)
+
 
     const confirm = useCallback(
         () => {
@@ -26,8 +35,6 @@ function TableModalForFields() {
                     if (item.entityName === stableDataReducer.name) {
 
                         const res1 = selectedFields.filter((page1) => !item.fields.find(page2 => page1.logicalName === page2.logicalName))
-                        console.log(item.fields, ' item.fieldss res1')
-                        console.log(res1, 'res1 res1')
                         item.fields = [...item.fields, ...res1]
 
                     }
@@ -40,11 +47,7 @@ function TableModalForFields() {
 
                         view.data.map((item) => {
                             if (item.name === stableDataReducer.name) {
-                                console.log('i am working', selectedFields)
                                 const res1 = selectedFields.filter((page1) => !item.cells.find(page2 => page1.logicalName === page2.logicalName))
-                                console.log(item.cells, 'item.cells res1')
-                                console.log(res1, 'res1 res1')
-
                                 item.cells = [...item.cells, ...res1]
                             }
                         })
@@ -64,28 +67,41 @@ function TableModalForFields() {
 
 
     useEffect(() => {
+
         if (stableDataReducer.searchName === 'entities') {
             stableDataReducer.tasks.map((data) => {
                 if (data.entityName === stableDataReducer.name) {
-                    console.log('salam', data)
-                    setdataFields(data.fields)
+                    GetAttributesByEntity(data.entityName, data.etc).then((attr) => {
+                        let newDataOfArray = [...data.fields, ...attr]
+
+                        var index = defaultTasksState.tasks.findIndex(function (item, i) {
+                            return item.entityName === stableDataReducer.name
+                        });
+                        let dataNew = getDifference(newDataOfArray, defaultTasksState.tasks[index].fields)
+                        setdataFields(dataNew)
+                    })
+
+
                 }
             })
         } else {
-            console.log(stableDataReducer.entities, ' stableDataReducer.entites')
             stableDataReducer.entities.map((entity) => {
-                if (entity.name === stableDataReducer.mainName) {
-                    entity.data.map((item) => {
-                        if (item.name === stableDataReducer.name) {
-                            setdataFields(item.cells)
-                        }
-                    })
+                if (entity.name === stableDataReducer.name) {
+                    var index = viewsByEntityState.entities.findIndex(function (item, i) {
+                        return item.name === stableDataReducer.mainName
+                    });
+
+                    let secondIndex = viewsByEntityState.entities[index].data.findIndex(function (item, i) {
+                        return item.name === stableDataReducer.name
+                    });
+                    let dataNew = getDifference(entity.data, viewsByEntityState.entities[index].data[secondIndex].cells)
+                    let newDataOfArray = [...entity.data]
+                    setdataFields(dataNew)
                 }
             })
         }
 
-        console.log('salammmm')
-    }, [stableDataReducer.tasks])
+    }, [defaultTasksState.tasks, stableDataReducer])
 
 
 
@@ -99,7 +115,6 @@ function TableModalForFields() {
 
 
     const choseCheckbox = (e: React.ChangeEvent<HTMLInputElement>, item: any) => {
-        console.log("gellllllll res", item)
         if (e.target.checked) {
 
             setselectedFields((prev) => [...prev, item])

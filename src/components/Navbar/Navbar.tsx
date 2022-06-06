@@ -42,7 +42,7 @@ function Navbar() {
     const getEntitiesAndTasks = async () => {
         let entities = await GetEntities();
         dispatch(setAllEntities(entities));
-        
+
         let tasks = await GetDefaultTasks();
         let newTasks = await defaultTaskAddETC(entities, tasks);
 
@@ -65,7 +65,7 @@ function Navbar() {
         })
 
         dispatch(setDefaultTasks(newTasks));
-        
+
         let customRules = await GetCustomRules();
         dispatch(getCustomRules(customRules))
         let vocabularies = await GetVocabularesList();

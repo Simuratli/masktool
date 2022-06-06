@@ -8,7 +8,7 @@ export const GetEntities = async () => {
 }
 
 
-export const GetAttributesByEntity = async (name: string, etc: number | undefined) => {
+export const GetAttributesByEntity = async (name: string | undefined, etc: number | undefined) => {
     let obj = {
         etc: etc,
         logicalName: name
@@ -36,18 +36,23 @@ export const GetVocabularesList = async () => {
 }
 
 export const ValidateCustomRule = async (params: any) => {
-    console.log(params, "validationParams")
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "ValidateCustomRule", RequestObj: JSON.stringify(params) }))
     let response = await makeRequest(request, true)
     return response
 }
 
 export const CreateCustomRule = async (params: any) => {
-    console.log(params, "CreateCustomRule prams")
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "CreateCustomRule", RequestObj: JSON.stringify(params) }))
     let response = await makeRequest(request, true)
     return response
 }
+
+export const DeleteCustomRule = async (params: any) => {
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "DeleteCustomRule", RequestObj: JSON.stringify(params) }))
+    let response = await makeRequest(request, true)
+    return response
+}
+
 
 export const UpdateCustomRule = async (params: CustomParametersStateTypes) => {
     let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "UpdateCustomRule", RequestObj: JSON.stringify(params) }))

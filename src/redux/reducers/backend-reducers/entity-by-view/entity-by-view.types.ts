@@ -22,7 +22,8 @@ export interface EntityByViewType {
     isDefault: true;
     name: string;
     viewId: string;
-    maskOperation?: boolean
+    maskOperation?: boolean;
+    errorMessage?: boolean | null
 }
 
 export interface EntityByViewActionsTypes {

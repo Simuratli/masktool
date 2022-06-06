@@ -1,0 +1,1 @@
+export const SET_ERRORED_DATA = "SET_ERRORED_DATA";

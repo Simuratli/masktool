@@ -10,7 +10,7 @@ import { prepareCells } from '../../../utils/run.utils';
 
 
 function MultitableContainer({ mainName, name, fields, deleteOrMask, searchName, etc }: MultitableContainerPropTypes) {
-
+    console.log(fields,'eeeee')
     const dispatch = useDispatch()
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer)
     const deleteEntitiesReducer = useSelector((state: ReducerType) => state.preParedDeleteEntites.delete);

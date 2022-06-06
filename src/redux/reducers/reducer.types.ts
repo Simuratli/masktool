@@ -33,5 +33,6 @@ export interface ReducerType {
     preParedDeleteEntites: PreparedDeleteEntitesStateTypes,
     requestProgressReducer:requestProgressStateTypes;
     customParametersReducer:CustomParametersStateTypes,
-    stableDataReducer:StableDataReducerStateTypes
+    stableDataReducer:StableDataReducerStateTypes,
+    erroredTaskReducer:DefaultTasksStateTypes
 }

@@ -95,7 +95,14 @@ function DropdownContentHeader({ name, deleteOrMask, checked, setChecked, filter
 
     const chose = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
+
+            console.log(e.target.checked, 'eeeee check')
+            console.log(e.target.value, 'eeeee value')
+
+
             if (e.target.checked) {
+                console.log(e.target.value, 'eeeee true check')
+
                 defaultTasksState.map((task) => {
                     if (task.entityName === name) {
                         task.filter = [...task.filter, e.target.value]
@@ -103,21 +110,27 @@ function DropdownContentHeader({ name, deleteOrMask, checked, setChecked, filter
                     }
                 })
 
-
-                setChecked(choseActionForRecords('special'))
+                let checkedData = choseActionForRecords('special')
+                console.log(checkedData,'checkedData eeee')
+                setChecked(checkedData)
             } else {
+                console.log(e.target.value, 'eeeee false check')
                 defaultTasksState.map((task) => {
                     if (task.entityName === name) {
                         task.filter = task.filter.filter((word: string) => word !== e.target.value)
                         task.text = task.filter.length === 0 ? `Nothing selected` : `View - ${task.filter.join(', ')}`
                     }
+
+
                 })
 
             }
 
             dispatch(setDefaultTasks(defaultTasksState))
+
+            console.log(defaultTasksState, 'defaultTasksState eeeee')
         },
-        [filter, defaultTasksState],
+        [dispatch, defaultTasksState, setChecked, name],
     )
 
 

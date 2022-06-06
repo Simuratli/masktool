@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { SuccessIcon } from "./icons";
 import { DropdownHeaderPorpTypes } from '../Dropdown.types';
@@ -15,7 +14,6 @@ import { ToggleIcon } from './icons'
 
 function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, progress, requestResult, totalRecords, successRecords }: DropdownHeaderPorpTypes) {
     const dispatch = useDispatch();
-
 
     const [insideViews, setinsideViews] = useState<any>({
         data: []
@@ -37,7 +35,9 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
         viewsByEntity.map((view: EntityByViewType) => {
             view.maskOperation = deleteOrMask
         })
-        dispatch(setViewsByEntity({ name: name, data: viewsByEntity }))
+
+        console.log('burasit est', name)
+        // dispatch(setViewsByEntity({ name: name, data: viewsByEntity }))
     }
 
     useEffect(() => {
@@ -58,20 +58,18 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
             //     if (number === 101) stop = false
             //     setprogressNumber(number++)
             // }
-            console.log(totalRecords, 'totoalll')
-            console.log(progressNumber, 'progressNumber')
-            console.log(progress, 'progress')
             setprogressNumber((prev) => prev + (successRecords * 100 / totalRecords))
-            if (success === false) {
+
+            if (success === false && totalRecords === successRecords) {
                 setprogressNumber(100)
             }
-            console.log(progressNumber, 'pmimber')
+
         }
 
         return () => {
             setprogressNumber(0)
         }
-    }, [progress, successRecords, totalRecords])
+    }, [progress, successRecords, totalRecords, success,])
 
 
 
@@ -83,11 +81,19 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
                     if (view.name === name) {
                         view.data.map((item) => {
                             if (item.viewId === deletedItem.filterViewId) {
-                                data.push(item)
+                                if (stepState.step === "error") {
+                                    if (item.errorMessage === true) {
+                                        data.push(item)
+                                    }
+                                } else {
+                                    data.push(item)
+                                }
                                 setinsideViews((prev: any) => ({
                                     ...prev,
                                     data: data
                                 }))
+
+                                console.log(data, 'burasi view datasidier')
                             }
                         })
                     }
@@ -98,6 +104,7 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
     }, [deleteEntitiesReducer])
 
 
+    console.log(insideViews, 'ABO VIEWS')
 
 
 
@@ -117,11 +124,10 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
     return (
         <div id={name} onClick={scrollView} className={`dropdown__header ${!success}`}>
             <h1 onClick={() => { setToggle((prev: boolean) => !prev); }}>
-                <SuccessIcon success={success} />
                 <span>{name}</span>
             </h1>
             <p onClick={(e) => { setToggle((prev: boolean) => !prev); window.scrollTo(0, 0) }}>
-                {stepState.step === "progress" ? ((insideViews.data.length !== 0 ? insideViews.data.map((item: any) => (<MultiProgress progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress} name={item.name} />)) : <ProgressLoader bgcolor={`${!success ? '#80BB5B' : '#CE1E1E'}`} completed={progressNumber} />)) : <span>{actions}</span>}
+                {stepState.step === "progress" && progressNumber !== 100 ? ((insideViews.data.length !== 0 ? insideViews.data.map((item: any) => (<MultiProgress progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress} errorMessage={item.errorMessage} name={item.name} />)) : <ProgressLoader bgcolor={`${!success ? '#80BB5B' : '#CE1E1E'}`} completed={progressNumber} />)) : <span>{actions}</span>}
             </p>
             <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggle} />
         </div>

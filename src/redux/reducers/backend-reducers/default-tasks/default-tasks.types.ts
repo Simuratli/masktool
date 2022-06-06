@@ -26,6 +26,8 @@ export interface DefaultTasksTypes {
     text: string,
     filter: string[],
     errorMessage: boolean | null;
+    logicalName?:string;
+    displayName?:string;
 
 }
 

@@ -13,7 +13,6 @@ const initialState: StableDataReducerStateTypes = {
 export const stableDataReducer = (state = initialState, action: StableDataReducerActionTypes) => {
     switch (action.type) {
         case SET_STABLE_TASKS:
-            console.log('i am change salam',action.payload)
             return {
                 ...state,
                 tasks: action.payload

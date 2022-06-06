@@ -37,7 +37,7 @@ function DropdownContent({ fields, name, deleteOrMask, etc, filter }: DropdownCo
                 })
             }
         })
-    }, [viewsByEntityState.entities])
+    }, [viewsByEntityState.entities, name])
 
 
 
@@ -46,6 +46,13 @@ function DropdownContent({ fields, name, deleteOrMask, etc, filter }: DropdownCo
             <DropdownContentHeader selectData={dropdownData} name={name} deleteOrMask={deleteOrMask} filter={filter ? filter : []} checked={checked} setChecked={setChecked} />
 
             <div className={`dropdown__content__table show`}>
+                {
+                    // console.log(, 'bitch')
+                }
+
+                {
+                    console.log(viewsByEntityState.entities.map((view)=>{console.log("view" , view)}))
+                }
                 {
                     checked.records ? <Table etc={etc} name={name} searchName="entities" fields={fields} /> :
                         (filter && filter.length === 0 ? <div className='table__nodata'>PLEASE SELECT VIEW</div> : viewsByEntityState.entities.map((view) => view.name === name && view.data.map((item) => filter && filter.includes(item.name) && <MultitableContainer etc={etc} searchName="views" mainName={name} deleteOrMask={item.maskOperation} fields={item.cells} name={item.name} />)))

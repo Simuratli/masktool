@@ -26,7 +26,7 @@ function Notification() {
             <div className='notification_info'>
                 <Header headerType="big" text='Welcome!' />
 
-                <p>The purpose of The UDS Business Data Masking is to quickly and flexibly delete or mask your system data before sharing access to Dynamics 365 with third parties. The add-on provides you with default masking rules and parameters. You can also change the default settings according to your needs.</p>
+                <p>The purpose of the UDS Business Data Masking is to quickly and flexibly delete or mask your system data before sharing access to Dynamics 365 with third parties. The add-on provides you with default masking rules and parameters. You can also change the default settings according to your needs.</p>
                 <p>The basic version of UDS Business Data Masking allows working with 3 field types:</p>
                 <ul className='list'>
                     <li>text fields;</li>

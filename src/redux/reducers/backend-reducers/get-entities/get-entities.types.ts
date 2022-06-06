@@ -3,6 +3,7 @@ export interface AllEntitiesTypes {
     displayName: string;
     etc: number;
     logicalName: string;
+    entityName?:string;
 }
 
 export interface GetEntitiesReducerStateTypes {

@@ -7,12 +7,15 @@ function HowToUse() {
             <div className="tutorial__content">
                 <h2 className="tutorial__heading__second">Default settings</h2>
                 <p className='tutorial__text'>
-                    All records will be deleted in 9 entities: <strong>Fax, Email, Letter, Phonecall, Socialprofile, Activityfile, Attachment, Activitymimeattachment, Annotation,</strong> and <strong>Attachment</strong>.
+                    By default, Business Data Masking will apply changes to 12 entities. All views through each entity will be processed.
                 </p>
                 <p className='tutorial__text'>
-                    Fields in <strong>Account, Contact,</strong> and <strong>Lead</strong> entities will be masked according to the points below.
+                    All records will be deleted in 9 entities: <strong>Fax</strong>, <strong>Email</strong>, <strong>Letter</strong>, <strong>Phonecall</strong>, <strong>Socialprofile</strong>, <strong>Activityfileattachment</strong>, <strong>Activitymimeattachment</strong>, <strong>Annotation</strong>, and <strong>Attachment</strong>.
                 </p>
-                <h2 className="tutorial__heading__second">Point 1</h2>
+                <p className='tutorial__text'>
+                    Fields in <strong>Account</strong>, <strong>Contact</strong>, and <strong>Lead</strong> entities will be masked according to the points below.
+                </p>
+                <h2 className="tutorial__text"><strong>Point 1</strong></h2>
                 <table className='tutorial__table'>
                     <thead>
                         <tr>
@@ -51,13 +54,13 @@ function HowToUse() {
                         </tr>
                     </tbody>
                 </table>
-                <h2 className="tutorial__heading__second">Point 2</h2>
+                <h2 className="tutorial__text"><strong>Point 2</strong></h2>
                 <p className='tutorial__text'>UDS Business Data Masking will clear values in the rest of the text, multiline, and date fields.</p>
                 <h2 className="tutorial__heading__second">Default masking flow</h2>
                 <h3 className="tutorial__heading__third"><span className="tutorial__heading__step">Step 1.</span> Run masking </h3>
-                <p className='tutorial__text'>Open the Masking settings tab on the ribbon, and click Run to proceed with default settings.</p>
+                <p className='tutorial__text'>Open the <strong>Masking settings</strong> tab on the ribbon, and click the <strong>Run button</strong> to proceed with default settings.</p>
                 <h3 className="tutorial__heading__third"><span className="tutorial__heading__step">Step 2.</span> Check the results</h3>
-                <p className='tutorial__text'>Wait for the report on the masking completion. If masking of some entities failed, download logs and change the masking settings accordingly. Click Run to start the new masking. </p>
+                <p className='tutorial__text'>Wait for the report on the masking completion. If the masking of some entities failed, download logs and change the masking settings accordingly. Click <strong>Run</strong> to start the new masking</p>
             </div>
 
 

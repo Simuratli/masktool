@@ -4,7 +4,7 @@ import { DropdownPorpTypes } from './Dropdown.types';
 
 function Dropdown({ actions, name, deleteOrMask, success, fields, etc, progress, requestResult, filter, totalRecords, successRecords }: DropdownPorpTypes) {
     const [toggle, setToggle] = useState(false);
-
+   
 
     return (
         <div className={`dropdown ${toggle && "openedDropdown"}`}>

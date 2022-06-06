@@ -24,7 +24,6 @@ function MaskRulesRightActions() {
             template: customParametersState.template
         });
         dispatch(setCodeEditorValue(validation.level))
-        console.log(validation, 'validation')
     }
 
     const createCustomRULE = async () => {
@@ -37,7 +36,6 @@ function MaskRulesRightActions() {
             fetchCustomRules()
             setsaveText('Parameters were saved.')
         }
-        console.log(createdCustomRule, 'createdCustomRule')
         setTimeout(() => {
             setsaveText('')
         }, 1000);
@@ -53,7 +51,6 @@ function MaskRulesRightActions() {
             template: customParametersState.template,
             duplicateToGeneral: customParametersState.duplicateToGeneral
         });
-        console.log(updateCustomRule, 'updateCustomRule')
         dispatch(setCodeEditorValue(null))
     }
 

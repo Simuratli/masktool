@@ -17,6 +17,7 @@ import preParedDeleteEntites from './backend-reducers/prepare-delete'
 import requestProgressReducer from './backend-reducers/request-progress'
 import customParametersReducer from './backend-reducers/custom-parameters'
 import stableDataReducer from './backend-reducers/stablep-data'
+import erroredTaskReducer from './erroredTasks'
 
 export default combineReducers({
     notificationReducer,
@@ -36,5 +37,7 @@ export default combineReducers({
     preParedDeleteEntites,
     requestProgressReducer,
     customParametersReducer,
-    stableDataReducer
+    stableDataReducer,
+    erroredTaskReducer,
+    
 })

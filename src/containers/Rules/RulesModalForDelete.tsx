@@ -9,10 +9,6 @@ function RulesModalForDelete() {
     const modalState = useSelector((state: ReducerType) => state.modalReducer);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks);
 
-    useEffect(() => {
-        console.log(defaultTasksState, 'defaultTasksState changed')
-    }, [defaultTasksState])
-
 
     const cutArray = async (array: any, name: string) => {
 
@@ -39,16 +35,14 @@ function RulesModalForDelete() {
             dispatch(setDefaultTasks(newArray))
 
             dispatch(setModaleActionsAllow(true))
-            console.log(newArray, 'newDefaultTaskState deleted')
             // let newDefaultTaskState = defaultTasksState.splice(index, 1)
 
 
-            console.log(newArray, 'newDefaultTaskState newArray')
             // dispatch(setDefaultTasks(newDefaultTaskState))
             // dispatch(setToggleModal(false))
             dispatch(setModalDeleted(true))
         },
-        [modalState.name, defaultTasksState, cutArray],
+        [defaultTasksState, modalState.name, dispatch],
     )
 
 
