@@ -1,52 +1,92 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { GetAttributesByEntity, GetTasksStatus } from '../../api';
+import { GetAttributesByEntity, GetDefaultTasks } from '../../api';
 import { setStableEntityByViews, setStableDefaultTasks } from '../../redux/actions'
 import { ReducerType } from '../../redux/reducers/reducer.types'
-import { fetchDefaultTaskForModal } from '../../containers/Rules/RulesElements/fetchData'
 import { DefaultTasksTypes } from '../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
+import { defaultTaskAddETC } from '../../utils/DefaultTaskETC';
 
 function Logo() {
     const dispatch = useDispatch();
     const stableDataReducer = useSelector((state: ReducerType) => state.stableDataReducer)
     const entitesState = useSelector((state: ReducerType) => state.getEntitiesReducer.entities)
+
     const fetch = async () => {
         let viewsByEntity = await GetAttributesByEntity(stableDataReducer.mainName, stableDataReducer.etc);
+
         dispatch(setStableEntityByViews({ name: stableDataReducer.name, data: viewsByEntity }))
+
+        let tasks = await GetDefaultTasks();
+        let newTasks = await defaultTaskAddETC(entitesState, tasks);
+
+        tasks.map(async (task: DefaultTasksTypes) => {
+
+
+
+            let atributes = await GetAttributesByEntity(task.entityName, task.etc);
+            atributes.map((atribute: any) => {
+                task.progress = "NULL";
+                task.requestResult = null
+                task.filter = []
+                task.records = true
+                task.open = false
+                
+                task.fields.map((field) => {
+                    if (atribute.logicalName === field.logicalName) {
+                        field.displayName = atribute.displayName
+                        field.attributeTypeCode = atribute.attributeTypeCode;
+                        field.requiredLevel = atribute.requiredLevel
+                    }
+                })
+                
+
+                let filteredTasks = task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
+                task.maskOperation ? task.text = `All Records ${filteredTasks.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields are masked` : task.text = "Delete"
+            })
+        })
+
+        return newTasks
     }
 
 
 
+
     useEffect(() => {
-        fetch()
-        let newArrayForEntity: any[] = []
+        // let newArrayForEntity: any[] = []
 
-        for (const entity of entitesState) {
-            newArrayForEntity.push({
-                entityName: entity.displayName,
-                logicalName: entity.logicalName,
-                errorMessage: null,
-                delete: true,
-                errorRecords: 0,
-                etc: entity.etc,
-                fields: [],
-                filter: [],
-                filterViewId: null,
-                maskOperation: false,
-                previousTaskId: null,
-                progress: "NULL",
-                requestResult: null,
-                successRecords: 0,
-                taskId: null,
-                taskStatus: 0,
-                text: "Delete",
-                totalRecords: 0,
-            })
-        }
+        // fetch().then((data) => {
 
-        fetchDefaultTaskForModal().then((data) => {
-            dispatch(setStableDefaultTasks([...data, ...newArrayForEntity]))
-        })
+        //     for (const entity of entitesState) {
+        //         newArrayForEntity.push({
+        //             entityName: entity.displayName,
+        //             logicalName: entity.logicalName,
+        //             errorMessage: null,
+        //             delete: true,
+        //             errorRecords: 0,
+        //             etc: entity.etc,
+        //             fields: [],
+        //             filter: [],
+        //             filterViewId: null,
+        //             maskOperation: false,
+        //             previousTaskId: null,
+        //             progress: "NULL",
+        //             requestResult: null,
+        //             successRecords: 0,
+        //             taskId: null,
+        //             taskStatus: 0,
+        //             text: "Delete",
+        //             totalRecords: 0,
+        //             records: true
+        //         })
+        //     }
+
+
+
+        //     dispatch(setStableDefaultTasks([...data, ...newArrayForEntity]))
+
+        // })
+
+
 
     }, [entitesState, stableDataReducer.mainName])
 
@@ -54,7 +94,7 @@ function Logo() {
 
 
     return (
-        <a target='_blank' rel="noreferrer" href="https://uds.systems/">
+        <a target='_blank' rel="noreferrer" href="https://my.uds.systems/add-ons">
             <svg width="99" height="64" viewBox="0 0 99 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M33.9062 45.27H64.9053V0H33.9062V45.27Z" fill="#FF8F3E" />
                 <path fillRule="evenodd" clipRule="evenodd" d="M0 45.27H30.999V0H0V45.27Z" fill="#1A4F95" />

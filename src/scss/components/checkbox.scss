@@ -10,6 +10,15 @@
 	opacity: 0;
 }
 
+
+.b-contain { 
+	&.disable{
+		span{
+			color: var(--table-header-color);
+		}
+	}
+}
+
 .b-contain span {
 	line-height: 1.54;
 	font-size: rem(14);
@@ -22,7 +31,6 @@
 	font-family: var(--font-sogoe);
 	position: relative;
 	top: rem(2);
-
 }
 
 .b-contain {

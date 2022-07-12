@@ -3,12 +3,21 @@
     opacity: 0;
     cursor: pointer;
     height: rem(20);
-    width: rem(150);
+    width: rem(20);
+    margin: 0;
+
+    
 }
 
 .radio__container {
     height: rem(20);
     min-width: max-content;
+    svg{
+        cursor: pointer !important;
+    }
+    label{
+        cursor: pointer !important;
+    }
 }
 
 .radio__text {
@@ -22,4 +31,5 @@
     text-transform: uppercase;
     color: var(--tutorial-text-color);
     top: -6.5px;
+    cursor: pointer;
 }

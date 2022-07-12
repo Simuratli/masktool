@@ -1,4 +1,12 @@
 .multiple__progress__bar{
+
+
+    &.false{
+        display: flex;
+        gap: rem(10);
+        align-items: center;
+    }
+
     margin-bottom: rem(10);
 
     &__name{
@@ -13,11 +21,12 @@
         margin-bottom: rem(10);
         
         &--success{
-            color: var(--blue);
+            color: #80BB5B;
+            background: rgba(128, 187, 91, 0.1);
         }
 
         &--error{
-            background: #CE1E1E1A !important;
+            background: rgba(206, 30, 30, 0.1) !important; 
             color: var(--danger);
         }
     }

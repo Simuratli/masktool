@@ -12,7 +12,8 @@ function Select({ chose, values, deleteFunc, placeholder, data }: MultiplePropTy
     const ref = useRef<HTMLDivElement>(null)
 
     const toggle = useCallback(
-        () => {
+        (e) => {
+            e.stopPropagation()
             setToggleElements((prev) => !prev)
         },
         [],
@@ -33,11 +34,11 @@ function Select({ chose, values, deleteFunc, placeholder, data }: MultiplePropTy
 
     return (
         <div className='multiple__select' ref={ref}>
-            <SelectHeader IconClick={toggle} iconProp={toggleElements}>
-                {values.length === 0 ? <span onClick={()=>{setToggleElements((prev)=>!prev)}}>{ placeholder }</span> : values.map((item: string, index: number) => {
+            <SelectHeader onClick={(e:any)=>{e.stopPropagation(); setToggleElements((prev)=>!prev)}} iconProp={toggleElements}>
+                {values.length === 0 ? <span onClick={(e)=>{e.stopPropagation(); setToggleElements((prev)=>!prev)}}>{ placeholder }</span> : values.map((item: string, index: number) => {
                     return <span key={index} className="multiple__select__main__badge">
-                        <span>{item}</span>
-                        <DeleteIcon deleteFunc={() => { deleteFunc(item) }} />
+                        <span  onClick={(e)=>{e.stopPropagation(); setToggleElements((prev)=>!prev)}}>{item}</span>
+                        <DeleteIcon deleteFunc={(e:any) => { e.stopPropagation(); deleteFunc(item) }} />
                     </span>
                 })}
             </SelectHeader>

@@ -7,6 +7,8 @@ export interface InputPropTypes {
     disabled?: boolean;
     max?: number;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value: string ;
+    value: string;
+    onBlurCapture?: any
+
 }
 

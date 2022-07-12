@@ -13,6 +13,8 @@ export interface DropdownHeaderPropsTypes {
     name: string;
     deleteOrMask?: boolean;
     selectData: string[];
+    records: boolean;
+    logicalName: string | undefined
 }
 
 
@@ -22,5 +24,8 @@ export interface MultitableContainerPropTypes {
     deleteOrMask?: boolean,
     mainName: string;
     searchName?: string;
-    etc:number
+    etc: number;
+    errorText?: string;
+    logicalName: string | undefined;
+    filter:string[]
 }

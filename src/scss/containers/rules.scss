@@ -18,13 +18,14 @@
 
     &__header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
         padding: rem(30) rem(30) rem(20) rem(30);
     }
 }
 
 .log-button {
-    padding: 11px 15px 12px;
+    padding: 11px 0 12px;
     border: 2px solid var(--blue);
     border-radius: 5px;
     font-size: 14px;
@@ -34,4 +35,7 @@
     line-height: 17px;
     text-align: center;
     color: #1A4F95;
+    width: 134px;
+    height: 41px;
+    font-family: 'Montserrat';
 }

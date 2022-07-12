@@ -25,31 +25,31 @@ function HowToUse() {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>address1_city</td>
+                            <td>Address 1: City</td>
                             <td>a default list of cities</td>
                         </tr>
                         <tr>
-                            <td>address1_country</td>
+                            <td>Address 1: Country/Region</td>
                             <td>a default list of the countries</td>
                         </tr>
                         <tr>
-                            <td>name, companyname</td>
+                            <td>Company Name</td>
                             <td>a default list of company names</td>
                         </tr>
                         <tr>
-                            <td>firstname</td>
+                            <td>First Name</td>
                             <td>a default list of first names</td>
                         </tr>
                         <tr>
-                            <td>lastname</td>
+                            <td>Last Name</td>
                             <td>a default list of last names</td>
                         </tr>
                         <tr>
-                            <td>address1_line1, address1_line2, address1_line3, address1_name</td>
+                            <td>Address 1: Street 1; Address 1: Street 2; Address 1: Street 3; Address 1: Name.</td>
                             <td>8 random letters</td>
                         </tr>
                         <tr>
-                            <td>emailaddress1</td>
+                            <td>Email</td>
                             <td>8 random letters before @, 3 random letters after @, and a random domain from the default list, like abcdefgh@ijk.domain</td>
                         </tr>
                     </tbody>

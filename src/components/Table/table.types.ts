@@ -10,7 +10,10 @@ export interface TableRowPropTypes {
     rowName?: string;
     mainName?: string;
     value?: string;
-    attributeTypeCode?: number
+    attributeTypeCode?: number;
+    parameter: string[];
+    requiredLevel?: number;
+    logicalName: string | undefined
 }
 
 export interface TablePropTypes {
@@ -18,7 +21,8 @@ export interface TablePropTypes {
     name?: string;
     searchName?: string;
     mainName?: string;
-    etc:number
+    etc: number;
+    logicalName: string | undefined
 }
 
 
@@ -35,5 +39,7 @@ export interface FilteredTableRowPropTypes {
     itemName: string;
     mainName?: string;
     attributeTypeCode?: number
-
+    parameter: string[];
+    logicalName: string | undefined
+    
 }

@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { SuccessIcon } from "./icons";
 import { DropdownHeaderPorpTypes } from '../Dropdown.types';
 import { ReducerType } from '../../../redux/reducers/reducer.types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProgressLoader from '../../ProgressLoader';
 import DropdownHeaderToggleIcon from './elements/DropdownHeaderToggleIcon';
-import { GetViewsByEntity } from '../../../api';
-import { setViewsByEntity, setAllViewsByEntity, setStableEntityByViews } from '../../../redux/actions';
-import { EntityByViewType } from '../../../redux/reducers/backend-reducers/entity-by-view/entity-by-view.types';
+import { setAllViewsByEntity, prepareEntitiesForDeleteItemsPutThemAll, setDefaultTasks } from '../../../redux/actions';
 import { addDeleteOrMaskViaHeader } from '../../../utils/ViewsByEntityUtils';
 import MultiProgress from './MultipleProgressBar'
-import { ToggleIcon } from './icons'
+import { returnInsideViews } from './DROPDOWN__UTILS'
 
-function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, progress, requestResult, totalRecords, successRecords }: DropdownHeaderPorpTypes) {
+function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, progress, requestResult, totalRecords, successRecords, errorText, logicalName, filter }: DropdownHeaderPorpTypes) {
     const dispatch = useDispatch();
 
     const [insideViews, setinsideViews] = useState<any>({
@@ -20,91 +17,84 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
     })
     const stepState = useSelector((state: ReducerType) => state.stepReducer);
     const requestProgressState = useSelector((state: ReducerType) => state.requestProgressReducer);
-    const progressState = useSelector((state: ReducerType) => state.progressReducer.number)
-
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer)
     const [progressNumber, setprogressNumber] = useState(0)
     const deleteEntitiesReducer = useSelector((state: ReducerType) => state.preParedDeleteEntites);
-
-
-
-
-
-    let fetchViewsByEntityFunction = async () => {
-        let viewsByEntity = await GetViewsByEntity(name, etc);
-        viewsByEntity.map((view: EntityByViewType) => {
-            view.maskOperation = deleteOrMask
-        })
-
-        console.log('burasit est', name)
-        // dispatch(setViewsByEntity({ name: name, data: viewsByEntity }))
-    }
-
-    useEffect(() => {
-        fetchViewsByEntityFunction();
-    }, [])
+    const defaultTaskState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks)
+    const modalState = useSelector((state: ReducerType) => state.modalReducer);
 
 
     useEffect(() => {
+
+        console.log(successRecords, totalRecords, progress, 'dasdasdasdasd succces')
         setprogressNumber(0)
-        if (progress === "START") {
-            setprogressNumber(0)
+        if (progress) {
+            setprogressNumber(1)
+        }
+
+        if (success !== null) {
+            setprogressNumber(100)
         }
 
         if (progress === "END") {
-            let stop: boolean = true
-            // let number: number = 0
-            // while (stop) {
-            //     if (number === 101) stop = false
-            //     setprogressNumber(number++)
-            // }
-            setprogressNumber((prev) => prev + (successRecords * 100 / totalRecords))
+            // setprogressNumber(1)
+            setprogressNumber((prev) => prev + (successRecords * 100 / totalRecords) - 10)
 
             if (success === false && totalRecords === successRecords) {
                 setprogressNumber(100)
+
             }
 
+
+            if (success !== null) {
+                setprogressNumber(100)
+            }
+
+
+
+            if (success === true) {
+                setprogressNumber(100)
+            }
         }
 
         return () => {
             setprogressNumber(0)
         }
-    }, [progress, successRecords, totalRecords, success,])
+    }, [progress, successRecords, totalRecords, success])
 
 
 
     useEffect(() => {
-        let data: any = []
-        deleteEntitiesReducer.delete.map((deletedItem) => {
-            if (deletedItem.entityName === name) {
-                viewsByEntityState.entities.map((view) => {
-                    if (view.name === name) {
-                        view.data.map((item) => {
-                            if (item.viewId === deletedItem.filterViewId) {
-                                if (stepState.step === "error") {
-                                    if (item.errorMessage === true) {
-                                        data.push(item)
-                                    }
-                                } else {
-                                    data.push(item)
-                                }
-                                setinsideViews((prev: any) => ({
-                                    ...prev,
-                                    data: data
-                                }))
 
-                                console.log(data, 'burasi view datasidier')
-                            }
-                        })
+
+
+        returnInsideViews(deleteEntitiesReducer.delete, viewsByEntityState.entities, logicalName ? logicalName : name, stepState.step).then((data) => {
+
+
+            let newData: any = []
+            filter && filter.map((item: any) => {
+                data.map((it) => {
+                    if (it.name === item) {
+                        newData.push(it)
                     }
                 })
-            }
+            })
+
+            setinsideViews((prev: any) => ({
+                ...prev,
+                data: newData
+            }))
         })
 
-    }, [deleteEntitiesReducer])
 
+        return () => {
+            setinsideViews((prev: any) => ({
+                ...prev,
+                data: []
+            }))
+        }
+    }, [deleteEntitiesReducer.delete, deleteEntitiesReducer.delete.length, filter, logicalName, name, stepState.step, viewsByEntityState])
 
-    console.log(insideViews, 'ABO VIEWS')
 
 
 
@@ -115,21 +105,66 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
 
 
     const scrollView = () => {
-        let element: HTMLElement | null = document.getElementById(name)
-        element && element.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+        // let element: HTMLElement | null = document.getElementById(name)
+        // element && element.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
     }
+
+    const setToggleButNotOnProgress = () => {
+
+        if (stepState.step !== 'progress') {
+            setToggle((prev: boolean) => !prev);
+            defaultTaskState.map((task) => {
+                if (task.entityName === name) {
+                    task.open = !task.open
+                }
+            })
+            dispatch(setDefaultTasks(defaultTaskState))
+        }
+    }
+
 
 
 
     return (
         <div id={name} onClick={scrollView} className={`dropdown__header ${!success}`}>
-            <h1 onClick={() => { setToggle((prev: boolean) => !prev); }}>
+            <h1 onClick={setToggleButNotOnProgress}>
                 <span>{name}</span>
             </h1>
-            <p onClick={(e) => { setToggle((prev: boolean) => !prev); window.scrollTo(0, 0) }}>
-                {stepState.step === "progress" && progressNumber !== 100 ? ((insideViews.data.length !== 0 ? insideViews.data.map((item: any) => (<MultiProgress progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress} errorMessage={item.errorMessage} name={item.name} />)) : <ProgressLoader bgcolor={`${!success ? '#80BB5B' : '#CE1E1E'}`} completed={progressNumber} />)) : <span>{actions}</span>}
+            <p onClick={(e) => { setToggleButNotOnProgress() }}>
+
+                {
+                    stepState.step === "error" && (insideViews.data.length !== 0 ? insideViews.data.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.name === v.name)) === i).map((item: any) => (<MultiProgress
+                        totalRecords={item.totalRecords}
+                        successRecords={item.successRecords}
+                        item={item}
+                        errorText={item.errorText}
+                        progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress}
+                        errorMessage={item.errorMessage}
+                        name={item.name} />)) : <span className="danger">{errorText}</span>)
+                }
+
+                {
+                    stepState.step === "rules" && <span>{actions}</span>
+                }
+
+                {
+                    stepState.step === "progress" && (insideViews.data.length !== 0
+                        ? insideViews.data.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.name === v.name)) === i).map((item: any) => (<MultiProgress
+                            item={item}
+                            totalRecords={item.totalRecords}
+                            successRecords={item.successRecords}
+                            errorText={item.errorText}
+                            progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress}
+                            errorMessage={item.errorMessage}
+                            name={item.name} />)) : (progressNumber !== 100 ? <ProgressLoader bgcolor={`${!success ? '#80BB5B' : '#CE1E1E'}`} completed={progressNumber} /> : (success ? <span className="danger">{errorText}</span> : <span>{actions}</span>)))
+                }
+
             </p>
-            <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggle} />
+            <div className="icon__container">
+                {
+                    stepState.step === 'rules' ? <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggleButNotOnProgress} /> : (insideViews.data.length === 0 && <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggleButNotOnProgress} />)
+                }
+            </div>
         </div>
     );
 }

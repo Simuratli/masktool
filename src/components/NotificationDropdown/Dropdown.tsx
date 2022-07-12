@@ -12,4 +12,4 @@ function Dropdown({ children, open }: DropdownPropTypes) {
     )
 }
 
-export default React.memo(Dropdown)
+export default Dropdown

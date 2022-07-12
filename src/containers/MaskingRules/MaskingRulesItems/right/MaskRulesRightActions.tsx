@@ -1,15 +1,16 @@
 /* eslint-disable react/style-prop-object */
 import { Button, Input } from '../../../../components'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ReducerType } from '../../../../redux/reducers/reducer.types';
-import { setCodeEditorValue, setCustomParameterRuleName, getCustomRules } from '../../../../redux/actions';
+import { setCodeEditorValue, setCustomParameterRuleName, getCustomRules, setCompareForSaveChanges, setCustomParameterCodeEditor } from '../../../../redux/actions';
 import { ValidateCustomRule, CreateCustomRule, GetCustomRules, UpdateCustomRule } from '../../../../api'
 
 function MaskRulesRightActions() {
     const dispatch = useDispatch();
     const customParametersState = useSelector((state: ReducerType) => state.customParametersReducer)
     const codeEditorState = useSelector((state: ReducerType) => state.codeEditorReducer.level)
+    const customRulesState = useSelector((state: ReducerType) => state.customRulesReducer)
     const [saveText, setsaveText] = useState('')
 
 
@@ -18,55 +19,71 @@ function MaskRulesRightActions() {
         dispatch(getCustomRules(customRules))
     }
 
-    const validate = async () => {
+  
+
+
+    const createCustomRULE = async () => {
+
+
         const validation = await ValidateCustomRule({
             attributeTypeCode: customParametersState.attributeTypeCode,
             template: customParametersState.template
         });
-        dispatch(setCodeEditorValue(validation.level))
-    }
 
-    const createCustomRULE = async () => {
-        const createdCustomRule = await CreateCustomRule({
-            name: customParametersState.name,
-            attributeTypeCode: customParametersState.attributeTypeCode,
-            template: customParametersState.template
-        });
-        if (createdCustomRule.level === "SUCCESS") {
-            fetchCustomRules()
-            setsaveText('Parameters were saved.')
+        if (validation.data) {
+            const createdCustomRule = await CreateCustomRule({
+                name: customParametersState.name,
+                attributeTypeCode: customParametersState.attributeTypeCode,
+                template: customParametersState.template
+            });
+
+            if (createdCustomRule.level === "SUCCESS") {
+                fetchCustomRules()
+                // setsaveText('Parameters were saved.')
+            }
+            dispatch(setCodeEditorValue(null))
+            dispatch(setCustomParameterRuleName(''))
+            dispatch(setCompareForSaveChanges(false))
+            dispatch(setCustomParameterCodeEditor(''));
+
+            dispatch(setCodeEditorValue(`${customParametersState.name} custom masking rule was saved`))
+
+            setTimeout(() => {
+                setsaveText('')
+                dispatch(setCodeEditorValue(null))
+            }, 2000);
+
+        } else {
+            dispatch(setCodeEditorValue(validation.level))
         }
-        setTimeout(() => {
-            setsaveText('')
-        }, 1000);
-        dispatch(setCodeEditorValue(null))
+
+
+
     }
 
 
-    const updateCustomRule = async () => {
-        const updateCustomRule = await UpdateCustomRule({
-            name: customParametersState.name,
-            id: customParametersState.id,
-            attributeTypeCode: customParametersState.attributeTypeCode,
-            template: customParametersState.template,
-            duplicateToGeneral: customParametersState.duplicateToGeneral
-        });
-        dispatch(setCodeEditorValue(null))
+
+    const onChangeCreateName = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setCustomParameterRuleName(e.target.value))
+        
     }
 
-    let inputSaveasnewButtonDisable = customParametersState.template ? (codeEditorState === "SUCCESS" || !customParametersState.saveChangesDisabled ? false : true) : true
 
+    let inputSaveasnewButtonDisable = customParametersState.template ? (customParametersState.template.trim() ? false : true) : true
+    let saveasnewDisableButton = customParametersState.name ? (customRulesState.names.some((item) => item === customParametersState.name) ? true : false) : true
+    let savechangesButtonDisabled = customParametersState.id ? (!saveasnewDisableButton ? true : (codeEditorState?.includes('custom masking rule was saved') ? !customParametersState.saveChangesDisabled : true)) : true
     return (
         <div className="masking__rules__right__actions">
-            <Button disabled={!customParametersState.template ? true : (codeEditorState === "SUCCESS" ? true : !customParametersState.saveChangesDisabled)} onClick={validate} type='outlined' size='small' text="Validate" />
+            {/* <Button disabled={!customParametersState.template ? true : (codeEditorState?.includes('SUCCESS') ? true : !customParametersState.saveChangesDisabled)} onClick={validate} type='outlined' size='small' text="Validate" /> */}
 
             <div className="masking__rules__right__actions__input">
-                <Input onChange={(e) => { dispatch(setCustomParameterRuleName(e.target.value)) }} value={customParametersState.name} disabled={inputSaveasnewButtonDisable} className="together" type='text' placeholder='Create name' name='name' />
-                <Button onClick={createCustomRULE} disabled={inputSaveasnewButtonDisable} type="together" size='small' text="Save As New" />
-                <span className="masking__rule__save_button_text">{saveText}</span>
+                <Input onChange={onChangeCreateName} value={customParametersState.name} disabled={inputSaveasnewButtonDisable} className="together" type='text' placeholder='Create name' name='name' />
+                <Button onClick={createCustomRULE} disabled={saveasnewDisableButton} type="together" size='small' text={customParametersState.id ? "Save as new" : "Save"} />
+                {/* <span style={{ color: saveText.includes("is exist") ? "#CE1E1E" : '#80BB5B' }} className="masking__rule__save_button_text">{saveText}</span> */}
             </div>
 
-            <Button onClick={updateCustomRule} disabled={customParametersState.id ? (codeEditorState === "SUCCESS" ? !customParametersState.saveChangesDisabled : true) : true} size='small' text="Save Changes" />
+            {/* {customParametersState.id && <Button onClick={updateCustomRuleFunc} disabled={savechangesButtonDisabled} size='small' text="Save Changes" />} */}
+
         </div>
     )
 }

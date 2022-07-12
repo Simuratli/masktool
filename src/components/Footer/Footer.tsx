@@ -12,7 +12,7 @@ function Footer() {
                 <a href="mailto: portal@uds.systems" className="mail">
                     <Mail /> <span>portal@uds.systems</span>
                 </a>
-                <a href="skype:uds.systems?chat" className="mail">
+                <a href="skype:live:uds_ddt" className="mail">
                     <Skype /> <span>uds.systems</span>
                 </a>
             </div>

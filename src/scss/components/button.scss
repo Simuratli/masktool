@@ -28,8 +28,10 @@
         height: rem(32);
         display: grid;
         place-content: center;
-        min-width: rem(116);
-        padding: rem(7) rem(7) rem(8) rem(7);
+        // min-width: rem(116);
+        height: rem(40);
+        padding: 0;
+        padding: rem(11) rem(12) rem(12) rem(12);
         filter: none;
     }
 
@@ -41,6 +43,14 @@
         &:hover{
             box-shadow: none;
         }
+
+        &:disabled{
+            box-shadow: none;
+        }
+    }
+
+    &.entity_add{
+        padding: 0 !important;
     }
 
     &.gold{
@@ -94,4 +104,14 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
     }
+}
+
+.settings{
+    padding: 0;
+    width: 134px;
+}
+
+.run{
+    width: rem(120);
+    height: rem(40);
 }

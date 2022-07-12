@@ -1,5 +1,6 @@
 import { PREPARE_ENTITES_FOR_DELETE, PREPARE_ENTITES_FOR_DELETE_PULL, PREPARE_ENTITES_FOR_DELETE_ALL } from '../../../constants/backend-constants/prepare-entities-for-delete';
 import { PreparedDeleteEntitesStateTypes } from './prepare-delete.types'
+import { REFRESH } from '../../../constants/refresh'
 
 const initialState: PreparedDeleteEntitesStateTypes = {
     delete: [],
@@ -25,6 +26,13 @@ export const preParedDeleteEntites = (state = initialState, action: any) => {
             return {
                 ...state,
                 delete: state.delete.filter((item: any) => item.filterViewId !== action.payload)
+            }
+        case REFRESH:
+            arr = []
+            arrIndex = {};
+            return {
+                ...state,
+                delete: []
             }
         case PREPARE_ENTITES_FOR_DELETE_ALL:
             return {

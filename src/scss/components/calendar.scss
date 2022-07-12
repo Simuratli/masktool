@@ -20,6 +20,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            cursor: pointer;
             padding: rem(5) rem(15) rem(5) rem(12);
         }
 
@@ -56,6 +57,7 @@
             height: rem(32);
             display: grid;
             place-content: center;
+            cursor: text !important;
 
             input {
                 text-align: left;
@@ -64,6 +66,7 @@
                 font-size: rem(14);
                 line-height: 140%;
                 color: var(--blue);
+                cursor: text !important;
             }
         }
     }

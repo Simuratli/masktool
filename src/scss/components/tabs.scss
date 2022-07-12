@@ -1,4 +1,4 @@
-.tabs_header{
+.tabs_header {
     display: flex;
     width: 100%;
     height: 69px;
@@ -8,18 +8,44 @@
     margin-bottom: rem(60);
 }
 
-.tab_item{
+
+.small {
+
+    &.tabs_header{
+        height: 52px;
+    }
+
+    .tab_item {
+        padding: rem(16) rem(20);
+        font-weight: normal;
+        font-family: 'Segoe UI';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        color: #696D8C;
+    }
+}
+
+.tab_item {
     padding: rem(23) rem(40);
     background: #FDFDFE;
     box-shadow: inset 10px 0px 29.6px rgba(161, 173, 206, 0.1221);
     cursor: pointer;
+    font-style: normal;
+    font-size: 18px;
+    line-height: 130%;
+    letter-spacing: 0.01em;
     color: #696D8C;
-    &.active{
+    font-weight: bold;
+
+    &.active {
         box-shadow: none;
         color: var(--blue);
     }
 }
 
-.tab_item_first,.tab_item_last{
+.tab_item_first,
+.tab_item_last {
     border-radius: 5px 5px 0px 0px;
 }

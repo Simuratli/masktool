@@ -2,7 +2,7 @@ import React from "react";
 
 export interface SelectHeaderTypes {
     children?: React.ReactNode;
-    onClick?: () => void;
+    onClick?: (e?:any) => void;
     iconProp: Boolean;
-    IconClick?: () => void;
+    IconClick?: (e?:any) => void;
 }

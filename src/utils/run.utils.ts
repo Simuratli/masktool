@@ -34,10 +34,10 @@ export const changeRequstJson = async (OBJECT: DefaultTasksTypes) => {
 
 export const prepareForDelete = (array: DefaultTasksTypes[]) => {
     let newArray: any = [];
-
     array.map(async (item) => {
         if (item.maskOperation) {
-            let newFields = await prepareFieldsDorDelete(item.fields)
+            let newFields = await prepareFieldsDorDelete(item.fields.filter((it:any) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7))
+
             newArray.push({
                 entityName: item.entityName,
                 fields: newFields,
@@ -58,49 +58,27 @@ export const prepareForDelete = (array: DefaultTasksTypes[]) => {
 
 
 export const prepareIndividualForDelete = async (data: DefaultTasksTypes) => {
-    let newFields = await prepareFieldsDorDelete(data.fields)
+    let newFields = await prepareFieldsDorDelete(data.fields.filter((it:any) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7))
+
     if (data.maskOperation) {
         return {
-            entityName: data.entityName,
+            entityName: data.logicalName ? data.logicalName : data.entityName,
             fields: newFields,
             filterViewId: data.filterViewId,
             maskOperation: data.maskOperation
         }
     } else {
         return {
-            entityName: data.entityName,
+            entityName: data.logicalName ? data.logicalName : data.entityName,
             maskOperation: data.maskOperation
         }
     }
-}
-
-let returnedItem: any
-
-export const prepareIndividualEntityForDelete = async (array: PreparedDeleteEntitesPayloadTypes[], name: string) => {
-
-
-    let loop = true;
-    let number = 0
-    let data
-
-    while (loop) {
-        if (name === array[number].entityName) {
-            let requestSecond = await CreateTask(array[number]);
-        }
-        number++;
-        if (array.length === number) break;
-
-    }
-
-    return data
 }
 
 
 
 export const prepareCells = async (array: EntityByViewCellsType[]) => {
     let newCells: any = []
-
-
     array.map((item) => {
         newCells.push({
             attributeTypeCode: item.attributeTypeCode,
@@ -115,9 +93,7 @@ export const prepareCells = async (array: EntityByViewCellsType[]) => {
 }
 
 
-
 export const updateCellItems = async (newData: any, deleteEntitiesReducer: any) => {
-
 
     newData.data.map(async (item: any) => {
         deleteEntitiesReducer.map(async (deleteRed: any) => {
@@ -132,7 +108,6 @@ export const updateCellItems = async (newData: any, deleteEntitiesReducer: any) 
             }
         })
     })
-
 
 
     return deleteEntitiesReducer

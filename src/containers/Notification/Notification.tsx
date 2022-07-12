@@ -9,15 +9,24 @@ import { ReducerType } from '../../redux/reducers/reducer.types'
 function Notification() {
 
     const dispatch = useDispatch()
-    const notificationState = useSelector((state: ReducerType) => state.notificationReducer.agree)
+    const notificationState = useSelector((state: ReducerType) => state.notificationReducer)
 
 
     const agreeWithNotification = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             dispatch(setNotificationAllowance(e.target.checked))
         },
-        [],
+        [dispatch],
     )
+
+    const onClickAgreeButton = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        dispatch(setAproveNotificationAgreement(true));
+        dispatch(setStep('rules'))
+    }
 
 
     return (
@@ -41,19 +50,17 @@ function Notification() {
                 })
             }
 
-
             <div className='notification__agreement'>
                 <Checkbox
                     onChange={agreeWithNotification}
-                    checked={notificationState}
+                    checked={notificationState.agree}
+                    disabled={notificationState.approveAgreement}
                     text={"I have read all the warnings"}
                 />
                 <Button
-                    disabled={!notificationState}
-                    onClick={() => {
-                        dispatch(setAproveNotificationAgreement(true));
-                        dispatch(setStep('rules'))
-                    }}
+                    type='normal__modal'
+                    disabled={!notificationState.agree && !notificationState.approveAgreement}
+                    onClick={onClickAgreeButton}
                     text="I agree"
                 />
             </div>

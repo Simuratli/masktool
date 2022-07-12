@@ -23,7 +23,10 @@ export interface EntityByViewType {
     name: string;
     viewId: string;
     maskOperation?: boolean;
-    errorMessage?: boolean | null
+    errorMessage?: boolean | null;
+    errortext?: string;
+    totalRecords?:any;
+    successRecords?:any
 }
 
 export interface EntityByViewActionsTypes {

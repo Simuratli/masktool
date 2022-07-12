@@ -5,6 +5,7 @@ export interface DefaultTasksFieldsTypes {
     displayName?: string;
     value?: string;
     attributeTypeCode?: number,
+    requiredLevel:number
 
 }
 
@@ -28,6 +29,9 @@ export interface DefaultTasksTypes {
     errorMessage: boolean | null;
     logicalName?:string;
     displayName?:string;
+    errortext?:string;
+    records:boolean;
+    open:boolean
 
 }
 

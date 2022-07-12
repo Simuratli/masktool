@@ -1,5 +1,6 @@
 import { CURRENT_REQUEST, OLD_REQUEST } from '../../../constants/backend-constants/request-progress';
 import { requestProgressStateTypes } from './requestProgress.types';
+import { REFRESH } from '../../../constants/refresh'
 
 const initialState: requestProgressStateTypes = {
     current: null,
@@ -12,6 +13,11 @@ export const requestProgressReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 current: action.payload
+            }
+        case REFRESH:
+            return {
+                current: null,
+                oldRequests: []
             }
         case OLD_REQUEST:
             return {

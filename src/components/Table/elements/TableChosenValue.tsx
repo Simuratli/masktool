@@ -1,22 +1,22 @@
 import React from 'react'
 
 function TableChosenValue({ rule, value }: any) {
-    if (rule === "RandomLetter" || rule === "RandomLetters" || rule === 14 || rule === "MultiLine" || rule === 7) {
+    if (rule === "Random letter" || rule === "Random letters" || rule === 14 || rule === "Multi line" || rule === 7) {
         return (
             <div className="table__cell__chosen">{value ? `${value} symbols` : `0 symbol`} </div>
         )
     }
-    else if (rule === "ClearValue") {
+    else if (rule === "Clear value") {
         return (
             <div className="table__cell__chosen">Clear value</div>
         )
     }
-    else if (rule === "RandomDate" || rule === 2) {
+    else if (rule === "Random date" || rule === 2) {
         return (
             <div className="table__cell__chosen">{value}</div>
         )
     }
-    else if (rule === "RandomLine" || rule === 7 || rule === "CustomRule") {
+    else if (rule === "List" || rule === 7 || rule === "Custom rule") {
         return (
             <div className="table__cell__chosen">{value}</div>
         )
@@ -33,4 +33,4 @@ function TableChosenValue({ rule, value }: any) {
     }
 }
 
-export default React.memo(TableChosenValue)
+export default TableChosenValue

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Header } from '../../components'
 import { MaskingRulesLeft, MaskingRulesRight } from './MaskingRulesItems'
 
 function MaskingRules() {

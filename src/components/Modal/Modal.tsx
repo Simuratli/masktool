@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setToggleModal, setModalToggleActions, setModalAddEntity, setModalAddField } from '../../redux/actions';
+import { setToggleModal, setModalToggleActions, setModalAddEntity, setModalAddField, setModalDeleted, setModaleActionsAllow } from '../../redux/actions';
 import { ModapPropTypes } from './modal.types';
 import { CloseIcon } from './icons';
 
@@ -11,7 +11,8 @@ function Modal({ children }: ModapPropTypes) {
     dispatch(setModalToggleActions(false))
     dispatch(setModalAddEntity(false))
     dispatch(setModalAddField(false))
-
+    dispatch(setModalDeleted(false))
+    dispatch(setModaleActionsAllow(false))
   }
 
   const dispatch = useDispatch()

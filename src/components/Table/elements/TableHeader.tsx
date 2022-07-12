@@ -36,7 +36,7 @@ function TableHeader({ name, searchName, mainName, etc }: TableHeaderPropTypes) 
                 </TableCell>
                 <TableCell>Masking rule</TableCell>
                 <TableCell>Parameter rule</TableCell>
-                <TableCell>no masking</TableCell>
+                {/* <TableCell>no masking</TableCell> */}
                 <TableCell>chosen data</TableCell>
             </div>
             <div className="table__header__shadow"></div>

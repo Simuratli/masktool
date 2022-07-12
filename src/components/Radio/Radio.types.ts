@@ -5,7 +5,8 @@ export interface RadioPropTypes {
     onChange: (e:React.ChangeEvent<HTMLInputElement>) => void;
     label?: string;
     color: string;
-    name:string
+    name:string;
+    className?:string
 }
 
 export interface RadioCheckedPropTypes {

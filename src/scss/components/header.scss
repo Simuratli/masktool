@@ -2,7 +2,6 @@
   font-family: var(--font-sogoe);
   font-style: normal;
   font-weight: 600;
-  line-height: 120%;
   background: -webkit-linear-gradient(#618fd0, #0d3b7c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -12,7 +11,7 @@
   }
 
 
-  &.modal__header{
+  &.modal__header {
     font-style: normal;
     font-weight: 600;
     font-size: rem(20);
@@ -20,8 +19,28 @@
     letter-spacing: 0.01em;
     color: var(--blue);
     background: -webkit-linear-gradient(#0d3b7c, #0d3b7c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
+}
+
+
+.nonentities {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  width: 100%;
+
+  .header {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 130%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #1A4F95;
+  }
 }

@@ -11,11 +11,12 @@ interface RandomLinePropTypes {
     rowName: string | undefined;
     itemName: string;
     mainName: string | undefined;
-    attributeTypeCode?: number
+    attributeTypeCode?: number;
+    logicalName:string | undefined;
 }
 
 
-function CustomRule({ searchName, rowName, itemName, mainName, attributeTypeCode }: RandomLinePropTypes) {
+function CustomRule({ searchName, rowName, itemName, mainName, attributeTypeCode,logicalName }: RandomLinePropTypes) {
     const dispatch = useDispatch();
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer);
@@ -37,7 +38,7 @@ function CustomRule({ searchName, rowName, itemName, mainName, attributeTypeCode
         customRulesState.rules.map(async (rule) => {
             if (rule.name === e) {
                 if (e) {
-                    let newData: any = addValueForCell(searchName, defaultTasksState.tasks, rowName, itemName, e, viewsByEntityState.entities, mainName, 'customrule', rule.id)
+                    let newData: any = addValueForCell(searchName, defaultTasksState.tasks, rowName, itemName, e, viewsByEntityState.entities,  logicalName ? logicalName : mainName, 'customrule', rule.id)
                     switch (newData.for) {
                         case 'tasks':
                             dispatch(setDefaultTasks(newData.data));

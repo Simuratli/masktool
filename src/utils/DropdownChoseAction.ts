@@ -4,7 +4,7 @@ let initialValues = {
     records: true,
 }
 
-export const choseActionForRecords = (name: string) => {
+export const choseActionForRecords = async (name: string) => {
     switch (name) {
         case "all":
             initialValues = {
@@ -24,26 +24,3 @@ export const choseActionForRecords = (name: string) => {
 
 }
 
-export const choseDeleteOrMask = async (array: DefaultTasksTypes[], name: string, actionName: string) => {
-    switch (actionName) {
-        case "masking":
-            return array.map((task: DefaultTasksTypes) => {
-                if (task.entityName === name) {
-                    task.maskOperation = false
-                    task.text = "Delete"
-                }
-                return task
-            })
-        case "delete":
-            return array.map((task: DefaultTasksTypes) => {
-                if (task.entityName === name) {
-                    task.maskOperation = true
-                    task.text = `All Records ${task.fields.length} fields are masked`
-                }
-                return task
-            })
-        default:
-            return array;
-    }
-
-}

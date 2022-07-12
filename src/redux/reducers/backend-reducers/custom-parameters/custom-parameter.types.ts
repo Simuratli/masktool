@@ -4,7 +4,8 @@ export interface CustomParametersStateTypes {
     attributeTypeCode: number,
     template?: string,
     duplicateToGeneral?: boolean,
-    saveChangesDisabled?:boolean
+    saveChangesDisabled?: boolean,
+    notChangableName?: string
 }
 
 export interface CustomParametersActionTypes {

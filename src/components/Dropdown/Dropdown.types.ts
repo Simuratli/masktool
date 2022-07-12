@@ -5,19 +5,23 @@ export interface DropdownContentPorpTypes {
     fields: DefaultTasksFieldsTypes[];
     name: string;
     deleteOrMask?: boolean;
-    etc:number,
-    filter:string[]
+    etc: number,
+    filter: string[];
+    errorText?: string;
+    records: boolean;
+    logicalName: string | undefined
 };
 
 
 export interface DropdownHeaderToggleIconPropTypes {
-    setToggle: React.Dispatch<React.SetStateAction<boolean>>;
+    setToggle: () => void;
     name: string,
     requestResult: boolean | null | undefined
 };
 
 export interface DropdownSuccessIcon {
     success: boolean | null;
+    noDrop?: boolean
 };
 
 
@@ -30,8 +34,11 @@ export interface DropdownHeaderPorpTypes {
     deleteOrMask?: boolean;
     progress: string | undefined,
     requestResult: boolean | null | undefined;
-    totalRecords:number,
-    successRecords:number
+    totalRecords: number,
+    successRecords: number;
+    errorText?: string | undefined;
+    logicalName: string | undefined;
+    filter: any
 };
 
 
@@ -44,7 +51,11 @@ export interface DropdownPorpTypes {
     deleteOrMask?: boolean;
     progress: string | undefined,
     requestResult: boolean | null | undefined;
-    filter:string[];
+    filter: string[];
     totalRecords: number;
-    successRecords:number
+    successRecords: number;
+    errorText?: string | undefined;
+    records: boolean;
+    logicalName: string | undefined;
+    open: boolean
 };

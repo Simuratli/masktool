@@ -1,4 +1,5 @@
 import { GET_CUSTOM_RULES } from '../../../constants/backend-constants/custom-rules';
+import { REFRESH } from '../../../constants/refresh'
 import { CustomRulesStateTypes, CustomRulesActionTypes } from './custom-rules.types';
 
 const initialState: CustomRulesStateTypes = {
@@ -31,20 +32,26 @@ export const customRulesReducer = (state = initialState, action: CustomRulesActi
                 ...state,
                 rules: action.payload,
                 names: names,
-                categorized:[
+                categorized: [
                     {
-                        name:"Line",
-                        data:line
+                        name: "Line",
+                        data: line.reverse()
                     },
                     {
-                        name:"Multi line",
-                        data:multiline
+                        name: "Multi line",
+                        data: multiline.reverse()
                     },
                     {
-                        name:"Date Type",
-                        data:dateType
+                        name: "Date Type",
+                        data: dateType.reverse()
                     },
                 ]
+            }
+        case REFRESH:
+            return {
+                rules: [],
+                names: [],
+                categorized: []
             }
         default:
             return { ...state }

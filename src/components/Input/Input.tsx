@@ -3,7 +3,7 @@ import { SearchIcon } from './icons'
 
 import { InputPropTypes } from './input.types';
 
-function Input({ type, name, placeholder, className, disabled, max, onChange, value }: InputPropTypes) {
+function Input({ type, name, placeholder, className, disabled, max, onChange, value, onBlurCapture }: InputPropTypes) {
 
     return (
         <div>
@@ -12,7 +12,7 @@ function Input({ type, name, placeholder, className, disabled, max, onChange, va
                     <SearchIcon />
                 </button>
             }
-            <input value={value.slice(0, 8)} onChange={onChange} inputMode={type === "number" ? 'numeric' : "text"} disabled={disabled} className={`input ${className}`} placeholder={placeholder} type={type} name={name} />
+            <input onBlurCapture={onBlurCapture} value={max ? value.slice(0, max) : value} onChange={onChange} inputMode={type === "number" ? 'numeric' : "text"} disabled={disabled} className={`input ${className}`} placeholder={placeholder} type={type} name={name} />
         </div>
     )
 }

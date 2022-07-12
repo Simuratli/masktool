@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface DownPropTypes {
-    deleteFunc: () => void;
+    deleteFunc: (e?:any) => void;
 }
 
 function Delete({ deleteFunc }: DownPropTypes) {

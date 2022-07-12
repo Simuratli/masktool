@@ -2,14 +2,14 @@ import React from 'react'
 import CheckedIcon from './icons/Checked'
 import { RadioPropTypes } from './Radio.types'
 
-function Radio({ checked, onChange, label, color, name }: RadioPropTypes) {
+function Radio({ checked, onChange, label, color, name, className }: RadioPropTypes) {
 
     return (
-        <div className="radio__container">
+        <div className={`radio__container ${className}`}>
             <div className="radio">
-                <input name={name} onChange={onChange} id="radio-1" type="radio" checked={checked} />
+                <input id={name} name={name} onChange={onChange}  type="radio" checked={checked} />
                 <CheckedIcon checked={checked} color={color === "blue" ? "#1A4F95" : "#80BB5B"} />
-                <span className="radio__text">{label}</span>
+                <label htmlFor={name} className="radio__text">{label}</label>
             </div>
         </div>
     )

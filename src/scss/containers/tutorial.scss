@@ -44,8 +44,10 @@
     margin: rem(40) 0;
 
     img{
-      width: 674px;
-      height: 578px;
+      width: 493px;
+      height: 538px;
+      object-fit: cover;
+      object-position: top;
       background: #FFFFFF;
       border: 7px solid #F9FAFF;
       border-radius: 5px;

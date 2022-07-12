@@ -13,7 +13,7 @@ function CalendarM({ onChange, date }: any) {
                 onChange={onChange}
                 moveRangeOnFirstSelection={false}
                 ranges={date}
-                dateDisplayFormat="dd/MM/yyyy"
+                dateDisplayFormat="MM/dd/yyyy"
                 color="#1A4F95"
                 // minDate={new Date()}
                 rangeColors={["#1A4F95"]}

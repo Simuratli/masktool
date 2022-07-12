@@ -2,7 +2,7 @@
 
 .main__container {
     padding: rem(30) rem(30) rem(50) rem(30);
-    min-width: rem(1440);
+    min-width: rem(1200);
 }
 
 .flex {
@@ -17,6 +17,31 @@
     color: var(--danger);
 }
 
+.danger-bg {
+    // background-color: var(--danger) !important;
+    .complated{
+        background-color: var(--danger) !important;
+    }
+}
+
 .click {
     cursor: pointer;
+}
+
+.container_for_multiprogres{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    left: -15px;
+    padding-right: 51px;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.modal__actions__container{
+    width: rem(250);
+    text-align: end;
+    padding-right: rem(5);
 }

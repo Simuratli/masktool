@@ -9,7 +9,7 @@ const ProgressBar = ({ bgcolor, completed }: ProgressBarPropTypes) => {
 
     const containerStyles = {
         height: 8,
-        width: 838,
+        width: 750,
         backgroundColor: "#e0e0de",
         borderRadius: 50,
     }

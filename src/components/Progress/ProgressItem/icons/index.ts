@@ -4,6 +4,7 @@ import Run from './run';
 import Settings from './settings';
 import Success from './success';
 import Info from './info';
+import Error from './error';
 
 export {
     Pause,
@@ -11,5 +12,6 @@ export {
     Run,
     Settings,
     Success,
-    Info
+    Info,
+    Error
 }

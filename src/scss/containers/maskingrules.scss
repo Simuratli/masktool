@@ -18,7 +18,7 @@
         top: 0px;
         border-radius: rem(8);
 
-       
+
 
         .note {
             font-weight: 400;
@@ -44,7 +44,7 @@
         border-radius: rem(8);
 
 
-        &__actionbox{
+        &__actionbox {
             position: relative;
         }
 
@@ -60,15 +60,32 @@
             justify-content: space-between;
             width: rem(522);
             margin-top: rem(10);
+            justify-content: flex-end;
 
             &__input {
                 display: flex;
                 position: relative;
+                gap: rem(10);
+                
+
+                button{
+                    padding: 11px 43px !important;
+                    height: 40px !important;
+                    border-radius: 5px !important;
+                }
+
+                input {
+                    height: rem(40) !important;
+                    background: #FFFFFF !important;
+                    border-radius: 6px !important;
+                    width: 234px !important;
+                }
+
+
             }
 
-            .input {
-                width: rem(140);
-            }
+            
+            
         }
 
         &__selectitems {
@@ -214,34 +231,13 @@
     color: var(--tutorial-text-color);
 }
 
-.masking__rule__save_button_text{
+.masking__rule__save_button_text {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
     color: #80BB5B;
-    left: rem(7);
-    top: rem(34);
+    left: rem(13);
+    top: rem(39);
     position: absolute;
-}
-
-
-.code__editor__text{
-    font-family: 'Segoe UI';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 17px;
-    position: absolute;
-    left: 0;
-    bottom:rem(240);
-    left: rem(10);
-
-    &.ERROR{
-        color: var(--danger);
-    }
-
-    &.SUCCESS{
-        color: #80BB5B;
-    }
 }

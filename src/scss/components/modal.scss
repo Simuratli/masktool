@@ -66,38 +66,50 @@
         display: flex;
         gap: rem(5);
         justify-content: center;
-        svg{
+
+        svg {
             position: relative;
             top: rem(2);
         }
     }
 
-    &__info__icon{
+    &__info__icon {
         text-align: center;
         margin-bottom: rem(30);
     }
 }
 
 
-.modal__for__run__content{
+.modal__for__run__content {
     margin-top: rem(30);
     padding-bottom: rem(15);
     margin-bottom: rem(15);
+    overflow: scroll hidden;
 
-    .modal__for__run__item{
-        margin: rem(10) 0;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 130%;
-        color: var(--tutorial-text-color);
+    .modal__for__run__item {
+        padding: 10px;
+        padding-right: 0;
+        text-transform: capitalize;
+        width: 421px;
+        background: #F9FAFF;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 5px 0;
+
+        span {
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 130%;
+            color: #1E2432;
+        }
+
     }
 }
 
-.modal__scroll__container{
+.modal__scroll__container {
     display: flex;
     flex-direction: column;
     gap: rem(10);
@@ -105,9 +117,50 @@
     overflow: hidden scroll;
     padding: 10px 0;
     height: rem(171);
+    margin-top: 0;
+    padding-right: rem(10);
 }
 
-.modal__checkbox{
+.modal__checkbox {
     padding: 14px;
     background-color: var(--select-background-color);
+}
+
+.modal__search__container {
+    padding: 10px;
+    width: 100%;
+    background: #E8EBFE;
+    border-radius: 5px;
+    position: relative;
+    margin-top: rem(30);
+    margin-bottom: rem(10);
+
+    input {
+        padding: rem(12);
+        width: 100%;
+        padding-left: 30px;
+        border: 1px solid #696D8C;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    svg {
+        position: absolute;
+        top: 26px;
+        left: 20px;
+    }
+}
+
+.deleteConfirmText {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+
+    /* t/p */
+
+    color: #1E2432;
+
 }

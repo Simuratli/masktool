@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { Dropdown } from '../../components';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReducerType } from '../../redux/reducers/reducer.types';
-import { setModalToggleActions, setStep, setCurrentRequest, setProgressAdd, setDefaultTasks, setViewsByEntity } from '../../redux/actions';
-import { ClearTasks, GetTasksStatus, CreateTask, GetViewsByEntity } from '../../api'
+import { setViewsByEntity } from '../../redux/actions';
+import { GetViewsByEntity } from '../../api'
 import { RulesHeader, RulesFooter } from './RulesElements'
 import Box from '../Box';
 import { getPaginatedData } from '../../utils/pagiantionUtil';
@@ -12,18 +12,18 @@ import RulesModalForDelete from './RulesModalForDelete'
 import RulesModalForRun from './RulesModalForRun'
 import RulesModalForAddEntity from './RulesElements/RulesModalForAddEntity'
 import TableModalForFields from '../../components/Table/elements/TableModalForFields'
-import { prepareIndividualForDelete } from '../../utils/run.utils'
-let number = 0
-let numberforSuccess = 0
+import NonEntites from '../../components/NonEntites'
+
 function Rules() {
     const dispatch = useDispatch();
     const modalState = useSelector((state: ReducerType) => state.modalReducer);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer);
     const paginationState = useSelector((state: ReducerType) => state.paginationReducer);
     const paginatedData = useSelector((state: ReducerType) => state.paginatedTasksdReducer);
-    // const calculation = useMemo(() => getPaginatedData(defaultTasksState.tasks, paginationState.current, paginationState.range), [defaultTasksState, paginationState]);
     const erroredState = useSelector((state: ReducerType) => state.erroredTaskReducer);
     const stepState = useSelector((state: ReducerType) => state.stepReducer);
+    const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer)
+    const loading = useSelector((state: ReducerType) => state.loaderReducer.loading)
 
     useEffect(() => {
         const calculation = getPaginatedData(defaultTasksState.tasks, paginationState.current, paginationState.range)
@@ -32,15 +32,31 @@ function Rules() {
 
 
     useEffect(() => {
-        console.log("salammmmmmmmm")
         paginatedData.paginated.map(async (item) => {
-            console.log(item, 'salmmm')
-            let viewsByEntity = await GetViewsByEntity(item.logicalName ? item.logicalName : item.entityName, item.etc);
-            console.log(viewsByEntity, 'viewsByEntity')
-            dispatch(setViewsByEntity({ name: item.entityName, data: viewsByEntity }))
-        })
-    }, [paginatedData.paginated.length])
 
+
+
+            if (viewsByEntityState.entities.some((value) => value.name === item.entityName || value.name === item.logicalName) === false) {
+
+                let viewsByEntity = await GetViewsByEntity(item.logicalName ? item.logicalName : item.entityName, item.etc);
+
+                viewsByEntity.map((view: any) => {
+                    view.maskOperation = item.maskOperation
+                    view.cells.map((v: any) => {
+                        item.fields.map((x) => {
+                            if (x.logicalName === v.logicalName) {
+                                v.requiredLevel = x.requiredLevel
+                            }
+                        })
+                    })
+                })
+
+
+                dispatch(setViewsByEntity({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
+
+            }
+        })
+    }, [dispatch, paginatedData.paginated, paginatedData.paginated.length])
 
     return (
         <div className='rules'>
@@ -56,10 +72,14 @@ function Rules() {
                             etc={task.etc}
                             fields={task.fields}
                             deleteOrMask={task.maskOperation}
-                            actions={task.text}
+                            actions={task.text ? task.text : 'Delete'}
                             filter={task.filter}
                             totalRecords={task.totalRecords}
                             successRecords={task.successRecords}
+                            errorText={task.errortext}
+                            records={task.records}
+                            logicalName={task.logicalName}
+                            open={task.open}
                         />
                     }) : paginatedData.paginated.map((task) => {
                         return <Dropdown
@@ -70,18 +90,25 @@ function Rules() {
                             etc={task.etc}
                             fields={task.fields}
                             deleteOrMask={task.maskOperation}
-                            actions={task.text}
+                            actions={task.text ? task.text : 'Delete'}
                             filter={task.filter}
                             totalRecords={task.totalRecords}
                             successRecords={task.successRecords}
+                            errorText={task.errortext}
+                            records={task.records}
+                            logicalName={task.logicalName}
+                            open={task.open}
                         />
                     }))
+                }
+
+                {
+                    !loading && paginatedData.paginated.length === 0 && <NonEntites />
                 }
                 <RulesFooter />
             </Box>
 
             {modalState.open && <RulesModalForDelete />}
-
             {modalState.runActionOpen && <RulesModalForRun />}
             {modalState.addEntity && <RulesModalForAddEntity />}
             {modalState.addFields && <TableModalForFields />}

@@ -16,7 +16,7 @@ function CodeEditor({ border }: CodeEditorPropTypes) {
         dispatch(setCustomParameterCodeEditor(e.target.value));
     }
     return (
-        <textarea onChange={writeCode} value={customParametersState} className={`editor ${border}`} />
+        <textarea placeholder='Edit code' onChange={writeCode} value={customParametersState} className={`editor ${border}`} />
     )
 }
 

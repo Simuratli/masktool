@@ -6,6 +6,9 @@
     padding: rem(6) rem(5) rem(6) rem(12);
     outline: none;
 
+    &.error{
+        border: 1px solid var(--danger);
+    }
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -48,7 +51,7 @@
     }
 
     &.search {
-        width: rem(342);
+        width: rem(234);
         height: rem(42);
         padding: rem(6) rem(5) rem(6) rem(42);
 

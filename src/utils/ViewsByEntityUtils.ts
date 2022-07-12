@@ -1,4 +1,5 @@
 import { EntityByViewMainType } from '../redux/reducers/backend-reducers/entity-by-view/entity-by-view.types';
+
 export const addDeleteOrMaskViaHeader = (array: EntityByViewMainType[], name: string, deleteOrMask: boolean | undefined) => {
     if (array.length !== 0) {
         array.map((view) => {

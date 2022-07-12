@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { ProgressItem, ProgressSettings, ProgressTutorial, ProgressDividedProgresbar } from './ProgressItem'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 import InfoIcon from "./ProgressItem/icons/info";
+import {setProgressAdd} from '../../redux/actions'
 
 function Progress() {
   const stepState = useSelector((state: ReducerType) => state.stepReducer.step)
   const notificationState = useSelector((state: ReducerType) => state.notificationReducer.agree)
   const [disabledContainer, setdisabledContainer] = useState<string[]>([])
-
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setdisabledContainer([])
@@ -18,6 +19,7 @@ function Progress() {
 
   useEffect(() => {
     setdisabledContainer((prev: string[]) => ([...prev, stepState]))
+    if(stepState === 'error') dispatch(setProgressAdd(0))
   }, [stepState])
 
 

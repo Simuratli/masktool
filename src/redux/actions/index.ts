@@ -6,8 +6,8 @@ import { setToggleModal, setNameOfDeletedEntityForModal, setModalDeleted, setMod
 import { setLoader } from './loader.action';
 import { setCurrentPage, setPaginationRange } from './pagination.actions';
 import { setProgressAdd, setProgressReset } from './progress.action'
-import { setErroredTasks } from './backend-actions/erroredTasks'
-
+import { setErroredTasks, setAllErroredTasks } from './backend-actions/erroredTasks'
+import {refresh} from './refresh'
 // backend actions 
 import { setDefaultTasks, setPaginatedTasks } from './backend-actions/default-tasks.actions';
 import { setAllEntities } from './backend-actions/get-entities.actions';
@@ -16,7 +16,7 @@ import { getCustomRules } from './backend-actions/custom-rules.action';
 import { setAllVocabularies } from './backend-actions/get-vocabularies.action';
 import { prepareEntitiesForDelete, prepareEntitiesForDeleteItemsFromArray, prepareEntitiesForDeleteItemsPutThemAll } from './backend-actions/prepare-entities-for-delete';
 import { setCurrentRequest, setOldRequest } from './backend-actions/request-progress.action';
-import { setCustomParameterCodeEditor, setCustomParameterRuleType, setCustomParameterRuleName, setSavedRule, setCompareForSaveChanges } from './backend-actions/custom-parameters.actions'
+import { setCustomParameterCodeEditor, setCustomParameterRuleType, setCustomParameterRuleName, setSavedRule, setCompareForSaveChanges, refreshCustomParameters } from './backend-actions/custom-parameters.actions'
 import { setStableDefaultTasks, setStableEntityByViews, setStableMainName, setStableName, setStableSearchName, setStableEtc } from './backend-actions/stable-data.actions'
 
 export {
@@ -60,5 +60,8 @@ export {
     setStableName,
     setStableSearchName,
     setStableEtc,
-    setErroredTasks
+    setErroredTasks,
+    setAllErroredTasks,
+    refreshCustomParameters,
+    refresh
 } 

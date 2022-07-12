@@ -64,10 +64,12 @@ function MaskingRulesRight() {
 
         <div className="masking__rules__right__actionbox">
           <MaskingRulesRightSelections />
-          <CodeEditor border={codeEditorState} />
-          <span className={`code__editor__text ${codeEditorState}`}>{codeEditorState}</span>
+          <div className='code__editor__container'>
+            <CodeEditor border={codeEditorState} />
+            <span className={`code__editor__text ${codeEditorState}`}>{codeEditorState}</span>
+          </div>
           <MaskRulesRightActions />
-          <MaskingRulesSavedItems />
+          {/* <MaskingRulesSavedItems /> */}
         </div>
 
       </div>

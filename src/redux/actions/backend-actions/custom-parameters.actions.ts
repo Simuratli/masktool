@@ -1,10 +1,17 @@
-import { CUSTOM_PAREMETER_CODE_EDITOR, CUSTOM_PAREMETER_RULE_TYPE, CUSTOM_PAREMETER_RULE_NAME, SELECT_SAVED_RULE,COMPARE_FOR_SAVE_CHANGES } from '../../constants/backend-constants/custom-parameters';
+import { CUSTOM_PAREMETER_CODE_EDITOR, REFRESH_CUSTOM_PARAMETERS, CUSTOM_PAREMETER_RULE_TYPE, CUSTOM_PAREMETER_RULE_NAME, SELECT_SAVED_RULE, COMPARE_FOR_SAVE_CHANGES } from '../../constants/backend-constants/custom-parameters';
 import { CustomParametersStateTypes } from '../../reducers/backend-reducers/custom-parameters/custom-parameter.types'
 
 export const setCustomParameterRuleType = (payload: any) => {
     return {
         type: CUSTOM_PAREMETER_RULE_TYPE,
         payload
+    }
+}
+
+
+export const refreshCustomParameters = () => {
+    return {
+        type: REFRESH_CUSTOM_PARAMETERS,
     }
 }
 
