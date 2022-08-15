@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Pagination, Input } from '../../../components';
-import { setModalAddEntity, setModalToggleActions, setProgressAdd, setPaginatedTasks } from "../../../redux/actions";
+import { setModalAddEntity, setModalToggleActions, setProgressAdd, setPaginatedTasks, setSearch } from "../../../redux/actions";
 import { useDispatch, useSelector } from 'react-redux'
 import { ReducerType } from '../../../redux/reducers/reducer.types'
 
@@ -9,52 +9,83 @@ function RulesHeader() {
     const stepState = useSelector((state: ReducerType) => state.stepReducer);
     const erroredState = useSelector((state: ReducerType) => state.erroredTaskReducer);
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks);
-    const [search, setSearch] = useState('')
+    const paginatedTasksdState = useSelector((state: ReducerType) => state.paginatedTasksdReducer.paginated)
+    const searchState = useSelector((state: ReducerType) => state.searchReducer.search)
+    const modalState = useSelector((state: ReducerType) => state.modalReducer);
+    const [search, setSearchva] = useState('')
 
 
     const RunFunction = async () => {
         dispatch(setModalToggleActions(true))
         dispatch(setProgressAdd(0))
-        if (stepState.step === "error") {
-            dispatch(setPaginatedTasks(erroredState.tasks))
-        }
+
     }
 
     const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch((prev: string) => e.target.value)
+        setSearchva((prev: string) => e.target.value)
+        dispatch(setSearch(e.target.value))
     }
 
 
+
+
+    const [erooroedTask, seterooroedTask] = useState(erroredState.tasks)
+
     useEffect(() => {
-        const filteredEntities = defaultTasksState.filter(
+        if (stepState.step === 'error') {
+            seterooroedTask(erroredState.tasks)
+        }
+    }, [stepState.step, paginatedTasksdState])
+
+    useEffect(() => {
+
+        let filteredEntities = defaultTasksState.filter(
             entity => {
                 return (
                     entity
                         .entityName
                         .toLowerCase()
-                        .includes(search.toLowerCase()));
+                        .includes(searchState.toLowerCase()));
             }
         );
 
         dispatch(setPaginatedTasks(filteredEntities))
-    }, [search])
+
+    }, [searchState])
+
+
+
+    useEffect(() => {
+
+        if (modalState.addEntity || modalState.open || modalState.runActionOpen || modalState.addFields) {
+            console.log("searchModalShouldWork")
+            dispatch(setSearch(''))
+            // window.scrollTo(0, 0)
+        }
+    }, [modalState.addEntity, modalState.open, modalState.runActionOpen, modalState.addFields])
+
+
 
     return (
         <div className="rules__header">
-            {
-                stepState.step !== 'progress' && <>
-                    <div className="rules__pagination">
-                        <Pagination />
-                    </div>
-                    <div className="navbar__search">
-                        <Input onChange={onSearchChange} value={search} disabled={stepState.step !== "rules"} name="search" className='search' type="text" placeholder='Search entity' />
+            <div className="rules__pagination">
+                {
+                    stepState.step !== 'progress' && (defaultTasksState.filter((v, i, a) => a.findIndex(v2 => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).length <= 5 ? <></> : <Pagination />)
+                }
 
+            </div>
+            <div className="navbar__search">
+                <Input onChange={onSearchChange} value={searchState} disabled={stepState.step === "progress"} name="search" className='search' type="text" placeholder='Search entity' />
+
+                {
+                    stepState.step !== 'progress' && <>
                         <Button onClick={() => { dispatch(setModalAddEntity(true)) }} type='normal__modal entity_add' size="big" text="Add entity" />
-                        <Button size='run' type={'gold'} onClick={RunFunction} text="RUN" />
-                    </div>
-
-                </>
-            }
+                        {
+                            (defaultTasksState.filter((v, i, a) => a.findIndex(v2 => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).length <= 5 ? <></> : <Button size='run' type={'gold'} onClick={RunFunction} text="RUN" />)
+                        }
+                    </>
+                }
+            </div>
 
         </div>
     )

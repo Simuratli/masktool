@@ -6,6 +6,11 @@ export const defaultTaskAddETC = async (entities: AllEntitiesTypes[], tasks: Def
     entities.map((entity: AllEntitiesTypes) => {
         tasks.map((task: DefaultTasksTypes) => {
             task.delete = true
+            task.errorMessage = null
+            task.filter = []
+            task.progress = 'NULL'
+            task.taskStatus = 0
+            task.successRecords = 0
             if (entity.logicalName === task.entityName) {
                 task.etc = entity.etc;
             }

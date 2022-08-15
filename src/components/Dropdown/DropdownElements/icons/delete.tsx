@@ -1,19 +1,21 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { setToggleModal, setNameOfDeletedEntityForModal } from '../../../../redux/actions';
+import { setToggleModal, setNameOfDeletedEntityForModal, setLogicalNameOfDeletedEntityForModal } from '../../../../redux/actions';
 
 
 interface DeleteIconPropTypes {
-    name: string
+    name: string;
+    logicalName: any
 }
 
-function DeleteIcon({ name }: DeleteIconPropTypes) {
+function DeleteIcon({ name, logicalName }: DeleteIconPropTypes) {
     const dispatch = useDispatch();
 
 
     const onClickDelete = () => {
         dispatch(setToggleModal(true))
         dispatch(setNameOfDeletedEntityForModal(name))
+        dispatch(setLogicalNameOfDeletedEntityForModal(logicalName))
     }
 
 

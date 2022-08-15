@@ -4,10 +4,11 @@ import { ReducerType } from '../../../redux/reducers/reducer.types';
 import { useSelector, useDispatch } from 'react-redux';
 import ProgressLoader from '../../ProgressLoader';
 import DropdownHeaderToggleIcon from './elements/DropdownHeaderToggleIcon';
-import { setAllViewsByEntity, prepareEntitiesForDeleteItemsPutThemAll, setDefaultTasks } from '../../../redux/actions';
+import { setAllViewsByEntity, prepareEntitiesForDeleteItemsPutThemAll, setDefaultTasks, setPaginatedTasks } from '../../../redux/actions';
 import { addDeleteOrMaskViaHeader } from '../../../utils/ViewsByEntityUtils';
 import MultiProgress from './MultipleProgressBar'
 import { returnInsideViews } from './DROPDOWN__UTILS'
+import { getPaginatedData } from '../../../utils/pagiantionUtil'
 
 function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, progress, requestResult, totalRecords, successRecords, errorText, logicalName, filter }: DropdownHeaderPorpTypes) {
     const dispatch = useDispatch();
@@ -22,12 +23,23 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
     const deleteEntitiesReducer = useSelector((state: ReducerType) => state.preParedDeleteEntites);
     const defaultTaskState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks)
     const modalState = useSelector((state: ReducerType) => state.modalReducer);
+    const paginationState = useSelector((state: ReducerType) => state.paginationReducer);
+    const progressState = useSelector((state: ReducerType) => state.progressReducer.number)
+
+
+    useEffect(() => {
+        if (progressState === 0 && progressNumber === 100) {
+            setprogressNumber(1)
+            console.log("haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", progressNumber)
+        }
+    }, [progressState])
+
 
 
     useEffect(() => {
 
         console.log(successRecords, totalRecords, progress, 'dasdasdasdasd succces')
-        setprogressNumber(0)
+        // setprogressNumber(0)
         if (progress) {
             setprogressNumber(1)
         }
@@ -42,7 +54,6 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
 
             if (success === false && totalRecords === successRecords) {
                 setprogressNumber(100)
-
             }
 
 
@@ -63,11 +74,19 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
     }, [progress, successRecords, totalRecords, success])
 
 
+    useEffect(() => {
+        console.log(modalState,'cahhgbebgs')
+        setprogressNumber(1)
+    }, [modalState.runActionOpen])
+    
 
+
+    
     useEffect(() => {
 
-
-
+        console.log(deleteEntitiesReducer,'hoooootttyyy deleteEntitiesReducer')
+        console.log( viewsByEntityState.entities,'hoooootttyyy  viewsByEntityState.entities')
+        console.log(filter,'hoooootttyyy filter')
         returnInsideViews(deleteEntitiesReducer.delete, viewsByEntityState.entities, logicalName ? logicalName : name, stepState.step).then((data) => {
 
 
@@ -84,6 +103,8 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
                 ...prev,
                 data: newData
             }))
+
+            
         })
 
 
@@ -104,29 +125,34 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
     }, [deleteOrMask])
 
 
-    const scrollView = () => {
-        // let element: HTMLElement | null = document.getElementById(name)
-        // element && element.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
-    }
 
     const setToggleButNotOnProgress = () => {
 
         if (stepState.step !== 'progress') {
             setToggle((prev: boolean) => !prev);
+
             defaultTaskState.map((task) => {
+
+                console.log(name, logicalName, task.entityName, 'ebasdasd')
                 if (task.entityName === name) {
+
                     task.open = !task.open
                 }
             })
+
             dispatch(setDefaultTasks(defaultTaskState))
+            const calculation = getPaginatedData(defaultTaskState, paginationState.current, paginationState.range)
+            dispatch(setPaginatedTasks(calculation))
+            console.log(defaultTaskState, 'defaultTaskStatedefaultTaskStatedefaultTaskState ebasdasd')
         }
     }
 
 
 
+    console.log(success,'gagaagaga')
 
     return (
-        <div id={name} onClick={scrollView} className={`dropdown__header ${!success}`}>
+        <div  id={name} className={`dropdown__header ${!success}`}>
             <h1 onClick={setToggleButNotOnProgress}>
                 <span>{name}</span>
             </h1>
@@ -140,7 +166,7 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
                         errorText={item.errorText}
                         progress={requestProgressState.current && item.viewId === requestProgressState.current.id && requestProgressState.current.progress}
                         errorMessage={item.errorMessage}
-                        name={item.name} />)) : <span className="danger">{errorText}</span>)
+                        name={item.name} />)) : (errorText ? <span className="danger">{errorText}</span> : <span>{actions}</span>))
                 }
 
                 {
@@ -160,10 +186,8 @@ function DropdownHeader({ setToggle, deleteOrMask, name, etc, actions, success, 
                 }
 
             </p>
-            <div className="icon__container">
-                {
-                    stepState.step === 'rules' ? <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggleButNotOnProgress} /> : (insideViews.data.length === 0 && <DropdownHeaderToggleIcon requestResult={success} name={name} setToggle={setToggleButNotOnProgress} />)
-                }
+            <div style={{width:58}} className="icon__container">
+                <DropdownHeaderToggleIcon logicalName={logicalName} insideViews={insideViews.data.length} requestResult={success} name={name} setToggle={setToggleButNotOnProgress} />
             </div>
         </div>
     );

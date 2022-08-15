@@ -16,6 +16,7 @@ function MaskRulesRightActions() {
 
     const fetchCustomRules = async () => {
         let customRules = await GetCustomRules();
+        console.log(customRules,'customrules')
         dispatch(getCustomRules(customRules))
     }
 
@@ -38,7 +39,7 @@ function MaskRulesRightActions() {
             });
 
             if (createdCustomRule.level === "SUCCESS") {
-                fetchCustomRules()
+                
                 // setsaveText('Parameters were saved.')
             }
             dispatch(setCodeEditorValue(null))
@@ -47,6 +48,7 @@ function MaskRulesRightActions() {
             dispatch(setCustomParameterCodeEditor(''));
 
             dispatch(setCodeEditorValue(`${customParametersState.name} custom masking rule was saved`))
+            fetchCustomRules()
 
             setTimeout(() => {
                 setsaveText('')

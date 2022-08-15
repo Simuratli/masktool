@@ -6,7 +6,7 @@ function Table({ fields, name, searchName, mainName, etc, logicalName }: TablePr
 
   return (
     <div className='table'>
-      <TableHeader etc={etc} name={name} searchName={searchName} mainName={mainName} />
+      <TableHeader logicalName={logicalName} etc={etc} name={name} searchName={searchName} mainName={mainName} />
       {fields.length !== 0 ? fields.map((field: any) => {
         if (field.attributeTypeCode === 14 || field.attributeTypeCode === 2 || field.attributeTypeCode === 7) {
           return <TableRow logicalName={logicalName} parameter={field.parameters} requiredLevel={field.requiredLevel} attributeTypeCode={field.attributeTypeCode} value={field.value} mainName={mainName} rowName={name} searchName={searchName} rule={field.rule ? field.rule : field.attributeTypeCode} name={field.displayName ? field.displayName : field.logicalName} mask="nomask" />

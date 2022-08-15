@@ -4,4 +4,5 @@ export interface ButtonPropTypes {
     onClick?: () => void;
     type?:string;
     size?:string;
+    addLoading?:boolean;
 }

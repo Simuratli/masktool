@@ -46,6 +46,7 @@
 
         &__actionbox {
             position: relative;
+            width: 100%;
         }
 
         &__next {
@@ -58,7 +59,7 @@
         &__actions {
             display: flex;
             justify-content: space-between;
-            width: rem(522);
+            width:100%;
             margin-top: rem(10);
             justify-content: flex-end;
 
@@ -91,7 +92,7 @@
         &__selectitems {
             display: flex;
             justify-content: space-between;
-            width: rem(522);
+            width: 100%;
         }
 
 
@@ -145,7 +146,7 @@
 
 
 .masking__rules__right__table {
-    width: rem(395);
+    width: rem(450);
     background-color: var(--select-background-color);
 
     &__header,
@@ -197,15 +198,15 @@
     }
 
     .cell_1 {
-        width: rem(81);
+        width: rem(90);
     }
 
     .cell_2 {
-        width: rem(161);
+        width: rem(200);
     }
 
     .cell_3 {
-        width: rem(141);
+        width: rem(180);
     }
 }
 

@@ -18,6 +18,7 @@ import requestProgressReducer from './backend-reducers/request-progress'
 import customParametersReducer from './backend-reducers/custom-parameters'
 import stableDataReducer from './backend-reducers/stablep-data'
 import erroredTaskReducer from './erroredTasks'
+import searchReducer from './search'
 
 export default combineReducers({
     notificationReducer,
@@ -39,5 +40,5 @@ export default combineReducers({
     customParametersReducer,
     stableDataReducer,
     erroredTaskReducer,
-    
+    searchReducer
 })

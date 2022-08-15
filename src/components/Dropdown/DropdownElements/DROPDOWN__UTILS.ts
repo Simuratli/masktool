@@ -22,6 +22,7 @@ export const returnInsideViews = async (deletedArray: PreparedDeleteEntitesPaylo
                             } else {
                                 data.push(item)
                             }
+                            // data.push(item)
                         }
                     })
                 }

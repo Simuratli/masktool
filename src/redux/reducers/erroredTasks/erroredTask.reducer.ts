@@ -9,6 +9,7 @@ const initialState: DefaultTasksStateTypes = {
 export const erroredTaskReducer = (state = initialState, action: DefaultTasksActionTypes) => {
     switch (action.type) {
         case SET_ERRORED_DATA:
+            console.log('SET_ERRORED_DATA calisiyooo')
             return {
                 ...state,
                 tasks: [...state.tasks, action.payload].filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName === v.entityName)) === i)
@@ -18,6 +19,7 @@ export const erroredTaskReducer = (state = initialState, action: DefaultTasksAct
                 tasks: []
             }
         case SET_ALL_ERRORED_DATA:
+            console.log('SET_ALL_ERRORED_DATA calisiyooo')
             return {
                 ...state,
                 tasks: action.payload

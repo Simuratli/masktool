@@ -9,9 +9,10 @@ const ProgressBar = ({ bgcolor, completed }: ProgressBarPropTypes) => {
 
     const containerStyles = {
         height: 8,
-        width: 750,
+        width: 650,
         backgroundColor: "#e0e0de",
         borderRadius: 50,
+        display:"block"
     }
 
     const fillerStyles: FillerStylesTypes = {
@@ -24,7 +25,7 @@ const ProgressBar = ({ bgcolor, completed }: ProgressBarPropTypes) => {
 
 
     return (
-        <div style={containerStyles}>
+        <div className="progressLoader" style={containerStyles}>
             <div style={fillerStyles}>
             </div>
         </div>

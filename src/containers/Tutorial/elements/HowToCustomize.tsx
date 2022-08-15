@@ -20,7 +20,7 @@ function HowToCustomize() {
                         You can add more entities to the UDS Business Data Masking by clicking the <strong>Add entity</strong> button. You can remove entities that will not be changed by clicking the <strong>bin icon</strong> near them.
                     </p>
                     <p className='tutorial__text'>
-                        Choose the needed views for each entity from the drop-down list.
+                        Choose available view(s) for each entity from the drop-down list.
                     </p>
 
                     <h2 className="tutorial__text"><span className="orange"><strong>Step 2.</strong></span> <strong>Specify your goals </strong></h2>
@@ -58,7 +58,7 @@ function HowToCustomize() {
                 </ul>
 
                 <p className='tutorial__text'>
-                    Or you can use your own list. Download the guide on <a download rel="noreferrer" target="_blank" href='https://raw.githubusercontent.com/Simuratli/masktool/f29f3fdb23d8313657adc4ccb640a8dca654f258/files/How%20to%20create%20custom%20masking%20lists.%20Guide%20for%20UDS%20Business%20Data%20Masking.pdf' className="orange click">How to add custom lists</a>
+                    Or you can use your own list. Download the guide on <a download rel="noreferrer" target="_blank" href='https://raw.githubusercontent.com/Simuratli/masktool/ac5926c4091c0e5ae0c55fd9f449d2eea7f1744f/files/uds-business-data-masking-adding-lists-guide.pdf' className="orange click">How to add custom lists</a>
                 </p>
             </TutorialDropdown>
             <TutorialDropdown badge='For text and multiline fields' name='Rule 2. Random Letters'>
@@ -70,7 +70,7 @@ function HowToCustomize() {
                 </p>
             </TutorialDropdown>
 
-           
+
 
             <TutorialDropdown badge='For all field types' name='Rule 3. Custom'>
                 <p className='tutorial__text'>
@@ -100,9 +100,9 @@ function HowToCustomize() {
                 </p>
             </TutorialDropdown> */}
 
-            
 
-           
+
+
             <br />
             <h2 className="tutorial__text"><span className="orange"><strong>Step 4.</strong></span> <strong>Apply changes </strong></h2>
             <p className='tutorial__text'>

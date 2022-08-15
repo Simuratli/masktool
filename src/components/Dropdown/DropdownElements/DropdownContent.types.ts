@@ -27,5 +27,6 @@ export interface MultitableContainerPropTypes {
     etc: number;
     errorText?: string;
     logicalName: string | undefined;
-    filter:string[]
+    filter:string[];
+    id: string
 }

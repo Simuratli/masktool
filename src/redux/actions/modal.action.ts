@@ -1,4 +1,4 @@
-import { SET_TOGGLE_MODAL, SET_DELETED_ENTITY_NAME_FOR_MODAL, SET_MODAL_DELETED, SET_MODAL_ACTIONS_ALLOW, SET_TOGGLE_MODAL_ACTIONS, SET_MODAL_ADD_ENTITY, SET_MODAL_ADD_FIELD } from '../constants/modal'
+import { SET_TOGGLE_MODAL, SET_DELETED_ENTITY_LOGICALNAME_FOR_MODAL, SET_DELETED_ENTITY_NAME_FOR_MODAL, SET_MODAL_DELETED, SET_MODAL_ACTIONS_ALLOW, SET_TOGGLE_MODAL_ACTIONS, SET_MODAL_ADD_ENTITY, SET_MODAL_ADD_FIELD } from '../constants/modal'
 
 export const setToggleModal = (payload: Boolean) => ({
     type: SET_TOGGLE_MODAL,
@@ -10,6 +10,14 @@ export const setNameOfDeletedEntityForModal = (payload: string) => ({
     type: SET_DELETED_ENTITY_NAME_FOR_MODAL,
     payload
 })
+
+export const setLogicalNameOfDeletedEntityForModal = (payload: string) => ({
+    type: SET_DELETED_ENTITY_LOGICALNAME_FOR_MODAL,
+    payload
+})
+
+
+
 
 
 

@@ -13,7 +13,7 @@ function ProgressDividedProgresbar() {
     return (
         <div className='progress__info'>
             <div className='progress__info__bar'>
-                <p className='progress__info__text'>{progressState} of {paginatedTasksdState.length} are masked</p>
+                <p className='progress__info__text'>{progressState} of {paginatedTasksdState.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).length} are Processed</p>
                 <LoaderForProgressBar />
             </div>
 

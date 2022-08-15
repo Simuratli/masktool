@@ -20,6 +20,7 @@ function RulesModalForAddEntity() {
     const paginatedDataState = useSelector((state: ReducerType) => state.paginatedTasksdReducer.paginated)
     const stableDataReducer = useSelector((state: ReducerType) => state.stableDataReducer.tasks)
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer.tasks)
+    const stepState = useSelector((state: ReducerType) => state.stepReducer.step);
     const paginationState = useSelector((state: ReducerType) => state.paginationReducer.range)
     const paginationStateCurrent = useSelector((state: ReducerType) => state.paginationReducer)
     const [cuttedStableData, setcuttedStableData] = useState<DefaultTasksTypes[]>([])
@@ -37,8 +38,8 @@ function RulesModalForAddEntity() {
         })
 
 
-        setcuttedStableData(newDarta.filter((v, i, a) => a.findIndex(v2 => (v2.entityName === v.entityName || v2.logicalName === v.entityName || v2.logicalName === v.logicalName)) === i))
-        setacuttedStableData(newDarta.filter((v, i, a) => a.findIndex(v2 => (v2.entityName === v.entityName || v2.logicalName === v.entityName || v2.logicalName === v.logicalName)) === i))
+        setcuttedStableData(newDarta.filter((v, i, a) => a.findIndex(v2 => (v2.entityName === v.entityName)) === i))
+        setacuttedStableData(newDarta.filter((v, i, a) => a.findIndex(v2 => (v2.entityName === v.entityName )) === i))
     }, [defaultTasksState, paginationState, stableDataReducer])
 
 
@@ -54,7 +55,7 @@ function RulesModalForAddEntity() {
                         .toLowerCase()
                         .includes(e.target.value.toLowerCase()));
             }
-        ).filter((v, i, a) => a.findIndex(v2 => (v2.entityName === v.entityName || v2.logicalName === v.entityName || v2.logicalName === v.logicalName)) === i);
+        ).filter((v, i, a) => a.findIndex(v2 => (v2.entityName === v.entityName )) === i);
         setcuttedStableData(newCutted)
     }
 
@@ -65,17 +66,27 @@ function RulesModalForAddEntity() {
             stableDataReducer.map((task) => {
                 selectedEntites.map((ent) => {
                     if (ent.entityName === task.entityName) {
-                        if (!paginatedDataState.some((value) => value.entityName === task.entityName || value.entityName === task.displayName)) {
+                        if (!paginatedDataState.some((value) => value.entityName === task.entityName )) {
+
+
+                            task.open = false
+                            task.records = true
+                            task.errorMessage = null
+                            task.errortext = ''
+                            task.progress = 'NULL'
+                            task.filter = []
+                            task.maskOperation = false
 
                             if (task.entityName.toLowerCase() === "lead") {
                                 task.maskOperation = true
 
-                                stableDataReducer.map((item) => {
-                                    if (item.entityName === "lead") {
-                                        task.fields = item.fields
-                                        task.fields = item.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
-                                    }
-                                })
+
+                                // stableDataReducer.map((item) => {
+                                //     if (item.entityName === "lead") {
+                                //         task.fields = item.fields
+                                //         task.fields = item.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
+                                //     }
+                                // })
                             }
 
                             if (task.entityName.toLowerCase() === "account" || task.entityName.toLowerCase() === "lead" || task.entityName.toLowerCase() === "contact") {
@@ -86,49 +97,48 @@ function RulesModalForAddEntity() {
                             if (task.entityName.toLowerCase() === "contact") {
                                 task.maskOperation = true
                                 task.records = true
-                                stableDataReducer.map((item) => {
-                                    if (item.entityName === "contact") {
-                                        task.fields = item.fields
-                                        task.fields = item.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
-                                    }
-                                })
+                                // stableDataReducer.map((item) => {
+                                //     if (item.entityName === "contact") {
+                                //         task.fields = item.fields
+                                //         task.fields = item.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
+                                //     }
+                                // })
                             }
 
                             if (task.entityName.toLowerCase() === "account") {
                                 task.maskOperation = true
                                 task.records = true
-                                stableDataReducer.map((item) => {
-                                    if (item.entityName === "account") {
-                                        task.fields = item.fields
-                                        task.fields = item.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
-                                    }
-                                })
+                                // stableDataReducer.map((item) => {
+                                //     if (item.entityName === "account") {
+                                //         task.fields = item.fields
+                                //         task.fields = item.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
+                                //     }
+                                // })
                             }
 
 
-                            task.open = false
-                            task.records = true
-                            task.filter = []
+
 
                             if (task.maskOperation) {
-                                task.text = `All Records ${task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields are masked`
+                                task.text = `You are going to mask ${task.fields && task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in all records.`
                             } else {
-                                task.text = "Delete"
+                                task.text = "You are going to delete all records."
                             }
                             newArrayForDefaultTasks.push(task)
                         }
                     }
                 })
             })
-            let newArrayForDefaultTask = [...newArrayForDefaultTasks, ...defaultTasksState]
+            let newArrayForDefaultTask = [...newArrayForDefaultTasks, ...defaultTasksState].filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName === v.entityName)) === i)
 
             const calculation = getPaginatedData(newArrayForDefaultTask, paginationStateCurrent.current, paginationStateCurrent.range)
 
-            if (errororedState.length !== 0) dispatch(setAllErroredTasks([...errororedState, ...newArrayForDefaultTasks]))
+            stepState === "error" && dispatch(setAllErroredTasks([...errororedState, ...newArrayForDefaultTasks]))
 
-
-            dispatch(setPaginatedTasks(calculation))
             dispatch(setDefaultTasks(newArrayForDefaultTask))
+            dispatch(setPaginatedTasks(calculation))
+
+            console.log(calculation, 'newArrayForDefaultTasknewArrayForDefaultTask')
             dispatch(setModalAddEntity(false))
         },
         [defaultTasksState, dispatch, errororedState, paginatedDataState, paginationStateCurrent, selectedEntites, stableDataReducer],
@@ -152,6 +162,8 @@ function RulesModalForAddEntity() {
         }
     }
 
+    console.log(cuttedStableData, 'cuttedStableDatacuttedStableData')
+
 
 
     return (
@@ -167,7 +179,7 @@ function RulesModalForAddEntity() {
             </div>
             <div style={{ height: 250 }} className='modal__scroll__container'>
                 {
-                    cuttedStableData.filter((v, i, a) => a.findIndex(v2 => (v2.entityName.toLowerCase() === v.entityName.toLowerCase() || v2.logicalName === v.entityName || v2.logicalName === v.logicalName)) === i).map((item) => {
+                    cuttedStableData.filter((v, i, a) => a.findIndex(v2 => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).map((item) => {
                         return <div className="modal__checkbox"><Checkbox checked={selectedEntites.some((data) => { return data.entityName === item.entityName })} value={item.entityName} onChange={(e) => { selectCheckbox(e, item) }} text={item.entityName.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))} /></div>
                     })
                 }

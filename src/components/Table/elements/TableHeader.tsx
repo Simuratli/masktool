@@ -1,30 +1,33 @@
 import React from 'react';
 import TableCell from './TableCell'
 import { useDispatch, useSelector } from 'react-redux';
-import { setModalAddField, setStableMainName, setStableName, setStableSearchName, setStableEtc, setStableEntityByViews } from '../../../redux/actions'
+import { setModalAddField, setStableMainName, setStableName, setStableSearchName, setStableEtc, setStableLogicalName } from '../../../redux/actions'
 import { GetViewsByEntity } from '../../../api'
 
 interface TableHeaderPropTypes {
     name: string | undefined,
     searchName: string | undefined,
     mainName: string | undefined,
-    etc: number
+    etc: number,
+    logicalName?: string
 }
 
-function TableHeader({ name, searchName, mainName, etc }: TableHeaderPropTypes) {
+function TableHeader({ name, searchName, mainName, etc, logicalName }: TableHeaderPropTypes) {
     const dispatch = useDispatch()
 
     const openModal = async () => {
         dispatch(setModalAddField(true))
         dispatch(setStableMainName(mainName))
+        console.log(name,'teteteetetetetette')
         dispatch(setStableName(name))
+        dispatch(setStableLogicalName(logicalName))
         dispatch(setStableSearchName(searchName))
         dispatch(setStableEtc(etc))
     }
 
     return (
         <>
-            <div className='table__header'>
+            <div className='table__row table-head'>
                 <TableCell>
                     fields
                     <button onClick={openModal} className="plus">
@@ -35,7 +38,7 @@ function TableHeader({ name, searchName, mainName, etc }: TableHeaderPropTypes) 
                     </button>
                 </TableCell>
                 <TableCell>Masking rule</TableCell>
-                <TableCell>Parameter rule</TableCell>
+                <TableCell>Parameter</TableCell>
                 {/* <TableCell>no masking</TableCell> */}
                 <TableCell>chosen data</TableCell>
             </div>

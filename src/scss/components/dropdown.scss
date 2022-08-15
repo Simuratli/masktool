@@ -9,6 +9,7 @@
             h1 {
                 color: var(--progres-text-active);
                 gap: rem(10);
+                height: auto;
             }
         }
 
@@ -16,6 +17,7 @@
             h1 {
                 color: var(--danger);
                 gap: rem(10);
+                height: auto;
             }
         }
 
@@ -45,12 +47,13 @@
             line-height: 130%;
             letter-spacing: 0.01em;
             color: var(--blue);
-            height: rem(54);
+            // height: rem(54);
             display: flex;
             align-items: center;
             text-transform: capitalize;
             width: rem(400);
             text-overflow: ellipsis;
+            height: auto;
         }
 
         &__icon {
@@ -61,7 +64,7 @@
             height: rem(54);
             display: flex;
             align-items: center;
-            gap: rem(5);
+            // gap: rem(5);
             width: rem(80);
 
             &__delete {
@@ -188,6 +191,7 @@
         }
 
         h1 {
+            height: auto !important;
             font-weight: 600;
             font-size: rem(28);
             line-height: 120%;

@@ -4,6 +4,10 @@ export const addValueForCell = (searchName: string | undefined, defaultTasksStat
     if (searchName === "entities") {
         defaultTasksState.map((task: any) => {
             if (task.entityName === rowName) {
+
+                // task.errorMessage = null
+                // task.errorText = ''
+
                 task.fields.map((field: any) => {
                     if (field.displayName === itemName) {
 
@@ -34,6 +38,9 @@ export const addValueForCell = (searchName: string | undefined, defaultTasksStat
                     if (item.name === rowName) {
                         item.cells.map((cell: any) => {
                             if (cell.displayName === itemName) {
+                                console.log(mainName, rowName, itemName, 'denerburay')
+                                // cell.errorMessage = null
+                                // cell.errorText = ''
                                 if (type === 'date' && value1 && value2) {
                                     cell.parameters = [DDMMYYYY(value1), DDMMYYYY(value2)];
                                 }
@@ -52,9 +59,12 @@ export const addValueForCell = (searchName: string | undefined, defaultTasksStat
             }
         })
 
+       
+
+
         return {
             for: "views",
-            data: viewsByEntityState
+            data: viewsByEntityState,
         }
     }
 }
@@ -123,8 +133,8 @@ export const changeMaskingRule = (searchName: string | undefined, defaultTasksSt
                 task.fields.map((field: any) => {
                     if (field.displayName === name) {
                         field.rule = convertRuleToBackUtil(textValue)
-                        
-                        if(convertRuleToBackUtil(textValue) === 'ClearValue'){
+
+                        if (convertRuleToBackUtil(textValue) === 'ClearValue') {
                             field.parameters = []
                         }
                     }
@@ -146,7 +156,7 @@ export const changeMaskingRule = (searchName: string | undefined, defaultTasksSt
                             if (cell.displayName === name) {
                                 cell.rule = convertRuleToBackUtil(textValue);
 
-                                if(convertRuleToBackUtil(textValue) === 'ClearValue'){
+                                if (convertRuleToBackUtil(textValue) === 'ClearValue') {
                                     cell.parameters = []
                                 }
 

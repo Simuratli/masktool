@@ -25,6 +25,8 @@ export const addDeleteOrMaskIndividual = async (array: EntityByViewMainType[], a
                 view.data.map((item) => {
                     if (item.name === name) {
                         item.maskOperation = false
+                        item.errorMessage = null
+                        item.errortext = ''
                     }
                 })
             }
@@ -36,6 +38,8 @@ export const addDeleteOrMaskIndividual = async (array: EntityByViewMainType[], a
                 view.data.map((item) => {
                     if (item.name === name) {
                         item.maskOperation = true
+                        item.errorMessage = null
+                        item.errortext = ''
                     }
                 })
             }

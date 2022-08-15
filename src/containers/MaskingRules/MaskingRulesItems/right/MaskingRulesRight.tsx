@@ -13,7 +13,6 @@ function MaskingRulesRight() {
   return (
     <div className='masking__rules__right'>
 
-
       <div className="masking__rules__right__container">
 
         <div className="masking__rules__right__table">
@@ -31,20 +30,41 @@ function MaskingRulesRight() {
           </div>
 
           <div className="masking__rules__right__table__body">
-            <div className="masking__rules__right__table__cell cell_1">Phone number</div>
-            <div className="masking__rules__right__table__cell cell_2">{`+380({RandomLine(new_phoheoperators.bdm.html)}){RandomNumber(1000000; 9999999)}`}</div>
+            <div className="masking__rules__right__table__cell cell_1">
+              {'Phone'} <br />
+              {`number`}
+            </div>
+            <div className="masking__rules__right__table__cell cell_2">
+              {'380(67))'} <br />
+              {'{RandomNumber(1000000;'} <br />
+              {`9999999)}`}
+            </div>
             <div className="masking__rules__right__table__cell cell_3">+380(67)1234567</div>
           </div>
 
           <div className="masking__rules__right__table__body">
-            <div className="masking__rules__right__table__cell cell_1">Name and Last name</div>
-            <div className="masking__rules__right__table__cell cell_2">{`{RandomLine(new_firstname.bdm.html)} {RandomLine(new_lastname.bdm.html)}`}</div>
+            <div className="masking__rules__right__table__cell cell_1">
+              {'Name and'} <br />
+              {`Last name`}
+            </div>
+            <div className="masking__rules__right__table__cell cell_2">
+              {'{RandomLine(uds_UserFirstNa)}'} <br />
+              {'mes.BDM)}'} <br />
+              {`{RandomLine(uds_UserLastNa`}<br />
+              {`mes.BDM)}`}
+            </div>
             <div className="masking__rules__right__table__cell cell_3">Peter Smirnovsky</div>
           </div>
 
           <div className="masking__rules__right__table__body">
-            <div className="masking__rules__right__table__cell cell_1">Contract number</div>
-            <div className="masking__rules__right__table__cell cell_2">{`ND-{RandomNumber(10; 1000000)}`}</div>
+            <div className="masking__rules__right__table__cell cell_1">
+              {'Contract'} <br />
+              {`number`}
+            </div>
+            <div className="masking__rules__right__table__cell cell_2">
+              {'ND-{RandomNumber'} <br />
+              {'(10; 1000000)}'}
+            </div>
             <div className="masking__rules__right__table__cell cell_3">ND-592684</div>
           </div>
 
@@ -55,9 +75,23 @@ function MaskingRulesRight() {
           </div>
 
           <div className="masking__rules__right__table__body">
-            <div className="masking__rules__right__table__cell cell_1">Dynamic text</div>
-            <div className="masking__rules__right__table__cell cell_2">{"Hi {RandomLine (new_firstname.bdm.html)}, we received your payment ${RandomNumber(10; 1000)}/ in {RandomDate(01/01/2020; 01/01/2022)}."}</div>
-            <div className="masking__rules__right__table__cell cell_3">Hi Jane, we received your payment $57 in 05/07/2021.</div>
+            <div className="masking__rules__right__table__cell cell_1">
+              {'Dynamic'} <br />
+              {`text`}
+            </div>
+            <div className="masking__rules__right__table__cell cell_2">
+              {'Hi {RandomLine '} <br />
+              {`(new_firstname.bdm.html)},`}<br />
+              {`we received your payment`}<br />
+              {"${RandomNumber(10; 1000)}"}<br />
+              {"in {RandomDate(01/01/2020;"}<br />
+              {"01/01/2022)}."}
+            </div>
+            <div className="masking__rules__right__table__cell cell_3">
+              {'Hi Jane, we received'} <br />
+              {`your payment $57 in`}<br />
+              {"05/07/2021."}
+            </div>
           </div>
 
         </div>

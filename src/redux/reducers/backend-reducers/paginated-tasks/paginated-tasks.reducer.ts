@@ -3,7 +3,7 @@ import { PaginatedStateTypes, DefaultTasksActionTypes } from '../default-tasks/d
 import { REFRESH } from '../../../constants/refresh'
 
 const initialState: PaginatedStateTypes = {
-    paginated: [],
+    paginated: [].filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i),
 }
 
 export const paginatedTasksReducer = (state = initialState, action: DefaultTasksActionTypes) => {

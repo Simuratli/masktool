@@ -15,6 +15,7 @@ import { PreparedDeleteEntitesStateTypes } from './backend-reducers/prepare-dele
 import { requestProgressStateTypes } from './backend-reducers/request-progress/requestProgress.types'
 import { CustomParametersStateTypes } from './backend-reducers/custom-parameters/custom-parameter.types'
 import {StableDataReducerStateTypes} from './backend-reducers/stablep-data/stable-data.types'
+import {SearchStateTypes} from './search/search.types'
 export interface ReducerType {
     notificationReducer: NotificationStateTypes;
     stepReducer: StepStateTypes;
@@ -34,5 +35,6 @@ export interface ReducerType {
     requestProgressReducer:requestProgressStateTypes;
     customParametersReducer:CustomParametersStateTypes,
     stableDataReducer:StableDataReducerStateTypes,
-    erroredTaskReducer:DefaultTasksStateTypes
+    erroredTaskReducer:DefaultTasksStateTypes,
+    searchReducer:SearchStateTypes
 }

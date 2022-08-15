@@ -107,4 +107,12 @@ export const ClearTasks = async () => {
 }
 
 
+export const ClearTasksAndLogs = async () => {
+    let request = await getRequestObjectForSend(JSON.stringify({ MethodName: "ClearTasksAndLogs" }))
+    let response = await makeRequest(request)
+    return response
+}
+
+
+
 

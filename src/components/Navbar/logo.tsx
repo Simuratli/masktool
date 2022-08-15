@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { GetAttributesByEntity, GetDefaultTasks } from '../../api';
+import { GetAttributesByEntity, GetDefaultTasks,GetViewsByEntity } from '../../api';
 import { setStableEntityByViews, setStableDefaultTasks } from '../../redux/actions'
 import { ReducerType } from '../../redux/reducers/reducer.types'
 import { DefaultTasksTypes } from '../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
@@ -11,8 +11,9 @@ function Logo() {
     const stableDataReducer = useSelector((state: ReducerType) => state.stableDataReducer)
     const entitesState = useSelector((state: ReducerType) => state.getEntitiesReducer.entities)
 
+    console.log(stableDataReducer,'stableDataReducerstableDataReducer')
     const fetch = async () => {
-        let viewsByEntity = await GetAttributesByEntity(stableDataReducer.mainName, stableDataReducer.etc);
+        let viewsByEntity = await GetAttributesByEntity(stableDataReducer.logicalName ? stableDataReducer.logicalName : stableDataReducer.mainName, stableDataReducer.etc);
 
         dispatch(setStableEntityByViews({ name: stableDataReducer.name, data: viewsByEntity }))
 
@@ -30,7 +31,7 @@ function Logo() {
                 task.filter = []
                 task.records = true
                 task.open = false
-                
+
                 task.fields.map((field) => {
                     if (atribute.logicalName === field.logicalName) {
                         field.displayName = atribute.displayName
@@ -38,12 +39,38 @@ function Logo() {
                         field.requiredLevel = atribute.requiredLevel
                     }
                 })
-                
 
                 let filteredTasks = task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
-                task.maskOperation ? task.text = `All Records ${filteredTasks.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields are masked` : task.text = "Delete"
+                task.maskOperation ? task.text = `You are going to mask ${task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in all records.` : task.text = "You are going to delete all records."
             })
         })
+
+
+        for (const item of newTasks) {
+            let viewsByEntity = await GetViewsByEntity(item.logicalName ? item.logicalName : item.entityName, item.etc);
+
+
+
+            for (const view of viewsByEntity) {
+                view.maskOperation = item.maskOperation
+                view.cells.map((v: any) => {
+                    for (const x of item.fields) {
+                        if (x.logicalName === v.logicalName) {
+                            v.requiredLevel = x.requiredLevel
+                        }
+                    }
+                })
+            }
+
+
+
+
+            // if (viewsArray.some((value) => value.name === item.entityName) === false) {
+                // viewsArray.push({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity })
+                // dispatch(setViewsByEntity({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
+                dispatch(setStableEntityByViews({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
+            // }
+        }
 
         return newTasks
     }
@@ -52,6 +79,7 @@ function Logo() {
 
 
     useEffect(() => {
+        fetch()
         // let newArrayForEntity: any[] = []
 
         // fetch().then((data) => {
@@ -88,7 +116,7 @@ function Logo() {
 
 
 
-    }, [entitesState, stableDataReducer.mainName])
+    }, [stableDataReducer.name,])
 
 
 

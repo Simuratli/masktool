@@ -6,6 +6,7 @@ export interface StableDataReducerStateTypes {
     entities: EntityByViewMainType[],
     searchName: string | undefined;
     mainName: string | undefined;
+    logicalName: string | undefined;
     name: string | undefined;
     etc: number
 }

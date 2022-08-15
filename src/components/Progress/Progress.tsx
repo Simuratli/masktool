@@ -19,6 +19,10 @@ function Progress() {
 
   useEffect(() => {
     setdisabledContainer((prev: string[]) => ([...prev, stepState]))
+
+    if(stepState === 'progress'){
+      setdisabledContainer((prev: string[]) => ([...prev, 'rules']))
+    }
     if(stepState === 'error') dispatch(setProgressAdd(0))
   }, [stepState])
 
@@ -50,7 +54,7 @@ function Progress() {
       }
 
       <div className='flex'>
-        <ProgressSettings/>
+        {/* <ProgressSettings/> */}
         <ProgressTutorial />
       </div>
 

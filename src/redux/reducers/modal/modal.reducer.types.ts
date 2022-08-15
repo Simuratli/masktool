@@ -1,6 +1,7 @@
 export interface ModalStateTypes {
     open:boolean;
     name:string;
+    logicalname:string;
     delete:boolean,
     runActionOpen: boolean,
     runActionAllow: boolean,

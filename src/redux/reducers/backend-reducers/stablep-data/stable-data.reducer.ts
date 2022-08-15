@@ -1,10 +1,11 @@
-import { SET_STABLE_ENTITIES, SET_STABLE_TASKS, SET_STABLE_DATA_MAIN_NAME, SET_STABLE_DATA_NAME, SET_STABLE_DATA_SEARCH_NAME, SET_STABLE_DATA_ETC } from '../../../constants/backend-constants/stable-data';
+import { SET_STABLE_ENTITIES, SET_STABLE_TASKS, SET_STABLE_DATA_MAIN_NAME, SET_STABLE_DATA_LOGICALNAME, SET_STABLE_DATA_NAME, SET_STABLE_DATA_SEARCH_NAME, SET_STABLE_DATA_ETC } from '../../../constants/backend-constants/stable-data';
 import { StableDataReducerStateTypes, StableDataReducerActionTypes } from './stable-data.types';
 
 const initialState: StableDataReducerStateTypes = {
     tasks: [],
     entities: [],
     searchName: '',
+    logicalName: '',
     mainName: '',
     name: '',
     etc: 0
@@ -26,6 +27,11 @@ export const stableDataReducer = (state = initialState, action: StableDataReduce
             return {
                 ...state,
                 mainName: action.payload
+            }
+        case SET_STABLE_DATA_LOGICALNAME:
+            return {
+                ...state,
+                logicalName: action.payload
             }
         case SET_STABLE_DATA_NAME:
             return {

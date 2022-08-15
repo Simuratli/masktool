@@ -1,58 +1,69 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProgresItemPropTypes } from '../progress.types';
 import { Dvider } from './';
-import { setStep, setDefaultTasks, setProgressAdd, setPaginatedTasks, setAllViewsByEntity } from '../../../redux/actions';
+import { setStep, setDefaultTasks, setProgressAdd, setPaginatedTasks, setAllViewsByEntity, setAllErroredTasks, setAllEntities, setAllVocabularies, getCustomRules, setLoader } from '../../../redux/actions';
 import { getPaginatedData } from '../../../utils/pagiantionUtil'
+import { defaultTaskAddETC } from '../../../utils/DefaultTaskETC'
 import { ReducerType } from '../../../redux/reducers/reducer.types';
+import { DefaultTasksTypes } from '../../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
+import { GetEntities, GetDefaultTasks, GetAttributesByEntity, GetCustomRules, GetVocabularesList, GetTasksStatus } from '../../../api'
+
+function getDifference(array1: DefaultTasksTypes[], array2: DefaultTasksTypes[]) {
+    return array1.filter(object1 => {
+        return !array2.some(object2 => {
+            return object1.entityName.toLowerCase() === object2.entityName.toLowerCase();
+        });
+    });
+}
+
 
 function PorgressItem({ icon, text, id, disabled }: ProgresItemPropTypes) {
     const dispatch = useDispatch();
     const defaultTasksState = useSelector((state: ReducerType) => state.defaultTasksReducer);
-    const paginationState = useSelector((state: ReducerType) => state.paginationReducer);
-    const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer);
     const stepState = useSelector((state: ReducerType) => state.stepReducer);
 
-    const travelBetweenSteps = () => {
 
-        if (stepState.step !== 'progress') {
+    const travelBetweenSteps = async () => {
+
+        if (stepState.step !== 'progress' && stepState.step !== id) {
+            // if (id === 'rules') {
+            //     console.log(stepState, 'statattaa')
+            //     if (count === 0) {
+            //         await getEntitiesAndTasks()
+            //     }
+            // }
             !disabled && id !== "progress" && dispatch(setStep(id));
+        }
+    }
+
+    useEffect(() => {
+        if (stepState.step === 'rules') {
             defaultTasksState.tasks.map((task) => {
-                task.progress = "START"
-                task.requestResult = null
+                task.errorMessage = null
+                task.errortext = ''
+                task.progress = 'NULL'
+                task.filter = []
+                task.records = true;
+                if (task.maskOperation) {
+                    task.text = `You are going to mask ${task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in all records.`
+                } else {
+                    task.text = "You are going to delete all records."
+                }
             })
-
-
-            viewsByEntityState.entities.map((view) => {
-                view.data.map((item) => {
-                    item.errortext = '';
-                    item.errorMessage = null
-                })
-            })
-
-            dispatch(setAllViewsByEntity(viewsByEntityState.entities))
 
             dispatch(setDefaultTasks(defaultTasksState.tasks))
-
-            if (id === 'rules') {
-                //reset default taskks
-                defaultTasksState.tasks.map((task) => {
-                    task.errorMessage = null
-                })
-                dispatch(setProgressAdd(0))
-                dispatch(setDefaultTasks(defaultTasksState.tasks))
-                const calculation = getPaginatedData(defaultTasksState.tasks, paginationState.current, paginationState.range)
-                dispatch(setPaginatedTasks(calculation))
-                //reset default taskks end
-            }
         }
+    }, [stepState.step])
 
-    }
+
+
+
 
     return (
         <>
-            <div onClick={travelBetweenSteps} className={`progress__item ${disabled && 'progress__item--disable'}`}>
+            <div onClick={travelBetweenSteps} style={{ cursor: stepState.step !== "progress" ? "pointer" : "no-drop" }} className={`progress__item ${disabled && 'progress__item--disable'}`}>
                 <span className='progress__item__text'>{text}</span>
                 {icon}
             </div>

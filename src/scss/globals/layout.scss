@@ -2,7 +2,537 @@
 
 .main__container {
     padding: rem(30) rem(30) rem(50) rem(30);
-    min-width: rem(1200);
+    min-width: rem(860);
+}
+
+@media only screen and (max-width: 1400px) {
+    .table__header {
+        gap: 5px !important;
+    }
+
+    .table__cell {
+        width: rem(232) !important;
+    }
+
+    .table__cell__name {
+        width: rem(150) !important;
+    }
+
+    .table__row .select {
+        width: rem(150) !important;
+    }
+
+    .input.filtered {
+        width: rem(150) !important;
+    }
+
+    .table__header .table__cell {
+        width: 210px !important
+    }
+
+
+    .modal__info__icon {
+        margin-bottom: 10px !important;
+
+        svg {
+            width: 35px !important;
+            height: 35px !important;
+        }
+    }
+
+    .header.modal__header {
+        font-size: 16px !important;
+    }
+
+    .modal__scroll__container {
+        height: 100px !important;
+    }
+
+    .modal__search__container {
+        margin-top: 10px !important;
+    }
+
+    .modal__search__container input {
+        padding: 5px 5px 5px 30px !important;
+        font-size: 12px !important;
+    }
+
+    .modal__search__container svg {
+        top: 21px !important;
+        height: 10px !important;
+        width: 11px !important;
+    }
+
+    .modal__checkbox {
+        padding: 5px !important;
+    }
+
+    .b-contain span {
+        font-size: 10px !important;
+    }
+
+    .b-contain input[type=checkbox]~.b-input {
+        width: 10px !important;
+        height: 10px !important;
+        top: 3px !important;
+    }
+
+    .b-contain input[type=checkbox]~.b-input:after {
+        height: 6px !important;
+        left: 3px !important;
+        top: 0px !important;
+        width: 2px !important;
+    }
+
+    .b-contain {
+        padding-left: 20px !important;
+    }
+
+    .button,
+    .normal__modal,
+    .gold,
+    .gray,
+    .entity_add,
+    .button.normal__modal {
+        height: 30px !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+    }
+
+
+    .entity_add,
+    .run {
+        width: 80px !important;
+    }
+
+    .navbar__search {
+        gap: 5px !important;
+    }
+
+    .button.normal__modal {
+        height: 30px !important;
+        border-radius: 4px !important;
+        font-size: 10px !important;
+    }
+
+    .big {
+        height: 30px !important;
+    }
+
+    .log-button {
+        height: 32px !important;
+        padding: 6px 0 12px !important;
+        font-size: 10px !important;
+    }
+
+    .modal__content {
+        width: 400px !important;
+    }
+
+    .navbar__search {
+        margin: 10px 0 !important;
+    }
+
+    .input.search {
+        height: 30px !important;
+    }
+
+    .input__button {
+        svg {
+            width: 10px !important;
+        }
+    }
+
+    .modal__for__run__content {
+        height: 100px !important;
+        padding-right: 5px !important;
+    }
+
+
+    .modal__for__run__content .modal__for__run__item {
+        width: 100% !important;
+        padding: 5px 0 5px 5px !important;
+
+        span {
+            font-size: 8px !important;
+        }
+    }
+
+    .modal__info__icon__text {
+        svg {
+            width: 250px !important;
+        }
+    }
+
+    .modal__for__run__content {
+        margin-top: 15px !important;
+    }
+
+
+    .modal__close {
+        svg {
+            width: 10px !important;
+            height: 10px !important;
+        }
+    }
+
+    .dropdown__header h1 {
+        font-size: 12px !important;
+        width: rem(180) !important;
+        padding: 5px 0px 5px 31px !important;
+    }
+
+    .dropdown__header p {
+        font-size: 8px !important;
+        padding: 5px 0px 5px 31px !important;
+        min-height: 0 !important;
+    }
+
+    .main__container {
+        padding: 15px 15px 20px !important;
+    }
+
+    .navbar,
+    .progress {
+        margin-bottom: 15px !important;
+    }
+
+    .progress {
+        height: 55px !important;
+
+        svg {
+            height: 55px !important;
+        }
+    }
+
+    .progress__settings__icon {
+        svg {
+            height: 20px !important;
+        }
+    }
+
+    .progress__item__text {
+        font-size: 10px !important;
+    }
+
+    .progress__item__icon {
+        svg {
+            height: 13px !important;
+            position: relative !important;
+            ;
+            top: -1px !important;
+            ;
+        }
+    }
+
+    .navbar {
+        svg {
+            width: 64px !important;
+        }
+    }
+
+    .header.big {
+        font-size: 18px !important;
+    }
+
+    .notification p {
+        font-size: 12px !important;
+        margin: 5px 0 0 !important;
+    }
+
+    .notification__box {
+        padding: 10px 34px 10px 34px !important;
+    }
+
+    .notification__box__container__text {
+        font-size: 14px !important;
+    }
+
+    .list li {
+        font-size: 12px !important;
+    }
+
+    .pagination__text {
+        font-size: 8px !important;
+    }
+
+    .pagination_warning {
+        svg {
+            width: 200px !important;
+        }
+    }
+
+    .navbar__search {
+        .input.search {
+            width: 150px !important;
+            font-size: 8px !important;
+            padding: 5px 0 5px 20px !important;
+        }
+
+        .input__button {
+            position: relative !important;
+            top: 5px !important;
+            left: 23px !important;
+        }
+    }
+
+    .pagination__button {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .pagination {
+        .multiple__select__main__text {
+            font-size: 8px !important;
+        }
+    }
+
+    .dropdown__header__icon {
+        height: 25px !important;
+    }
+
+    .dropdown__header__icon__delete__container {
+        height: 25px !important;
+
+        svg {
+            height: 10px !important;
+        }
+    }
+
+    .dropdown__header__icon__border {
+        height: 25px !important;
+
+        svg {
+            height: 15px !important;
+        }
+    }
+
+    .dropdown__header {
+        min-height: 30px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .dropdown__content__head {
+        margin: 20px 10px !important;
+
+        .box.small {
+            padding: 13px 4.0625rem 8px 4.125rem !important;
+        }
+
+    }
+
+    .radio {
+        svg {
+            height: 15px !important;
+        }
+
+        .radio__text {
+            font-size: 10px !important;
+            top: -3.5px !important;
+        }
+    }
+
+    .dropdown__box__container__actions {
+        padding: 5px 1.875rem 1px 0.625rem !important;
+        position: relative !important;
+        top: -3px !important;
+    }
+
+    .dropdown__box__container {
+        .multiple__select__main {
+            height: max-content !important;
+            position: relative !important;
+            top: -3px !important;
+        }
+
+        .multiple__select__main__text {
+            font-size: 12px !important;
+        }
+    }
+
+
+    .table__header {
+        .table__cell {
+            font-size: 12px !important;
+        }
+    }
+
+    .table__cell__name {
+        font-size: 12px !important;
+    }
+
+    .table__row {
+        gap: 0 !important;
+        padding: 0.55rem 4.375rem !important;
+
+        svg {
+            height: 10px !important;
+        }
+    }
+
+    .table__cell {
+
+        .multiple__select__main__text,
+        .select__dropdown__element__text {
+            font-size: 12px !important;
+        }
+
+        .multiple__select__main {
+            padding: 2px 0.75rem 4px !important;
+        }
+
+        input {
+            height: 25px !important;
+            font-size: 10px !important;
+        }
+
+        .table__cell__chosen {
+            font-size: 10px !important;
+        }
+    }
+
+
+    .tabs_header {
+        margin-bottom: 20px !important;
+        height: max-content !important;
+    }
+
+    .tab_item {
+        padding: 13px 20px !important;
+        font-size: 12px !important;
+    }
+
+    .masking__rules__right__selectitems {
+        .tab_item {
+            padding: 13px 20px !important;
+            font-size: 12px !important;
+        }
+    }
+
+    .tutorial {
+        padding: 0px !important;
+
+        .header {
+            margin: 10px 27px !important;
+        }
+    }
+
+    .editor {
+        font-size: 12px !important;
+    }
+
+    .masking__rules__left {
+        padding: 10px !important;
+
+        p, .note{
+            font-size: 10px !important;
+        }
+    }
+
+    .multiple__progress__bar__name {
+        font-size: 8px !important;
+    }
+
+    .multiple__progress__bar {
+        margin-bottom: 0px !important;
+
+        div {
+            font-size: 8px !important;
+        }
+    }
+
+    .progress__item {
+        min-width: 0 !important;
+    }
+
+    .multiple__select__main__badge {
+        span {
+            font-size: 8px !important;
+        }
+    }
+
+    .tutorial__heading__second {
+        font-size: 14px !important;
+    }
+
+    .tutorial__text {
+        padding: 0 !important;
+        font-size: 12px !important;
+    }
+
+    .tutorial__table {
+        td {
+            padding: 10px !important;
+            font-size: 10px !important;
+        }
+    }
+
+    .tutorial__dropdown__header {
+        padding: 10px 15px 10px 10px !important;
+    }
+
+    .tutorial__dropdown__container {
+        margin-bottom: 10px !important;
+    }
+
+    .masking__rules__right__container {
+        gap: 15px !important;
+    }
+
+    .masking__rules__right__table__cell {
+        font-size: 8px !important;
+    }
+
+    .cell_1 {
+        width: 70px !important;
+    }
+
+    .cell_2 {
+        width: 150px !important;
+    }
+
+    .cell_3 {
+        width: 150px !important;
+    }
+
+    .masking__rules__right__table__header {
+        .masking__rules__right__table__cell {
+            font-size: 8px !important;
+        }
+    }
+
+    .masking__rules__right__table__cell {
+        padding: 5px !important;
+    }
+
+    .masking__rules__right__table {
+        width: 290px !important;
+    }
+    
+    .progressLoader{
+        width: 550px !important;
+    }
+
+    .code__editor__container{
+        display: block !important;
+    }
+
+    .masking__rules__left{
+        .list{
+            li{
+                font-size: 10px !important;
+            }
+        }
+    }
+
+    .success__modal {
+        height: 30px !important;
+        font-size: 10px !important;
+    }
+    .modal__text{
+        font-size: 12px !important;
+    }
 }
 
 .flex {
@@ -18,8 +548,9 @@
 }
 
 .danger-bg {
+
     // background-color: var(--danger) !important;
-    .complated{
+    .complated {
         background-color: var(--danger) !important;
     }
 }
@@ -28,19 +559,20 @@
     cursor: pointer;
 }
 
-.container_for_multiprogres{
+.container_for_multiprogres {
     display: flex;
     justify-content: space-between;
     position: relative;
-    left: -15px;
-    padding-right: 51px;
+    margin-bottom: 5px;
+    // left: -15px;
+    // padding-right: 51px;
 }
 
-.capitalize{
+.capitalize {
     text-transform: capitalize;
 }
 
-.modal__actions__container{
+.modal__actions__container {
     width: rem(250);
     text-align: end;
     padding-right: rem(5);

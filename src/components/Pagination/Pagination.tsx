@@ -16,10 +16,19 @@ function Pagination() {
 
     useEffect(() => {
         if (stepState.step === 'error') {
-            dispatch(setPaginationRange(pageCountMain))
+            dispatch(setPaginationRange(100000))
             setPage((prev) => ({
                 ...prev,
-                rangeView: erroredState.tasks.length
+                rangeView: 100000
+            }))
+            
+        }
+
+        if(stepState.step === 'rules'){
+            dispatch(setPaginationRange(12))
+            setPage((prev) => ({
+                ...prev,
+                rangeView: 12
             }))
         }
     }, [stepState.step])

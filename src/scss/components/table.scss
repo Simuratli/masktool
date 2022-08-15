@@ -18,26 +18,17 @@
             font-style: normal;
             font-weight: 600;
             font-size: rem(12);
-            line-height: rem(16);
-            letter-spacing: rem(0.327273);
+            // line-height: rem(16);
+            // letter-spacing: rem(0.327273);
             text-transform: uppercase;
-            display: flex;
-            gap: rem(10);
-            align-items: center;
+            // display: flex;
+            // gap: rem(10);
+            // align-items: center;
             color: var(--table-header-color);
         }
 
 
-        .plus{
-            border-radius: 50%;
-            background-color: var(--blue);
-            cursor: pointer;
-            display: grid;
-            place-content: center;
-            height: rem(20);
-            width: rem(20);
-            border: 0;
-        }
+        
     }
 
     &__cell {
@@ -77,6 +68,7 @@
         display: flex;
         border-bottom: 1px solid var(--dropdown--border);
         // border-image: linear-gradient(to right, var(--dropdown--border) 97.5%, transparent 50%) 100% 1;
+        position: relative;
         gap: rem(20);
         align-items: center;
 
@@ -125,5 +117,31 @@
         text-transform: uppercase;
         color: var(--table-header-color);
         padding: rem(15) 0;
+    }
+}
+
+.table-head{
+    .table__cell{
+        font-family: 'Segoe UI';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #757689;
+        padding: 14px 0;
+        display: flex;
+    }
+
+    .plus{
+        border-radius: 50%;
+        background-color: var(--blue);
+        cursor: pointer;
+        display: grid;
+        place-content: center;
+        height: rem(20);
+        width: rem(20);
+        border: 0;
+        position: relative;
+        left: 10px;
     }
 }

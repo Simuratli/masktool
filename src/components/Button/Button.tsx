@@ -1,10 +1,13 @@
 import { ButtonPropTypes } from './button.types';
 import React from 'react';
+import ButtonLoading from './ButtonLoading'
 
-function Button({ text, disabled, onClick, type, size }: ButtonPropTypes) {
+function Button({ text, disabled, onClick, type, size, addLoading }: ButtonPropTypes) {
     return (
         <button disabled={disabled} onClick={onClick} className={`button ${type} ${size}`}>
-            {text}
+            {
+                addLoading ? <ButtonLoading /> : text
+            }
         </button>
     )
 }

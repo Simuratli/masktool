@@ -15,7 +15,7 @@ function NonEntities() {
                 <path d="M35.875 28C35.875 28.8284 35.2034 29.5 34.375 29.5C33.5466 29.5 32.875 28.8284 32.875 28C32.875 27.1716 33.5466 26.5 34.375 26.5C35.2034 26.5 35.875 27.1716 35.875 28Z" fill="#1E2432" />
                 <path d="M33.25 32.125V39.625C33.25 40.2463 33.7537 40.75 34.375 40.75C34.9963 40.75 35.5 40.2463 35.5 39.625V32.125C35.5 31.5037 34.9963 31 34.375 31C33.7537 31 33.25 31.5037 33.25 32.125Z" fill="#1E2432" />
             </svg>
-            <Header  headerType="modal__header" text="Add entities for editing" />
+            <Header  headerType="modal__header" text="Need more masking? Add another entity(ies)." />
             <Button onClick={() => { dispatch(setModalAddEntity(true)) }} type='normal-modal' size="big" text="Add entity" />
         </div>
     )

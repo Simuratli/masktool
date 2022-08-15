@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from '../Input';
 import { ReducerType } from '../../redux/reducers/reducer.types';
-import { setLoader, setDefaultTasks, setAllEntities, getCustomRules, setAllVocabularies, setAllViewsByEntity, setProgressAdd, setStep, setViewsByEntity, setPaginationRange, prepareEntitiesForDelete, setStableDefaultTasks, setAproveNotificationAgreement, setNotificationAllowance } from '../../redux/actions';
-import { GetDefaultTasks, GetEntities, GetCustomRules, GetVocabularesList, GetAttributesByEntity, GetTasksStatus, GetViewsByEntity, ClearTasks } from '../../api';
+import { setLoader, setDefaultTasks, setAllEntities, getCustomRules, setAllVocabularies, setAllViewsByEntity, setProgressAdd, setStep, setViewsByEntity, setPaginationRange, prepareEntitiesForDelete, setStableDefaultTasks, setAproveNotificationAgreement, setNotificationAllowance, setStableEntityByViews } from '../../redux/actions';
+import { GetDefaultTasks, GetEntities, GetCustomRules,ClearTasksAndLogs, GetVocabularesList, GetAttributesByEntity, GetTasksStatus, GetViewsByEntity, ClearTasks } from '../../api';
 import Logo from './logo';
 import { defaultTaskAddETC } from '../../utils/DefaultTaskETC';
 import { DefaultTasksTypes } from '../../redux/reducers/backend-reducers/default-tasks/default-tasks.types'
@@ -24,26 +24,13 @@ function Navbar() {
     const viewsByEntityState = useSelector((state: ReducerType) => state.getEntitiesByViewReducer);
     const paginatedTasksdState = useSelector((state: ReducerType) => state.paginatedTasksdReducer.paginated)
 
-    // useEffect(() => {
-    //     const filteredEntities = defaultTasksState.filter(
-    //         entity => {
-    //             return (
-    //                 entity
-    //                     .entityName
-    //                     .toLowerCase()
-    //                     .includes(search.toLowerCase()));
-    //         }
-    //     );
-
-    //     dispatch(setPaginatedTasks(filteredEntities))
-    // }, [search])
-
-
 
 
 
 
     const getEntitiesAndTasks = async () => {
+        // ClearTasks()
+        // ClearTasksAndLogs()
         dispatch(setLoader(true))
         let entities = await GetEntities();
         dispatch(setAllEntities(entities));
@@ -62,7 +49,8 @@ function Navbar() {
                 task.progress = "NULL";
                 task.requestResult = null
                 task.filter = []
-                task.records = true
+                // task.records = true
+                task.logicalName = task.entityName.toLowerCase()
                 task.open = false
                 task.fields.map((field) => {
                     if (atribute.logicalName === field.logicalName) {
@@ -76,7 +64,7 @@ function Navbar() {
 
 
                 let filteredTasks = task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7)
-                task.maskOperation ? task.text = `All Records ${filteredTasks.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields are masked` : task.text = "Delete"
+                task.maskOperation ? task.text = `You are going to mask ${task.fields.filter((it) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in all records.` : task.text = "You are going to delete all records."
             })
         })
 
@@ -90,9 +78,19 @@ function Navbar() {
         let tasksForStatus: any[] = []
 
 
+        let mapFunc = (logicalName: String) => {
+            let fields: any = []
+            newTasks.map((item) => {
+                if (item.entityName === logicalName) {
+                    fields = item.fields
+                }
+            })
+            return fields
+        }
 
         let newArrayForEntity: any[] = []
         for (const vv of entities) {
+
             newArrayForEntity.push({
                 entityName: vv.displayName,
                 logicalName: vv.logicalName,
@@ -100,7 +98,7 @@ function Navbar() {
                 delete: true,
                 errorRecords: 0,
                 etc: vv.etc,
-                fields: [],
+                fields: mapFunc(vv.logicalName),
                 filter: [],
                 filterViewId: null,
                 maskOperation: false,
@@ -117,12 +115,11 @@ function Navbar() {
         }
 
 
-        let stableTasks: any = [...newTasks, ...newArrayForEntity]
-        dispatch(setStableDefaultTasks([...newTasks, ...newArrayForEntity]))
+        let stableTasks: any = [...newTasks, ...newArrayForEntity].filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName === v.entityName) || (v2.logicalName === v.entityName) || (v2.entityName === v.logicalName)) === i)
+        dispatch(setStableDefaultTasks(stableTasks))
 
         let deleteEntitites: any = []
 
-        console.log(newTasks)
         console.log(stableTasks, 'atete')
         let viewsArray: any[] = []
 
@@ -147,7 +144,7 @@ function Navbar() {
             if (viewsArray.some((value) => value.name === item.entityName) === false) {
                 viewsArray.push({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity })
                 dispatch(setViewsByEntity({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
-
+                // dispatch(setStableEntityByViews({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
             }
         }
 
@@ -178,12 +175,14 @@ function Navbar() {
 
 
                                 if (item.entityName !== 'Activity File Attachment' && item.entityName !== "Phone Call" && item.entityName !== 'Social Profile' && item.entityName !== "Note") {
-                                    tasksForStatus.unshift(item)
+                                    tasksForStatus.push(item)
                                     let viewsByEntity = await GetViewsByEntity(item.logicalName ? item.logicalName : item.entityName, item.etc);
 
                                     if (viewsArray.some((value) => value.name === item.entityName) === false) {
                                         viewsArray.push({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity })
                                         dispatch(setViewsByEntity({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
+                                        console.log({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }, 'offfasda')
+                                        // dispatch(setStableEntityByViews({ name: item.logicalName ? item.logicalName : item.entityName, data: viewsByEntity }))
                                     }
 
                                 }
@@ -195,9 +194,28 @@ function Navbar() {
 
                                         view.data.map(async (viewdata: any) => {
                                             if (viewdata.viewId === stat.filterViewId) {
-                                                item.filter = item.filter ? [...item.filter, viewdata.name] : [viewdata.name]
-                                                item.text = `View - ${item.filter.join(', ')}`
+                                                // item.filter = item.filter ? [...item.filter, viewdata.name] : [viewdata.name]
+                                                console.log(viewdata, 'iameuqal')
+                                                if (item.filter) {
+                                                    if (!item.filter.some((value: any) => value === viewdata.name)) {
+                                                        item.filter = [...item.filter, viewdata.name]
+
+                                                    }
+                                                } else {
+                                                    item.filter = [viewdata.name]
+
+                                                }
+
+
+                                                item.maskOperation = stat.maskOperation
                                                 item.progress = "END"
+
+                                                if (item.maskOperation) {
+                                                    item.text = `You are going to edit fields in ${item.filter.join(' ')}`
+                                                } else {
+                                                    item.text = `You are going to edit records in ${item.filter.join(' ')}`
+                                                }
+
                                                 if (item.maskOperation) {
                                                     let newCells = await prepareCells(viewdata.cells)
                                                     deleteEntitites.push({
@@ -233,20 +251,26 @@ function Navbar() {
 
 
                             }
-                            if (item.entityName !== 'Activity File Attachment' && item.entityName !== "Phone Call" && item.entityName !== 'Social Profile' && item.entityName !== "Note") {
+
+
+
+                            if (item.entityName !== 'Activity File Attachment' && item.entityName !== "Phone Call" && item.entityName !== 'Social Profile' && item.entityName !== "Note" && item.logicalName !== 'activitymimeattachment') {
                                 item.maskOperation = stat.maskOperation
                                 if (!stat.maskOperation) {
-                                    item.text = "Delete"
+                                    item.text = "You are going to delete all records."
                                 } else {
-                                    if (item.filter.length !== 0 || item.filter) {
-                                        item.records = true
-                                        item.text = `All Records ${stat.fields.filter((it: any) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields are masked`
+                                    if (item.filter) {
+                                        if (item.filter.length !== 0) {
+                                            item.records = false
+                                            item.text = `You are going to mask ${item.fields.filter((it: any) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in all records.`
+                                        }
                                     } else {
-                                        item.records = false
-                                        item.text = item.filter && item.filter.length === 0 ? `Nothing selected` : `View - ${item.filter.join(', ')}`
+                                        item.records = true
+                                        item.text = item.filter && item.filter.length === 0 ? `No edits will be applied to this entity as you have not chosen any view.` : `You are going to edit fields in ${item.filter.join(' ')}`
 
                                     }
                                 }
+                                item.maskOperation = stat.maskOperation
                                 item.progress = "END"
                                 tasksForStatus.push(item)
                             }
@@ -270,7 +294,6 @@ function Navbar() {
 
 
 
-
                 dispatch(setStableDefaultTasks([...tasksForStatus, ...newArrayForEntity]))
                 dispatch(setDefaultTasks(tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i)));
 
@@ -282,7 +305,7 @@ function Navbar() {
                 setTimeout(() => {
                     dispatch(setAproveNotificationAgreement(true));
                     dispatch(setNotificationAllowance(true))
-                    dispatch(setPaginationRange(data.length))
+                    dispatch(setPaginationRange(1000))
                     data.length !== 0 && dispatch(setStep('progress'))
                 }, 3000);
 
@@ -299,6 +322,7 @@ function Navbar() {
                                         statetask.successRecords = stat.successRecords
                                         statetask.totalRecords = stat.totalRecords
                                         statetask.maskOperation = stat.maskOperation
+
                                         if (stat.taskStatus === 2) {
                                             statetask.errorMessage = true
                                             statetask.errortext = stat.errorMessage
@@ -306,6 +330,11 @@ function Navbar() {
 
                                         if (stat.taskStatus === 3) {
                                             statetask.errorMessage = false
+                                            if (statetask.maskOperation) {
+                                                statetask.text = `${statetask.fields.filter((it: any) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in ${stat.successRecords} records were masked.`
+                                            } else {
+                                                statetask.text = `${stat.successRecords} records were deleted.`
+                                            }
                                         }
 
                                         if (stat.taskStatus === 1 || stat.taskStatus === 0) {
@@ -341,12 +370,21 @@ function Navbar() {
                                                     vi.errorMessage = true
                                                     vi.errortext = stat.errorMessage
 
-                                                    tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).map((t) => {
-                                                        if (t.entityName === stat.name || t.logicalName === stat.name) {
-                                                            t.errorMessage = true
-                                                            // task.errortext = requestSecond.messages[0].message
-                                                        }
-                                                    })
+                                                    // tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).map((t) => {
+
+                                                    //     if (t.entityName === stat.entityName) {
+                                                    //         t.errorMessage = true
+                                                    //         // task.errortext = requestSecond.messages[0].message
+                                                    //     }
+                                                    //     if (t.logicalName) {
+                                                    //         if (t.logicalName === stat.entityName) {
+                                                    //             t.errorMessage = true
+                                                    //             console.log(t, 'tasksForStatustasksForStatus logical', stat)
+                                                    //         }
+                                                    //     }
+
+
+                                                    // })
 
                                                     // dispatch(setDefaultTasks(defaultTasksState.tasks))
 
@@ -356,17 +394,25 @@ function Navbar() {
 
                                                 if (stat.taskStatus === 3) {
                                                     vi.errorMessage = false
-                                                    tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).map((t) => {
-                                                        if (t.entityName === stat.name) {
-                                                            t.errorMessage = false
-                                                            // task.errortext = requestSecond.messages[0].message
-                                                        }
-                                                    })
+                                                    // tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).map((t) => {
+                                                    //     console.log('salam3 taskStatustaskStatus', t.entityName, stat)
+                                                    //     if (t.entityName === stat.entityName) {
+
+                                                    //         t.errorMessage = false
+                                                    //         // task.errortext = requestSecond.messages[0].message
+                                                    //         if (t.maskOperation) {
+                                                    //             t.text = `${t.fields.filter((it: any) => it.attributeTypeCode === 14 || it.attributeTypeCode === 2 || it.attributeTypeCode === 7).length} fields in all records were masked.`
+                                                    //         } else {
+                                                    //             t.text = "All records were deleted."
+                                                    //         }
+                                                    //     }
+                                                    // })
 
                                                 }
 
                                             }
                                         })
+                                        console.log(tasksForStatus, 'taskStatustaskStatus')
 
                                     }
                                 })
@@ -382,15 +428,72 @@ function Navbar() {
 
                         let notsame = data2.filter((item: any) => item.taskStatus === 2 || item.taskStatus === 3).filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName === v.entityName)) === i)
 
+                        console.log(notsame, 'notnsatmee')
+                        // dispatch(setProgressAdd(notsame.length > deletedLength ? notsame.length - deletedLength : notsame.length))
 
-                        dispatch(setProgressAdd(notsame.length > deletedLength ? notsame.length - deletedLength : notsame.length))
+
+
+
+                        let obj = data2.reduce((res: any, curr: any) => {
+                            if (res[curr.entityName])
+                                res[curr.entityName].push(curr);
+                            else
+                                Object.assign(res, { [curr.entityName]: [curr] });
+
+                            return res;
+                        }, {});
+
+
+
+
+                        console.log(obj, 'data22 obj')
+                        console.log(data2, 'data22')
+                        let num = 0
+
+                        data2.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName === v.entityName)) === i).map((dat: any) => {
+                            if (!obj[dat.entityName].some((value: any) => value.taskStatus === 0 || value.taskStatus === 1)) {
+                                console.log(obj[dat.entityName], 'offfffffffffffffffffffffffffffffffffff data22')
+                                num++
+                                dispatch(setProgressAdd(num))
+                            }
+
+                        })
+
+                        console.log()
+                        Object.keys(obj).map(function (key) {
+                                console.log(obj[key], 'obj[key]')
+                                if (!obj[key].some((value: any) => value.taskStatus === 0 || value.taskStatus === 1)) {
+                                    if (obj[key].some((value: any) => value.taskStatus === 2)) {
+                                        console.log(obj[key],'hhohoho')
+                                    }
+
+                                    tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).map((t) => {
+                                        console.log('sal5 taskStatustaskStatus', t.entityName, key)
+                                        if ((t.logicalName ? t.logicalName : t.entityName) === key) {
+                                            if (obj[key].some((value: any) => value.taskStatus === 2)) {
+                                                t.errorMessage = true
+                                            }else{
+                                                t.errorMessage = false
+                                            }
+                                        }
+                                    })
+
+                                    dispatch(setDefaultTasks(tasksForStatus.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i)))
+                                }
+
+                        });
+
 
                         if (!data2.some((value: any) => value.taskStatus === 0 || value.taskStatus === 1)) {
                             console.log("bitti")
                             // dispatch(setProgressAdd(paginatedTasksdState.length))
                             clearInterval(interval)
-                            ClearTasks()
-                            dispatch(setProgressAdd(data2.filter((v: any, i: any, a: any) => a.findIndex((v2: any) => (v2.entityName.toLowerCase() === v.entityName.toLowerCase())) === i).length))
+                            // ClearTasks()
+
+
+
+                            console.log(Object.keys(obj).length, 'data22 tasksForStatus')
+                            dispatch(setProgressAdd(Object.keys(obj).length))
 
                         }
 

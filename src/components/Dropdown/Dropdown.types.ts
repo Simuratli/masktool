@@ -16,12 +16,15 @@ export interface DropdownContentPorpTypes {
 export interface DropdownHeaderToggleIconPropTypes {
     setToggle: () => void;
     name: string,
-    requestResult: boolean | null | undefined
+    requestResult: boolean | null | undefined,
+    insideViews:number;
+    logicalName:any
 };
 
 export interface DropdownSuccessIcon {
     success: boolean | null;
-    noDrop?: boolean
+    noDrop?: boolean;
+    style?:any
 };
 
 

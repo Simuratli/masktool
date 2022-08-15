@@ -1,4 +1,4 @@
-import { SET_STABLE_ENTITIES, SET_STABLE_TASKS, SET_STABLE_DATA_MAIN_NAME, SET_STABLE_DATA_NAME, SET_STABLE_DATA_SEARCH_NAME, SET_STABLE_DATA_ETC } from '../../constants/backend-constants/stable-data';
+import { SET_STABLE_ENTITIES, SET_STABLE_TASKS,SET_STABLE_DATA_LOGICALNAME, SET_STABLE_DATA_MAIN_NAME, SET_STABLE_DATA_NAME, SET_STABLE_DATA_SEARCH_NAME, SET_STABLE_DATA_ETC } from '../../constants/backend-constants/stable-data';
 
 
 export const setStableEntityByViews = (payload: any) => ({
@@ -8,6 +8,12 @@ export const setStableEntityByViews = (payload: any) => ({
 
 export const setStableDefaultTasks = (payload: any) => ({
     type: SET_STABLE_TASKS,
+    payload
+})
+
+
+export const setStableLogicalName = (payload: any) => ({
+    type: SET_STABLE_DATA_LOGICALNAME,
     payload
 })
 

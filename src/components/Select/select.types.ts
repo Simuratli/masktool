@@ -12,5 +12,6 @@ export interface SelectPropTypes {
     deleteSavedParam?:any;
     selectedValueForRule?:string;
     disabled?:boolean;
-    pagination?:number
+    pagination?:number;
+    list?:boolean
 }

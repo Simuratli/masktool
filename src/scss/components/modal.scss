@@ -104,6 +104,7 @@
             font-size: 12px;
             line-height: 130%;
             color: #1E2432;
+            margin-right: 10px;
         }
 
     }
@@ -163,4 +164,9 @@
 
     color: #1E2432;
 
+}
+
+.modal__info__icon__text {
+    text-align: center;
+    margin:30px 0;
 }

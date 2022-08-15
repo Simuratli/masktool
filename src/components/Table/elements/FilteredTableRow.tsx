@@ -8,16 +8,16 @@ function FilteredTableRow({ name, rowName, searchName, rule, itemName, mainName,
     return <RandomLetters logicalName={logicalName} parameter={parameter} max={15} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
   else if (rule === "Random date" || rule === 2 || rule === "BirthDay dates") {
-    return <RandomDate logicalName={logicalName} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+    return <RandomDate parameter={parameter} logicalName={logicalName} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
   else if (rule === "Multi line" || rule === 7) {
     return <RandomLetters logicalName={logicalName} parameter={parameter} max={52} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
   else if (rule === "Custom rule") {
-    return <CustomRule logicalName={logicalName} attributeTypeCode={attributeTypeCode} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+    return <CustomRule parameter={parameter} logicalName={logicalName} attributeTypeCode={attributeTypeCode} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
   else if (rule === "List") {
-    return <RandomLine logicalName={logicalName} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
+    return <RandomLine parameter={parameter} logicalName={logicalName} itemName={itemName} searchName={searchName} mainName={mainName} rowName={rowName} />
   }
   else {
     return <div></div>;

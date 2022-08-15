@@ -2,18 +2,21 @@ import React, { useState, useEffect, useRef } from 'react'
 import { SelectPropTypes } from './select.types'
 import { SelectHeader } from '../'
 
-function Select({ data, placeholder, type, customData, onChange, deletableData, disabled, deleteLoader, choseSaved, deleteSavedParam, selectedValueForRule, pagination }: SelectPropTypes) {
+function Select({ data, placeholder, type, customData, onChange, deletableData, disabled, deleteLoader, choseSaved, deleteSavedParam, list, selectedValueForRule, pagination }: SelectPropTypes) {
     const [toggleElements, settoggleElements] = useState(false)
     const [selectedElement, setSelectedElement] = useState<string | null>('')
     const ref = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        console.log(selectedValueForRule, 'selectedValueForRule 2dasda')
         setSelectedElement(selectedValueForRule ? selectedValueForRule : "")
     }, [choseSaved, selectedValueForRule])
 
 
     const selectItem = (e: React.MouseEvent<HTMLSpanElement>) => {
+
         const input = e.target as HTMLElement;
+        console.log(input.textContent, 'eee 2dasda')
         setSelectedElement(input.textContent)
         settoggleElements(false)
         if (onChange) onChange(input.textContent)
@@ -51,6 +54,14 @@ function Select({ data, placeholder, type, customData, onChange, deletableData, 
                 }
 
 
+                {
+                    list && <div className="select__dropdown__element">
+                        <a style={{fontSize:12}} download rel="noreferrer" target="_blank" href='https://raw.githubusercontent.com/Simuratli/masktool/ac5926c4091c0e5ae0c55fd9f449d2eea7f1744f/files/uds-business-data-masking-adding-lists-guide.pdf' className="orange">
+                            Download Adding List Guide
+                        </a>
+                    </div>
+
+                }
 
                 {
                     deletableData && !deleteLoader && deletableData.filter((cat) => cat.data.length !== 0).map((category) => {

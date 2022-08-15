@@ -62,7 +62,7 @@ function Tutorial() {
                 <div className="tabs_header">
                     <div onClick={() => { setselectedTab('tutorial'); dispatch(refreshCustomParameters()); dispatch(setStep('tutorial'));dispatch(setCodeEditorValue(null)) }} className={`tab_item tab_item_first ${selectedTab === 'tutorial' && "active"}`}>How to use</div>
                     <div onClick={() => { setselectedTab('customize'); dispatch(refreshCustomParameters()); dispatch(setStep('tutorial'));dispatch(setCodeEditorValue(null)) }} className={`tab_item ${selectedTab === 'customize' && "active"}`}>How to customize</div>
-                    <div onClick={() => { setselectedTab('masking'); dispatch(refreshCustomParameters()); dispatch(setStep('tutorial'));dispatch(setCodeEditorValue(null)) }} className={`tab_item ${selectedTab === 'masking' && "active"}`}>Сreate custom rule</div>
+                    <div onClick={() => { setselectedTab('masking'); dispatch(refreshCustomParameters()); dispatch(setStep('tutorial'));dispatch(setCodeEditorValue(null)) }} className={`tab_item ${selectedTab === 'masking' && "active"}`}>Сreate custom parameter</div>
                     <div onClick={() => { setselectedTab('list'); dispatch(refreshCustomParameters()); dispatch(setStep('tutorial'));dispatch(setCodeEditorValue(null)) }} className={`tab_item tab_item_last ${selectedTab === 'list' && "active"}`}>Masking with custom list</div>
                 </div>
 
